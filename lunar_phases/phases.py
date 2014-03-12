@@ -15,10 +15,13 @@ lat = numpy.linspace(-90, 90, 180)
 lonv, latv = numpy.meshgrid(lon, lat)
 
 data = numpy.zeros_like(lonv)
-data[lonv > 180] = 1.0
+data[:,:] = 0.99
+data[lonv > 180] = 0.1
 
 i = 0
 while i < len(lon_center):
+
+    fig = pylab.figure(facecolor="black")
 
     map = Basemap(projection='ortho', lat_0 = 0, lon_0 = lon_center[i],
                   resolution = 'l', area_thresh = 1000.)
@@ -28,8 +31,10 @@ while i < len(lon_center):
     #map.drawmeridians(numpy.arange(0, 360, 15), color="0.5", latmax=90)
     #map.drawparallels(numpy.arange(-90, 90, 15), color="0.5", latmax=90) 
 
-    map.pcolor(lonv, latv, data, latlon=True, cmap=cm.binary)
+    map.pcolor(lonv, latv, data, latlon=True, cmap=cm.bone, vmin = 0.0, vmax=1.0)
 
-    pylab.savefig("phase-{:02d}.png".format(i))
+    pylab.savefig("phase-{:02d}.png".format(i), facecolor=fig.get_facecolor())
+
+    pylab.close()
 
     i += 1
