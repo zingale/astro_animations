@@ -193,7 +193,7 @@ def draw_earth_moon(t, iframe, connect_EM = 0, label = 0,
     pylab.subplots_adjust(left=0.05,right=0.98,bottom=0.05,top=0.98)
 
     f = pylab.gcf()
-    f.set_size_inches(6.0,6.0)
+    f.set_size_inches(7.2,7.2)
 
     outfile = "lunar_period_%04d.png" % iframe
     pylab.savefig(outfile)

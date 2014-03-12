@@ -178,7 +178,7 @@ def sidereal():
 
         # plot planet 
         theta = numpy.arange(180)
-        r = 0.05*AU  # exaggerate the planet's size
+        r = 0.075*AU  # exaggerate the planet's size
         x_surface = orbit.x[n] + r*numpy.cos(theta)
         y_surface = orbit.y[n] + r*numpy.sin(theta)
         pylab.fill(x_surface,y_surface,"b", edgecolor="b",zorder=1000)
@@ -223,7 +223,7 @@ def sidereal():
             pylab.text(-1.0*AU, -1.15*AU, "Noon (Sun is on the meridian)")
 
             d = 0
-            while (d < 100):
+            while (d < 150):
                 outfile = "rotation_%04d.png" % iframe
                 pylab.savefig(outfile)            
                 iframe += 1
@@ -234,7 +234,7 @@ def sidereal():
             pylab.text(-1.0*AU, -1.15*AU, "1 Sidereal period (Earth rotated 360 degrees)")
 
             d = 0
-            while (d < 100):
+            while (d < 150):
                 outfile = "rotation_%04d.png" % iframe
                 pylab.savefig(outfile)            
                 iframe += 1
@@ -245,7 +245,7 @@ def sidereal():
             pylab.text(-1.0*AU, -1.15*AU, "1 Solar period (Sun is back on the meridian)")
 
             d = 0
-            while (d < 100):
+            while (d < 150):
                 outfile = "rotation_%04d.png" % iframe
                 pylab.savefig(outfile)            
                 iframe += 1
