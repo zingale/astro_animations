@@ -1,0 +1,15 @@
+# illustrate the Gamov peak as well as an approximate Gaussian fit to it.
+
+# this is all based on Clayton, Ch. 4.
+
+
+# constants
+k = 1.38e-16   # erg/K
+eV_erg = 1.602e-16  # erg/eV
+k_keV = k*1000.0/eV_erg
+
+
+def gamow(E, T):
+    # E should be in keV
+    return numpy.exp(-E/(k_keV*T) - b/numpy.sqrt(E))
+

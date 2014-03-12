@@ -1,0 +1,28 @@
+2012-04-11 13:28  zingale
+
+	* HR_MS_fitting.eps, HR_MS_fitting.png, HR_MS_fitting.py: add MS
+	  fitting figures
+
+2012-02-29 19:12  zingale
+
+	* HR_exam.py, HR_mass.png, HR_radius.png, HR_radius.py,
+	  HR_radius_wd.png, absorption_line.png, absorption_line.py,
+	  astrometric_binary.png, astrometric_binary.py, binary_fig.eps,
+	  binary_fig.py, coulomb_barrier.png, coulomb_barrier.py,
+	  eclipsing_binary_fig_rad.py, eclipsingbinary_rad.eps,
+	  eclipsingbinary_rad.png, ellipse_geom.png, ellipse_geom.py,
+	  ellipse_vel.png, ellipse_vel.py, harmonic_law.eps,
+	  harmonic_law.png, harmonic_law.py, harmonic_law_all.png,
+	  harmonic_law_all_sm.png, harmonic_law_sm.png, line_strength.png,
+	  line_strength.py, line_strength_excitation.png,
+	  line_strength_ionization.png, maxwell_boltzmann.py, planets.eps,
+	  planets.py, radial_velocity_a_1.5e+13_e_0.00_Mp_02e+30.eps,
+	  radial_velocity_a_1.5e+13_e_0.00_Mp_02e+30.png,
+	  radial_velocity_a_1.5e+13_e_0.00_Mp_06e+30.eps,
+	  radial_velocity_a_1.5e+13_e_0.00_Mp_06e+30.png,
+	  radial_velocity_a_1.5e+13_e_0.40_Mp_02e+30.eps,
+	  radial_velocity_a_1.5e+13_e_0.40_Mp_02e+30.png,
+	  radial_velocity_a_7.5e+12_e_0.00_Mp_02e+30.eps,
+	  radial_velocity_a_7.5e+12_e_0.00_Mp_02e+30.png,
+	  radial_velocity_ell.py, rb.png, red_black.py: various figures
+
