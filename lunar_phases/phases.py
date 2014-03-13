@@ -1,13 +1,10 @@
 import pylab
 from mpl_toolkits.basemap import Basemap
 import numpy
-import math
 import matplotlib.cm as cm
 
 
 lon_center = numpy.linspace(0, 360, 361, endpoint=True)
-
-print lon_center
 
 lon = numpy.linspace(0, 360, 360)
 lat = numpy.linspace(-90, 90, 180)
@@ -33,6 +30,10 @@ while i < len(lon_center):
     map.drawmapboundary()
     map.pcolor(lonv, latv, data, latlon=True, cmap=cm.bone, vmin = 0.0, vmax=1.0)
 
+    ax = pylab.gca()
+    pylab.text(0.5, -0.2, "phase seen from Earth", 
+               horizontalalignment="center", color="w", 
+               transform=ax.transAxes)
 
     #-------------------------------------------------------------------------
     pylab.axes([0.4,0.1, 0.5, 0.8])
@@ -89,7 +90,7 @@ while i < len(lon_center):
     pylab.axis("off")
 
 
-    pylab.savefig("phase-{:02d}.png".format(i), facecolor=fig.get_facecolor())
+    pylab.savefig("phase-{:03d}.png".format(i), facecolor=fig.get_facecolor())
     pylab.close()
 
     i += 1
