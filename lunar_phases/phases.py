@@ -54,11 +54,35 @@ while i < len(lon_center):
     # draw the orbit
     pylab.plot(x, y, "w--")
 
-    # draw the Moon
-    pylab.fill(numpy.cos(lon_center[i]) + 0.075*x, numpy.sin(lon_center[i]) + 0.075*y, "0.25", zorder=100)
-    pylab.fill(numpy.cos(lon_center[i]) + 0.075*x_half, numpy.sin(lon_center[i]) + 0.075*y_half, "1.0", zorder=101)
+    # draw the Moon -- full circle (dark)
+    pylab.fill(numpy.cos(numpy.radians(lon_center[i])) + 0.075*x, 
+               numpy.sin(numpy.radians(lon_center[i])) + 0.075*y, "0.25", zorder=100)
+
+    # semi-circle -- illuminated
+    pylab.fill(numpy.cos(numpy.radians(lon_center[i])) + 0.075*x_half, 
+               numpy.sin(numpy.radians(lon_center[i])) + 0.075*y_half, "1.0", zorder=101)
 
     
+    # sunlight
+    pylab.arrow(1.6, -0.6, -0.4, 0.0, color="y",
+                length_includes_head=True,
+                head_width = 0.1, width=0.05, overhang=-0.1)
+
+    pylab.arrow(1.6, -0.2, -0.4, 0.0, color="y",
+                length_includes_head=True,
+                head_width = 0.1, width=0.05, overhang=-0.1)
+
+    pylab.arrow(1.6, 0.2, -0.4, 0.0, color="y",
+                length_includes_head=True,
+                head_width = 0.1, width=0.05, overhang=-0.1)
+
+    pylab.arrow(1.6, 0.6, -0.4, 0.0, color="y",
+                length_includes_head=True,
+                head_width = 0.1, width=0.05, overhang=-0.1)
+
+    pylab.text(1.7, 0.0, "sunlight", rotation=90, fontsize=16,
+               horizontalalignment="center", verticalalignment="center", color="y")
+
     ax = pylab.gca()
     ax.set_aspect("equal", "datalim")
 
