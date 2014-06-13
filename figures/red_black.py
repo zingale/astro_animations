@@ -79,14 +79,16 @@ def RB():
         n += 1
 
             
-    ax = pylab.axis([-1,nx+1,-1,ny+1])
+    ax = pylab.axis([-0.5,nx+0.5,-0.5,ny+0.5])
     pylab.axis("off")
 
     f = pylab.gcf()
     f.set_size_inches(6.0,6.0)
 
-    outfile = "rb.png" 
-    pylab.savefig(outfile)
+    pylab.tight_layout()
+
+    pylab.savefig("rb.png")
+    pylab.savefig("rb.eps", bbox_inches="tight", pad_inches=0)
 
 
 if __name__== "__main__":
