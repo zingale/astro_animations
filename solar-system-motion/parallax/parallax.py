@@ -1,122 +1,140 @@
 import math
-import numpy
-import pylab
-
-# demonstrate the principle of Parallax.  We will take Earth's orbit to
-# be circular.
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-# note: this routine is very klunky -- there is a lot of repitition that
-# should be eliminated.
+# Demonstrate the principle of Parallax.  We will take Earth's orbit
+# to be circular.
+#
+# We work in units of AU, yr, and M_sun in these units, G = 4 pi^2
 
-# M. Zingale (2008-09-02)
-
-# we work in units of AU, yr, and M_sun
-# in these units, G = 4 pi^2
-
-
-# planet data
-a_E = 1.0       # semi-major axis of planet Earth
+# M. Zingale 
 
 
-# integration data
-nsteps_year = 360   # number of steps per year 
-                    # (make this a number divisible by 4)
 
-nyears = 1.0        # number years to show
+class ParallaxScene:
+    """
+    We'll treat the entire collection of the Earth/Sun, foreground
+    star, and background star as an object.  The only real thing that we
+    need to change from frame to frame is the location of Earth
+    """
 
-omega = 2.0*math.pi/1.0          # angular velocity (radians per year)
+    def __init__(self):
 
-omega_orbit = numpy.arange(nsteps_year)*2.0*math.pi/(nsteps_year-1)
-x_orbit = a_E*numpy.cos(omega_orbit)
-y_orbit = a_E*numpy.sin(omega_orbit)
+        # start Earth on the x-axis, on the opposite side of the field of
+        # stars we will reference -- we accomplish this through a phase
+        self.phi = math.pi
+        
+        # number of steps per year (make this a number divisible by 4)
+        self.nsteps_year = 360   
 
-x_fg = 3.5
-y_fg = 0.0
+        # angular velocity (radians per year)
+        self.omega = 2.0*math.pi/1.0          
+
+        # semi-major axis of planet Earth
+        self.a_E = 1.0       
+
+        # position of Earth over the year
+        omega_t = np.arange(self.nsteps_year)*2.0*math.pi/(self.nsteps_year-1)
+        self.x_orbit = self.a_E*np.cos(omega_t + self.phi)
+        self.y_orbit = self.a_E*np.sin(omega_t + self.phi)
+
+        # foreground star
+        self.x_fg = 3.5
+        self.y_fg = 0.0
+
+
+    def draw_sun_and_orbit(self):
+
+        # draw the Sun
+        plt.scatter([0], [0], s=250, marker=(5,1), color="k")
+        plt.scatter([0], [0], s=200, marker=(5,1), color="y")
+
+        # plot the orbit
+        plt.plot(self.x_orbit, self.y_orbit, "b--")
+
+
+    def draw_earth(self, time, connect_to_fg=0):
+
+        x_E = self.a_E*math.cos(self.omega*time + self.phi)
+        y_E = self.a_E*math.sin(self.omega*time + self.phi)
+
+        # plot Earth
+        plt.scatter([x_E], [y_E], s=100, color="b")
+
+        # draw the line connecting Earth and the foreground star
+        if connect_to_fg == 1:
+            slope = (y_E - self.y_fg)/(x_E - self.x_fg)
+            xpt1 = 4.5
+            ypt1 = y_E + slope*(xpt1 - x_E)
+            x_E_old = x_E
+            y_E_old = y_E
+            plt.plot([x_E_old,xpt1], [y_E_old,ypt1], 'g--')
+
+
+    def draw_foreground_star(self):
+        # draw the foreground star
+        plt.scatter([self.x_fg], [self.y_fg], s=200, marker=(5,1), color="r")        
+
+        # draw the line connecting the Sun and the foreground star
+        plt.plot([0,self.x_fg], [0,self.y_fg], 'k--')
+        plt.text(1.5, -0.25, "d", color="k")
+
+
+    def draw_background_stars(self):
+        # draw some random background stars        
+
+        pos = [(4.2, 2.1), (4.7, 1.0), (4.4, -0.4), (4.8, -0.9), 
+               (4.1,-1.3), (4.3,-1.8), (4.5, 0.5)]
+
+        for x, y in pos:
+            plt.scatter( [x], [y], s=200, marker=(5,1), color="c")        
+
 
 
 def parallax():
 
 
     t = 0.0
-    dt = 0.0
 
-
-    # ================================================================
-    # Earth initialization
-    # ================================================================
-
-    # start Earth on the x-axis, on the opposite side of the field of
-    # stars we will reference -- we accomplish this through a phase
-    phi = math.pi
-
+    nyears = 1.0
 
     # set the initial timestep
+    nsteps_year = 360
     dt = 1.0/nsteps_year
 
     # compute the total number of steps needed 
     nsteps = int(nyears*nsteps_year)
 
-    print "nstep = ", nsteps
+
+    p = ParallaxScene()
 
     iout = 0
 
     # integrate until the Earth is at a right angle
     n = 0  
-    while (n < nsteps/4):
+    while n < nsteps/4:
 
-        x_E = a_E*math.cos(omega*t + phi)
-        y_E = a_E*math.sin(omega*t + phi)
-
-    
-        # clear
-        pylab.clf()
-
-
-        # draw the line connecting the Sun and the foreground star
-        pylab.plot([0,x_fg],[0,y_fg],'k--')
-        pylab.text(1.5,-0.25,"d",color="k")
-
- 
-        # draw the Sun
-        pylab.scatter([0],[0],s=250,marker=(5,1),color="k")
-        pylab.scatter([0],[0],s=200,marker=(5,1),color="y")
-
-        # draw the foreground star
-        pylab.scatter([x_fg],[y_fg],s=200,marker=(5,1),color="r")        
-
-        # plot the orbit
-        pylab.plot(x_orbit, y_orbit, "b--")
-
-        # plot Earth
-        pylab.scatter([x_E],[y_E],s=100,color="b")
-
-        # draw some random background stars
-        pylab.scatter([4.2],[ 2.1],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.7],[ 1.0],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.4],[-0.4],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.8],[-0.9],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.1],[-1.3],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.3],[-1.8],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.5],[ 0.5],s=200,marker=(5,1),color="c")        
-
+        plt.clf()
         
+        p.draw_sun_and_orbit()
+        p.draw_earth(t)
+        p.draw_foreground_star()
+        p.draw_background_stars()
+        
+        plt.axis([-1.5,5.0,-2.5,2.5])
 
-        pylab.axis([-1.5,5.0,-2.5,2.5])
+        plt.axis('off')
 
-        pylab.axis('off')
-
-        f = pylab.gcf()
+        f = plt.gcf()
         f.set_size_inches(6.5,5.0)
 
-        pylab.xlabel("AU")
-        pylab.ylabel("AU")
-        pylab.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        pylab.title("Parallax")
-
-
-        outfile = "parallax_%04d.png" % iout
-        pylab.savefig(outfile)
+        plt.xlabel("AU")
+        plt.ylabel("AU")
+        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
+        plt.title("Parallax")
+        
+        plt.savefig("parallax_%04d.png" % iout)
 
         t += dt
         n += 1
@@ -130,138 +148,58 @@ def parallax():
     print "connecting"
 
     nframes = 50
-    n = 0
-    while (n < nframes):
 
-        x_E = a_E*math.cos(omega*t + phi)
-        y_E = a_E*math.sin(omega*t + phi)
+    plt.clf()
 
+    p.draw_sun_and_orbit()
+    p.draw_earth(t, connect_to_fg=1)
+    p.draw_foreground_star()
+    p.draw_background_stars()
+    
+    plt.axis([-1.5,5.0,-2.5,2.5])
 
-        # clear
-        pylab.clf()
-
-
-        # draw the line connecting the Sun and the foreground star
-        pylab.plot([0,x_fg],[0,y_fg],'k--')
-        pylab.text(1.5,-0.25,"d",color="k")
-
- 
-        # draw the Sun
-        pylab.scatter([0],[0],s=250,marker=(5,1),color="k")
-        pylab.scatter([0],[0],s=200,marker=(5,1),color="y")
-
-        # draw the line connecting Earth and the foreground star
-        slope = (y_E - y_fg)/(x_E - x_fg)
-        xpt1 = 4.5
-        ypt1 = y_E + slope*(xpt1 - x_E)
-        x_E_old = x_E
-        y_E_old = y_E
-        pylab.plot([x_E_old,xpt1],[y_E_old,ypt1], 'g--')
-
-        # draw the foreground star
-        pylab.scatter([x_fg],[y_fg],s=200,marker=(5,1),color="r")        
-
-        # plot the orbit
-        pylab.plot(x_orbit, y_orbit, "b--")
-
-        # plot Earth        
-        pylab.scatter([x_E],[y_E],s=100,color="b")
-
-        # draw some random background stars
-        pylab.scatter([4.2],[ 2.1],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.7],[ 1.0],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.4],[-0.4],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.8],[-0.9],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.1],[-1.3],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.3],[-1.8],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.5],[ 0.5],s=200,marker=(5,1),color="c")        
-
+    plt.axis('off')
         
+    f = plt.gcf()
+    f.set_size_inches(6.5,5.0)
 
-        pylab.axis([-1.5,5.0,-2.5,2.5])
+    plt.xlabel("AU")
+    plt.ylabel("AU")
+    plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
+    plt.title("Parallax")
 
-        pylab.axis('off')
+    plt.text(1.5,-0.8, "line of sight", color="g")
+    plt.text(1.5,-1.0, "to foreground star", color="g")
 
-        f = pylab.gcf()
-        f.set_size_inches(6.5,5.0)
-
-        pylab.xlabel("AU")
-        pylab.ylabel("AU")
-        pylab.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        pylab.title("Parallax")
-
-        pylab.text(1.5,-0.8, "line of sight", color="g")
-        pylab.text(1.5,-1.0, "to foreground star", color="g")
-
-        outfile = "parallax_%04d.png" % iout
-        pylab.savefig(outfile)
-
-        
-        n += 1
+    for n in range(nframes):
+        plt.savefig("parallax_%04d.png" % iout)
         iout += 1
-
-
 
 
     # integrate for 6 months
     n = 0  
     while (n < nsteps/2):
 
-        x_E = a_E*math.cos(omega*t + phi)
-        y_E = a_E*math.sin(omega*t + phi)
+        plt.clf()
 
+        p.draw_sun_and_orbit()
+        p.draw_earth(t)
+        p.draw_foreground_star()
+        p.draw_background_stars()
 
-        # clear
-        pylab.clf()
+        plt.axis([-1.5,5.0,-2.5,2.5])
 
+        plt.axis('off')
 
-        # draw the line connecting the Sun and the foreground star
-        pylab.plot([0,x_fg],[0,y_fg],'k--')
-        pylab.text(1.5,-0.25,"d",color="k")
-
- 
-        # draw the Sun
-        pylab.scatter([0],[0],s=250,marker=(5,1),color="k")
-        pylab.scatter([0],[0],s=200,marker=(5,1),color="y")
-
-        # draw the line connecting old Earth and the foreground star
-        pylab.plot([x_E_old,xpt1],[y_E_old,ypt1], 'g--')
-
-        # draw the foreground star
-        pylab.scatter([x_fg],[y_fg],s=200,marker=(5,1),color="r")        
-
-        # plot the orbit
-        pylab.plot(x_orbit, y_orbit, "b--")
-
-        # plot Earth
-        pylab.scatter([x_E],[y_E],s=100,color="b")
-
-        # draw some random background stars
-        pylab.scatter([4.2],[ 2.1],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.7],[ 1.0],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.4],[-0.4],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.8],[-0.9],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.1],[-1.3],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.3],[-1.8],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.5],[ 0.5],s=200,marker=(5,1),color="c")        
-
-        
-
-        pylab.axis([-1.5,5.0,-2.5,2.5])
-
-        pylab.axis('off')
-
-        f = pylab.gcf()
+        f = plt.gcf()
         f.set_size_inches(6.5,5.0)
 
-        pylab.xlabel("AU")
-        pylab.ylabel("AU")
-        pylab.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        pylab.title("Parallax")
-
-
-        outfile = "parallax_%04d.png" % iout
-        pylab.savefig(outfile)
+        plt.xlabel("AU")
+        plt.ylabel("AU")
+        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
+        plt.title("Parallax")
+        
+        plt.savefig("parallax_%04d.png" % iout)
 
         t += dt
         n += 1
@@ -274,138 +212,58 @@ def parallax():
     print "connecting2"
 
     nframes = 50
-    n = 0
-    while (n < nframes):
 
-        x_E = a_E*math.cos(omega*t + phi)
-        y_E = a_E*math.sin(omega*t + phi)
+    plt.clf()
 
+    p.draw_sun_and_orbit()
+    p.draw_earth(t, connect_to_fg=1)
+    p.draw_foreground_star()
+    p.draw_background_stars()
 
-        # clear
-        pylab.clf()
+    plt.axis([-1.5,5.0,-2.5,2.5])
 
+    plt.axis('off')
 
-        # draw the line connecting the Sun and the foreground star
-        pylab.plot([0,x_fg],[0,y_fg],'k--')
-        pylab.text(1.5,-0.25,"d",color="k")
+    f = plt.gcf()
+    f.set_size_inches(6.5,5.0)
 
- 
-        # draw the Sun
-        pylab.scatter([0],[0],s=250,marker=(5,1),color="k")
-        pylab.scatter([0],[0],s=200,marker=(5,1),color="y")
+    plt.xlabel("AU")
+    plt.ylabel("AU")
+    plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
+    plt.title("Parallax")
 
-        # draw the line connecting Earth and the foreground star
-        slope = (y_E - y_fg)/(x_E - x_fg)
-        xpt2 = 4.5
-        ypt2 = y_E + slope*(xpt2 - x_E)
-        x_E_new = x_E
-        y_E_new = y_E
-        pylab.plot([x_E_new,xpt2],[y_E_new,ypt2], 'g--')
-        pylab.plot([x_E_old,xpt1],[y_E_old,ypt1], 'g--')
+    plt.text(1.5,1.0, "new line of sight", color="g")
+    plt.text(1.5,0.8, "to foreground star", color="g")
 
-
-        # draw the foreground star
-        pylab.scatter([x_fg],[y_fg],s=200,marker=(5,1),color="r")        
-
-        # plot the orbit
-        pylab.plot(x_orbit, y_orbit, "b--")
-
-        # plot Earth        
-        pylab.scatter([x_E],[y_E],s=100,color="b")
-
-        # draw some random background stars
-        pylab.scatter([4.2],[ 2.1],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.7],[ 1.0],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.4],[-0.4],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.8],[-0.9],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.1],[-1.3],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.3],[-1.8],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.5],[ 0.5],s=200,marker=(5,1),color="c")        
-
-        
-
-        pylab.axis([-1.5,5.0,-2.5,2.5])
-
-        pylab.axis('off')
-
-        f = pylab.gcf()
-        f.set_size_inches(6.5,5.0)
-
-        pylab.xlabel("AU")
-        pylab.ylabel("AU")
-        pylab.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        pylab.title("Parallax")
-
-        pylab.text(1.5,1.0, "new line of sight", color="g")
-        pylab.text(1.5,0.8, "to foreground star", color="g")
-
-        outfile = "parallax_%04d.png" % iout
-        pylab.savefig(outfile)
-
-        n += 1
+    for n in range(nframes):
+        plt.savefig("parallax_%04d.png" % iout)
         iout += 1
-
 
 
     # integrate for the final 1/4 year
     n = 0  
     while (n < nsteps/4):
 
-        # clear
-        pylab.clf()
+        plt.clf()
 
-        # draw the line connecting the Sun and the foreground star
-        pylab.plot([0,x_fg],[0,y_fg],'k--')
-        pylab.text(1.5,-0.25,"d",color="k")
+        p.draw_sun_and_orbit()
+        p.draw_earth(t)
+        p.draw_foreground_star()
+        p.draw_background_stars()
 
- 
-        # draw the Sun
-        pylab.scatter([0],[0],s=250,marker=(5,1),color="k")
-        pylab.scatter([0],[0],s=200,marker=(5,1),color="y")
+        plt.axis([-1.5,5.0,-2.5,2.5])
 
-        # draw the foreground star
-        pylab.scatter([x_fg],[y_fg],s=200,marker=(5,1),color="r")        
+        plt.axis('off')
 
-        # draw the connecting lines
-        pylab.plot([x_E_new,xpt2],[y_E_new,ypt2], 'g--')
-        pylab.plot([x_E_old,xpt1],[y_E_old,ypt1], 'g--')
-
-        # plot the orbit
-        pylab.plot(x_orbit, y_orbit, "b--")
-
-        # plot Earth
-        x_E = a_E*math.cos(omega*t + phi)
-        y_E = a_E*math.sin(omega*t + phi)
-
-        
-        pylab.scatter([x_E],[y_E],s=100,color="b")
-
-        # draw some random background stars
-        pylab.scatter([4.2],[ 2.1],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.7],[ 1.0],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.4],[-0.4],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.8],[-0.9],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.1],[-1.3],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.3],[-1.8],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.5],[ 0.5],s=200,marker=(5,1),color="c")        
-
-        
-
-        pylab.axis([-1.5,5.0,-2.5,2.5])
-
-        pylab.axis('off')
-
-        f = pylab.gcf()
+        f = plt.gcf()
         f.set_size_inches(6.5,5.0)
 
-        pylab.xlabel("AU")
-        pylab.ylabel("AU")
-        pylab.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        pylab.title("Parallax")
+        plt.xlabel("AU")
+        plt.ylabel("AU")
+        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
+        plt.title("Parallax")
 
-
-        outfile = "parallax_%04d.png" % iout
-        pylab.savefig(outfile)
+        plt.savefig("parallax_%04d.png" % iout)
 
         t += dt
         n += 1
@@ -415,74 +273,37 @@ def parallax():
 
     # summarize
     nframes = nsteps_year/2
-    n = 0
-    while (n < nframes):
+    for n in range(nframes):
 
-        x_E = a_E*math.cos(omega*t + phi)
-        y_E = a_E*math.sin(omega*t + phi)
-
-        # clear
-        pylab.clf()
-
-        # draw the line connecting the Sun and the foreground star
-        pylab.plot([0,x_fg],[0,y_fg],'k--')
-        pylab.text(1.5,-0.25,"d",color="k")
-
- 
-        # draw the Sun
-        pylab.scatter([0],[0],s=250,marker=(5,1),color="k")
-        pylab.scatter([0],[0],s=200,marker=(5,1),color="y")
-
-        # draw the foreground star
-        pylab.scatter([x_fg],[y_fg],s=200,marker=(5,1),color="r")        
-
-        # draw the connecting lines
-        pylab.plot([x_E_new,xpt2],[y_E_new,ypt2], 'g--')
-        pylab.plot([x_E_old,xpt1],[y_E_old,ypt1], 'g--')
-
-        # plot the orbit
-        pylab.plot(x_orbit, y_orbit, "b--")
-
+        plt.clf()
+    
+        p.draw_sun_and_orbit()
+        p.draw_earth(t)
+        p.draw_foreground_star()
+        p.draw_background_stars()
         
-        # plot Earth
-        pylab.scatter([x_E],[y_E],s=100,color="b")
-
-        # draw some random background stars
-        pylab.scatter([4.2],[ 2.1],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.7],[ 1.0],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.4],[-0.4],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.8],[-0.9],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.1],[-1.3],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.3],[-1.8],s=200,marker=(5,1),color="c")        
-        pylab.scatter([4.5],[ 0.5],s=200,marker=(5,1),color="c")        
-
-        
-        f = pylab.gcf()
+        f = plt.gcf()
         f.set_size_inches(6.5,5.0)
 
-        pylab.xlabel("AU")
-        pylab.ylabel("AU")
-        pylab.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        pylab.title("Parallax")
+        plt.xlabel("AU")
+        plt.ylabel("AU")
+        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
+        plt.title("Parallax")
+        
+        plt.plot([0.0,0.0],[0.0,-1.0], "r")
 
-        pylab.plot([0.0,0.0],[0.0,-1.0], "r")
+        plt.text(2.5,-0.25,"p",color="g")
+        plt.text(2.0,1.5,"tan p = 1 AU / d",color="g")
+        plt.text(-0.5,-0.5, "1 AU", color="r")
+        
+        plt.axis([-1.5,5.0,-2.5,2.5])
 
-        pylab.text(2.5,-0.25,"p",color="g")
-        pylab.text(2.0,1.5,"tan p = 1 AU / d",color="g")
-        pylab.text(-0.5,-0.5, "1 AU", color="r")
+        plt.axis('off')
 
-        pylab.axis([-1.5,5.0,-2.5,2.5])
-
-        pylab.axis('off')
-
-        outfile = "parallax_%04d.png" % iout
-        pylab.savefig(outfile)
+        plt.savefig("parallax_%04d.png" % iout)
 
         t += dt
-        n += 1
         iout += 1
-
-
 
     
 if __name__== "__main__":
