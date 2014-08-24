@@ -1,3 +1,5 @@
+#!/bin/env python
+
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,8 +11,6 @@ import matplotlib.pyplot as plt
 # We work in units of AU, yr, and M_sun in these units, G = 4 pi^2
 
 # M. Zingale 
-
-
 
 class ParallaxScene:
     """
@@ -84,16 +84,33 @@ class ParallaxScene:
     def draw_background_stars(self):
         # draw some random background stars        
 
-        pos = [(4.2, 2.1), (4.7, 1.0), (4.4, -0.4), (4.8, -0.9), 
-               (4.1,-1.3), (4.3,-1.8), (4.5, 0.5)]
+        pos = [(4.2, 1.6), (4.7, 1.0), (4.4, -0.4), (4.8, -0.9), 
+               (4.1,-1.3), (4.3,-1.5), (4.5, 0.5)]
 
         for x, y in pos:
             plt.scatter( [x], [y], s=200, marker=(5,1), color="c")        
 
 
+    def setup_fig(self, time, name):
+
+        plt.axis([-1.5,5.0,-1.8,1.8])
+
+        plt.axis('off')
+        ax = plt.gca()
+        ax.set_aspect("equal", "datalim")
+
+        f = plt.gcf()
+        f.set_size_inches(12.8, 7.2)
+
+        plt.xlabel("AU")
+        plt.ylabel("AU")
+        plt.text(-1.4,-2.0, "time = %6.3f yr" % time)
+        plt.title("Parallax")
+
+        plt.savefig(name)
+
 
 def parallax():
-
 
     t = 0.0
 
@@ -121,26 +138,12 @@ def parallax():
         p.draw_earth(t)
         p.draw_foreground_star()
         p.draw_background_stars()
-        
-        plt.axis([-1.5,5.0,-2.5,2.5])
-
-        plt.axis('off')
-
-        f = plt.gcf()
-        f.set_size_inches(6.5,5.0)
-
-        plt.xlabel("AU")
-        plt.ylabel("AU")
-        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        plt.title("Parallax")
-        
-        plt.savefig("parallax_%04d.png" % iout)
+                
+        p.setup_fig(t, "parallax_%04d.png" % iout)
 
         t += dt
         n += 1
         iout += 1
-
-
 
 
     # show the line connecting the current position and the foreground star
@@ -156,20 +159,11 @@ def parallax():
     p.draw_foreground_star()
     p.draw_background_stars()
     
-    plt.axis([-1.5,5.0,-2.5,2.5])
-
-    plt.axis('off')
-        
-    f = plt.gcf()
-    f.set_size_inches(6.5,5.0)
-
-    plt.xlabel("AU")
-    plt.ylabel("AU")
-    plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
-    plt.title("Parallax")
-
     plt.text(1.5,-0.8, "line of sight", color="g")
     plt.text(1.5,-1.0, "to foreground star", color="g")
+
+    p.setup_fig(t, "parallax_%04d.png" % iout)
+    iout += 1
 
     for n in range(nframes):
         plt.savefig("parallax_%04d.png" % iout)
@@ -187,19 +181,7 @@ def parallax():
         p.draw_foreground_star()
         p.draw_background_stars()
 
-        plt.axis([-1.5,5.0,-2.5,2.5])
-
-        plt.axis('off')
-
-        f = plt.gcf()
-        f.set_size_inches(6.5,5.0)
-
-        plt.xlabel("AU")
-        plt.ylabel("AU")
-        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        plt.title("Parallax")
-        
-        plt.savefig("parallax_%04d.png" % iout)
+        p.setup_fig(t, "parallax_%04d.png" % iout)
 
         t += dt
         n += 1
@@ -220,20 +202,11 @@ def parallax():
     p.draw_foreground_star()
     p.draw_background_stars()
 
-    plt.axis([-1.5,5.0,-2.5,2.5])
-
-    plt.axis('off')
-
-    f = plt.gcf()
-    f.set_size_inches(6.5,5.0)
-
-    plt.xlabel("AU")
-    plt.ylabel("AU")
-    plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
-    plt.title("Parallax")
-
     plt.text(1.5,1.0, "new line of sight", color="g")
     plt.text(1.5,0.8, "to foreground star", color="g")
+
+    p.setup_fig(t, "parallax_%04d.png" % iout)
+    iout += 1
 
     for n in range(nframes):
         plt.savefig("parallax_%04d.png" % iout)
@@ -251,19 +224,7 @@ def parallax():
         p.draw_foreground_star()
         p.draw_background_stars()
 
-        plt.axis([-1.5,5.0,-2.5,2.5])
-
-        plt.axis('off')
-
-        f = plt.gcf()
-        f.set_size_inches(6.5,5.0)
-
-        plt.xlabel("AU")
-        plt.ylabel("AU")
-        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        plt.title("Parallax")
-
-        plt.savefig("parallax_%04d.png" % iout)
+        p.setup_fig(t, "parallax_%04d.png" % iout)
 
         t += dt
         n += 1
@@ -282,25 +243,14 @@ def parallax():
         p.draw_foreground_star()
         p.draw_background_stars()
         
-        f = plt.gcf()
-        f.set_size_inches(6.5,5.0)
-
-        plt.xlabel("AU")
-        plt.ylabel("AU")
-        plt.text(-1.4,-2.0, "time = %6.3f yr" % t)
-        plt.title("Parallax")
         
         plt.plot([0.0,0.0],[0.0,-1.0], "r")
-
-        plt.text(2.5,-0.25,"p",color="g")
-        plt.text(2.0,1.5,"tan p = 1 AU / d",color="g")
+        plt.plot([0.0,p.x_fg], [-1.0,p.y_fg], "r")
+        plt.text(p.x_fg-0.5,-0.125,"p",color="g")
+        plt.text(2.0,0.5,"tan p = 1 AU / d",color="g")
         plt.text(-0.5,-0.5, "1 AU", color="r")
         
-        plt.axis([-1.5,5.0,-2.5,2.5])
-
-        plt.axis('off')
-
-        plt.savefig("parallax_%04d.png" % iout)
+        p.setup_fig(t, "parallax_%04d.png" % iout)
 
         t += dt
         iout += 1
@@ -308,7 +258,3 @@ def parallax():
     
 if __name__== "__main__":
     parallax()
-
-
-    
-        
