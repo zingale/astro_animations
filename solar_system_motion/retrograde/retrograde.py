@@ -134,7 +134,7 @@ def doit():
 
         pylab.xlabel("AU")
         pylab.ylabel("AU")
-        pylab.text(-1.5,-2.0, "time = %6.3f yr" % sol[0].t[n])
+        pylab.text(-1.5,-1.5, "time = %6.3f yr" % sol[0].t[n])
         pylab.title("Retrograde Mars")
 
         pylab.savefig("retrograde_%04d.png" % n)
