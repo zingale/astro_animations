@@ -1,12 +1,12 @@
+#!/bin/env python
+
 import math
 import numpy
 import pylab
 
 # show how ellipses are drawn
 
-# M. Zingale (2008-09-02)
-#
-#      2009-02-14: fixed the aspect ratio
+# M. Zingale
 
 def ellipse():
 
@@ -26,11 +26,7 @@ def ellipse():
 
 
     # plotting
-    n = 0
-    while (n < npts):
-
-        # turn on interactive mode 
-        #pylab.ion()
+    for n in range(npts):
 
         pylab.clf()
 
@@ -38,20 +34,20 @@ def ellipse():
         ax.set_aspect("equal", "datalim")
         
         # draw the ellipse
-        pylab.plot(x,y,color="b")
+        pylab.plot(x, y, color="b")
 
         # draw our current point
-        pylab.scatter([x[n]],[y[n]], color="k", s=75)
+        pylab.scatter([x[n]], [y[n]], color="k", s=75)
 
         # second foci
         pylab.scatter([-2.0*a*e], [0], color="g", marker="x", s=200)
 
         # primary foci
-        pylab.scatter([0],           [0], color="r", marker="x", s=200)
+        pylab.scatter([0],        [0], color="r", marker="x", s=200)
 
         # draw lines connecting the foci to the current point
-        pylab.plot([0,x[n]],[0,y[n]], color="r")
-        pylab.plot([-2.0*a*e,x[n]],[0,y[n]], color="g")
+        pylab.plot([0,x[n]], [0,y[n]], color="r")
+        pylab.plot([-2.0*a*e,x[n]], [0,y[n]], color="g")
 
         pylab.axis([-2.5,1.5,-2.,2.])
 
@@ -64,16 +60,10 @@ def ellipse():
         pylab.text(-1.5,-1.5, "r' length: %5.3f" % len2, color="g")
         pylab.text(-1.5,-1.75, "r + r' = %5.3f" % (len1 + len2) )
 
-
-        print n, len1, len2, len1+len2
-
         f = pylab.gcf()
-        f.set_size_inches(6.0,6.0)
+        f.set_size_inches(7.2,7.2)
 
-        outfile = "ellipsedraw_%03d.png" % n
-        pylab.savefig(outfile)
-
-        n += 1
+        pylab.savefig("ellipsedraw_%03d.png" % n)
 
 
 if __name__== "__main__":
