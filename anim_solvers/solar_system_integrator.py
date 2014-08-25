@@ -62,7 +62,7 @@ class SolarSystem:
             y0 = 0.0
 
             vx0 = 0.0
-            vy0 = -math.sqrt((self.GM/a)*(1.0+e)/(1.0-e))
+            vy0 = math.sqrt((self.GM/a)*(1.0+e)/(1.0-e))
         
             pos_vel = PlanetPosVel(x0, y0, vx0, vy0)
 
@@ -71,7 +71,7 @@ class SolarSystem:
             y0 = 0.0
 
             vx0 = 0.0
-            vy0 = math.sqrt((self.GM/a)*(1.0-e)/(1.0+e))
+            vy0 = -math.sqrt((self.GM/a)*(1.0-e)/(1.0+e))
 
             pos_vel = PlanetPosVel(x0, y0, vx0, vy0)
         
