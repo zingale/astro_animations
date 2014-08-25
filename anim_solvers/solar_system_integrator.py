@@ -67,7 +67,7 @@ class SolarSystem:
             pos_vel = PlanetPosVel(x0, y0, vx0, vy0)
 
         elif loc == "aphelion":
-            x0 = a*(1.0 + e)
+            x0 = -a*(1.0 + e)
             y0 = 0.0
 
             vx0 = 0.0
