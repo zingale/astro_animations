@@ -87,7 +87,8 @@ class SolarSystem:
     def integrate(self, nsteps_per_year, num_years):
         """ 
         integrate our system to time num_years (given in years), taking
-        nsteps_per_year steps each year.
+        nsteps_per_year steps each year.  This does 4th-order Runge-Kutta
+        with a fixed timestep.
         """
         
         # we will advance each planet separately
