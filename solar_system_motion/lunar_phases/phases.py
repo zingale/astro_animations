@@ -4,8 +4,15 @@ import numpy
 import matplotlib.cm as cm
 
 
+# to show the phase we will paint a hemisphere white and the other
+# black.  We will then change the longitude that we are centered above
+# through the full 360 degress, showing the range of phases.
+
+# the range of longitudes to view
 lon_center = numpy.linspace(0, 360, 361, endpoint=True)
 
+# our grid of lon, lat that we will cover (half white, half dark gray)
+# to show the illumination of the moon.
 lon = numpy.linspace(0, 360, 360)
 lat = numpy.linspace(-90, 90, 180)
 
@@ -15,6 +22,7 @@ data = numpy.zeros_like(lonv)
 data[:,:] = 0.99
 data[lonv > 180] = 0.1
 
+# loop over the longitudes
 i = 0
 while i < len(lon_center):
 
@@ -22,6 +30,7 @@ while i < len(lon_center):
 
 
     #-------------------------------------------------------------------------
+    # draw the sphere showing the phase
     pylab.axes([0.05, 0.333, 0.3, 0.333], axisbg="k")
 
     map = Basemap(projection='ortho', lat_0 = 0, lon_0 = lon_center[i] - 90,
@@ -36,6 +45,8 @@ while i < len(lon_center):
                transform=ax.transAxes)
 
     #-------------------------------------------------------------------------
+    # draw the orbit seen top-down -- we adjust the phase angle here to sync
+    # up with the phase view 
     pylab.axes([0.4,0.1, 0.5, 0.8])
 
     theta = numpy.linspace(0, 2.0*numpy.pi, 361, endpoint=True)
