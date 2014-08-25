@@ -94,7 +94,8 @@ def doit():
     # plotting
     # ================================================================
     for n in range(len(sol[0].x)):
-        pylab.clf()
+        
+        f = pylab.figure()
 
         # plot the foci
         pylab.scatter([0], [0], s=250,marker=(5,1), color="k")
@@ -123,13 +124,12 @@ def doit():
         pylab.scatter([3.8],[-0.9],s=200,marker=(5,1),color="c")        
         pylab.scatter([3.1],[-1.3],s=200,marker=(5,1),color="c")        
 
-        pylab.axis([-2.,4.,-2.0,2.0])
+        pylab.axis([-2.,4.,-1.5,2.0])
         pylab.axis("off")
 
         ax = pylab.gca()
         ax.set_aspect("equal", "datalim")
 
-        f = pylab.gcf()
         f.set_size_inches(12.8,7.2)
 
         pylab.xlabel("AU")
@@ -137,9 +137,9 @@ def doit():
         pylab.text(-1.5,-2.0, "time = %6.3f yr" % sol[0].t[n])
         pylab.title("Retrograde Mars")
 
-        pylab.tight_layout()
-
         pylab.savefig("retrograde_%04d.png" % n)
+
+        pylab.close()
 
         n += 1
 
