@@ -1,3 +1,5 @@
+#!/bin/env python
+
 import math
 import numpy
 import pylab
@@ -5,16 +7,14 @@ import pylab
 # draw ellipses of varying eccentricity
 
 # M. Zingale (2008-09-02)
-#
-#      2009-02-14: fix aspect ratio
 
 def ellipse():
 
     # theta ranges from 0 to 2pi
-    npts = 250
+    npts = 360
     theta = numpy.arange(npts)*2.0*math.pi/(npts-1)
 
-    n_ecc = 100
+    n_ecc = 200
     e_tmp = numpy.arange(n_ecc)*.95/n_ecc
     e = numpy.zeros(2*n_ecc)
     e[0:n_ecc] = e_tmp[:]
@@ -22,20 +22,14 @@ def ellipse():
 
     a = 1.0
 
-    n = 0
-    while (n < 2*n_ecc):
+    for n in range(2*n_ecc):
  
         r = a*(1.0 - e[n]*e[n])/(1.0 + e[n]*numpy.cos(theta))
 
         x = r*numpy.cos(theta)
         y = r*numpy.sin(theta)
 
-
         # plotting
-        
-        # turn on interactive mode 
-        #pylab.ion()
-
         pylab.clf()
 
         ax = pylab.gca()
@@ -44,24 +38,19 @@ def ellipse():
         pylab.plot(x,y,color="b")
 
         # second foci
-        pylab.scatter([-2.0*a*e[n]], [0], color="r", marker="x", s=200)
+        pylab.scatter([-2.0*a*e[n]], [0], color="r", marker="x", s=100)
+
         # primary foci
-        pylab.scatter([0],[0],color="g",marker="x",s=200)
-
-
+        pylab.scatter([0],[0],color="g",marker="x",s=100)
 
         pylab.axis([-2.5,1.5,-2.,2.])
 
         pylab.text(-1.5,-1.5,"a = %5.3f, e = %6.4f" % (a, e[n]))
 
         f = pylab.gcf()
-        f.set_size_inches(6.0,6.0)
+        f.set_size_inches(7.2,7.2)
 
-        outfile = "ellipse_%03d.png" % n
-        pylab.savefig(outfile)
-
-        n += 1
-
+        pylab.savefig("ellipse_%03d.png" % n)
 
 
 if __name__== "__main__":
