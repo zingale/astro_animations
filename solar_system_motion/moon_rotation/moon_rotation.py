@@ -1,10 +1,12 @@
+#!/bin/env python
+
 import math
 import numpy
 import pylab
 
 # demonstrate synchronous rotation of the Moon
 
-# M. Zingale (2011-08-31)
+# M. Zingale 
 
 # we work in MKS units
 G = 6.67428e-11          # [m^3 kg^{-1} s^{-2}]
@@ -25,8 +27,6 @@ class trajectory:
         self.vx = numpy.zeros(self.maxpoints)
         self.vy = numpy.zeros(self.maxpoints)
         self.t  = numpy.zeros(self.maxpoints)
-
-
 
 
 def orbitalenergy():
@@ -66,33 +66,18 @@ def orbitalenergy():
     integrate_projectile(orbit,x_init,y_init,vx_init,vy_init,dt,tmax)
 
 
-
-
-    # ================================================================
     # plotting
-    # ================================================================
 
-    # turn on interactive mode 
-    #pylab.ion()
-
-
-    # plot the orbit
-    iframe = 0
-
-    # v1
-    n = 0
-    while (n < orbit.npts):
+    for n in range(orbit.npts):
 
         pylab.clf()
 
-
         # plot the Earth
-        pylab.scatter([0],[0],s=250,color="k")
-        pylab.scatter([0],[0],s=200,color="b")
+        pylab.scatter([0], [0], s=650, color="k")
+        pylab.scatter([0], [0], s=600, color="b")
 
         # plot the orbit
-        pylab.plot(orbit.x[0:orbit.npts],orbit.y[0:orbit.npts],color="r")
-        #pylab.scatter([orbit.x[n]],[orbit.y[n]],s=100,color="r")
+        pylab.plot(orbit.x[0:orbit.npts], orbit.y[0:orbit.npts], color="0.5", ls=":", lw=2)
 
         # plot moon (use zorder to put this on top of the orbit line)
         theta = numpy.arange(180)
@@ -107,17 +92,19 @@ def orbitalenergy():
         pylab.scatter([xpt],[ypt],s=25,color="k")
 
 
-        pylab.axis([-1.2*d,1.2*d,-1.2*d,1.2*d])
+        pylab.axis([-1.1*d,1.1*d,-1.1*d,1.1*d])
         pylab.axis("off")
 
+        pylab.subplots_adjust(left=0.05,right=0.95,bottom=0.05,top=0.95)
+
+        ax = pylab.gca()
+        ax.set_aspect("equal", "datalim")
+
+
         f = pylab.gcf()
-        f.set_size_inches(6.0,6.0)
+        f.set_size_inches(7.2,7.2)
 
-
-        outfile = "moon_rotation_%04d.png" % n
-        pylab.savefig(outfile)
-        n += 1
-
+        pylab.savefig("moon_rotation_%04d.png" % n)
 
 
 
@@ -131,11 +118,8 @@ def integrate_projectile(orbit,x_init,y_init,vx_init,vy_init,dt,tmax):
     k3 = numpy.zeros(4, numpy.float64)
     k4 = numpy.zeros(4, numpy.float64)
 
-
     y = numpy.zeros(4, numpy.float64)
     f = numpy.zeros(4, numpy.float64)
-
-
 
     t = 0.0
 
@@ -187,7 +171,6 @@ def integrate_projectile(orbit,x_init,y_init,vx_init,vy_init,dt,tmax):
     orbit.npts = n
 
 
-
 def rhs(t,y):
 
     f = numpy.zeros(4, numpy.float64)
@@ -201,7 +184,6 @@ def rhs(t,y):
 
     return f
     
-
     
 if __name__== "__main__":
     orbitalenergy()
