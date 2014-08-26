@@ -52,7 +52,7 @@ periods, ...
 `waves`: animations related to wave motion.
 
 
-* Setup:
+# Setup:
 
 Many of the routines use the solver in anim_solvers to do the
 integration.  This directory needs to be in your `PYTHONPATH` for the
