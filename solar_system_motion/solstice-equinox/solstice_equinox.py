@@ -8,81 +8,42 @@ from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 
 
-# summer solstice
-for lon in range(0, 360, 1):
+ss_date = datetime(2014, 06, 21, 12, 0, 0)
+eq_date = datetime(2014, 9, 23, 12, 0, 0)
+ws_date = datetime(2014, 12, 21, 12, 0, 0)    
 
-    plt.clf()
+dates = [ss_date, eq_date, ws_date]
+events = ["summer_solstice", "equinox", "winter_solstice"]
+pretty_title = ["Summer Solstice", "Equinox", "Winter Solstice"]
 
-    map = Basemap(projection='ortho', lat_0 = 0, lon_0 = lon,
-                  resolution = 'l', area_thresh = 1000.)
+for e, p, d in zip(events, pretty_title, dates):
 
-    map.drawmapboundary()
+    for lon in range(0, 360, 1):
 
-    map.drawmeridians(np.arange(0, 360, 15), color="0.5", latmax=90)
-    map.drawparallels(np.arange(-90, 90, 15), color="0.5", latmax=90)
+        plt.clf()
 
-    map.drawcoastlines()
-    map.drawmapboundary(fill_color='aqua')
-    map.fillcontinents(color='coral',lake_color='aqua')
+        map = Basemap(projection='ortho', lat_0 = 0, lon_0 = lon,
+                      resolution = 'l', area_thresh = 1000.)
 
-    date = datetime(2014, 06, 21, 12, 0, 0)
-    CS=map.nightshade(date)
+        map.drawmapboundary()
 
-    f = plt.gcf()
-    f.set_size_inches(7.2, 7.2)
+        map.drawmeridians(np.arange(0, 360, 15), color="0.5", latmax=90)
+        map.drawparallels(np.arange(-90, 90, 15), color="0.5", latmax=90)
 
-    plt.savefig("summer_solstice_{:03}.png".format(lon))
+        map.drawcoastlines()
+        map.drawmapboundary(fill_color='aqua')
+        map.fillcontinents(color='coral',lake_color='aqua')
 
+        CS=map.nightshade(d)
 
-# equinox
-for lon in range(0, 360, 1):
+        f = plt.gcf()
+        f.set_size_inches(7.2, 7.2)
 
-    plt.clf()
+        plt.text(0.5, 0.95, p, transform=f.transFigure, 
+                 horizontalalignment="center", fontsize="large")
 
-    map = Basemap(projection='ortho', lat_0 = 0, lon_0 = lon,
-                  resolution = 'l', area_thresh = 1000.)
+        plt.text(0.5, 0.05, "noon UTC", transform=f.transFigure, 
+                 horizontalalignment="center")
 
-    map.drawmapboundary()
-
-    map.drawmeridians(np.arange(0, 360, 15), color="0.5", latmax=90)
-    map.drawparallels(np.arange(-90, 90, 15), color="0.5", latmax=90)
-
-    map.drawcoastlines()
-    map.drawmapboundary(fill_color='aqua')
-    map.fillcontinents(color='coral',lake_color='aqua')
-
-    date = datetime(2014, 9, 23, 12, 0, 0)
-    CS=map.nightshade(date)
-
-    f = plt.gcf()
-    f.set_size_inches(7.2, 7.2)
-
-    plt.savefig("equinox_{:03}.png".format(lon))
-
-
-# winter solstice
-for lon in range(0, 360, 1):
-
-    plt.clf()
-
-    map = Basemap(projection='ortho', lat_0 = 0, lon_0 = lon,
-                  resolution = 'l', area_thresh = 1000.)
-
-    map.drawmapboundary()
-
-    map.drawmeridians(np.arange(0, 360, 15), color="0.5", latmax=90)
-    map.drawparallels(np.arange(-90, 90, 15), color="0.5", latmax=90)
-
-    map.drawcoastlines()
-    map.drawmapboundary(fill_color='aqua')
-    map.fillcontinents(color='coral',lake_color='aqua')
-
-    date = datetime(2014, 12, 21, 12, 0, 0)
-    CS=map.nightshade(date)
-
-    f = plt.gcf()
-    f.set_size_inches(7.2, 7.2)
-
-    plt.savefig("winter_solstice_{:03}.png".format(lon))
-
+        plt.savefig("{}_{:03}.png".format(e, lon))
 
