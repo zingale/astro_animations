@@ -1,3 +1,5 @@
+#!/bin/env python
+
 # plot the periods vs. semi-major axes for the planets in our solar
 # system on a log-log plot, and draw a line through it showing that
 # that obey Kepler's third law.
@@ -14,10 +16,11 @@ import pylab
 
 def harmonic_law():
 
-    plot_moons = 1
-    plot_pluto = 1
+    plot_moons = 0
+    plot_pluto = 0
 
-    names = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+    names = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", 
+             "Uranus", "Neptune", "Pluto"]
 
     names_J = ["Io", "Europa", "Ganymede", "Callisto"]
 
@@ -61,27 +64,25 @@ def harmonic_law():
 
 
     # solar system
-    pylab.scatter(a,P, s=100, marker="+", color="r", lw=2)
+    if plot_pluto == 1:
+        pylab.scatter(a, P, s=100, marker="+", color="r", lw=2)
+    else:
+        pylab.scatter(a[0:8], P[0:8], s=100, marker="+", color="r", lw=2)
 
     atemp = numpy.arange(2)*(2*numpy.max(a) - 0.5*numpy.min(a)) + 0.5*numpy.min(a)
     pylab.plot(atemp, atemp**1.5, 'k--')
 
-    i = 0
-    if (plot_pluto == 1):
+    if plot_pluto == 1:
         num = 9
     else:
         num = 8
 
-    while (i < num):
+    for i in range(num):
         pylab.text(a[i]*0.8,P[i], names[i],horizontalalignment="right", 
                    color="r", fontsize=10)
-        i += 1
 
 
-    print a_J
-    print P_J
-
-    if (plot_moons == 1):
+    if plot_moons == 1:
 
         # Galilean moons
         pylab.scatter(a_J,P_J, s=50, marker="o", color="b", lw=2)
@@ -89,17 +90,14 @@ def harmonic_law():
         atemp = numpy.arange(2)*(2*numpy.max(a_J) - 0.5*numpy.min(a_J)) + 0.5*numpy.min(a_J)
         pylab.plot(atemp, P_J[0]*(atemp/a_J[0])**1.5, 'k--')
 
-        i = 0
-        while (i < 4):
+        for i in range(4):
             pylab.text(a_J[i]*1.5,P_J[i], names_J[i],horizontalalignment="left",
                        verticalalignment="center",
                        color="b",fontsize=10)
-            i += 1
 
 
     pylab.xlabel("semi-major axis (AU)")
     pylab.ylabel("period (yr)")
-
         
     pylab.axis([min_a,100,min_P,1000])
 
@@ -108,8 +106,14 @@ def harmonic_law():
     f = pylab.gcf()
     f.set_size_inches(7.0,6.0)
 
-    pylab.savefig("harmonic_law.png")
-    pylab.savefig("harmonic_law.eps")
+    pylab.tight_layout()
+
+    outbase = "harmonic_law"
+    if plot_pluto == 1: outbase += "_pluto"
+    if plot_moons == 1: outbase += "_moons"
+        
+    pylab.savefig(outbase + ".png")
+    pylab.savefig(outbase + ".eps")
 
 
 

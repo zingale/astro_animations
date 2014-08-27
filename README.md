@@ -50,3 +50,13 @@ periods, ...
 `stars`: figures related to stellar astrophysics.
 
 `waves`: animations related to wave motion.
+
+
+## Setup
+
+Many of the routines use the solver in anim_solvers to do the
+integration.  This directory needs to be in your `PYTHONPATH` for the
+scripts to execute.
+
+You will need to have `numpy`, `matplotlib`, and the `python-basemap`
+packages installed for the scripts to run.
