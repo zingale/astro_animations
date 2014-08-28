@@ -1,6 +1,7 @@
 #!/bin/env python
 
-# show the day night line over the course of a year (each frame is 2 hours apart)
+# show the day night line over the course of a year (each frame is 2
+# hours apart)
 # centered on NY
 
 from datetime import datetime, timedelta
@@ -11,9 +12,21 @@ from mpl_toolkits.basemap import Basemap
 
 import matplotlib.pyplot as plt
 
+#proj = "ortho"
+proj = "moll"
+
+
 # Stony Brook data 
-lat = 40.906
-lon = -73.128
+lat_sb = 40.906
+lon_sb = -73.128
+
+if proj == "ortho":
+    lat = lat_sb
+    lon = lon_sb
+else:
+    lat = 0
+    lon = 0
+
 
 # work in UTC (+5)
 date = datetime(2014, 01, 01, 12+5, 0, 0)
@@ -27,7 +40,7 @@ for n in range(365):
 
     plt.clf()
 
-    map = Basemap(projection='ortho', lat_0 = lat, lon_0 = lon,
+    map = Basemap(projection=proj, lat_0 = lat, lon_0 = lon,
                   resolution = 'l', area_thresh = 1000.)
 
     map.drawmapboundary()
@@ -50,7 +63,7 @@ for n in range(365):
     plt.text(0.5, 0.05, "{}".format(utc.localize(date).astimezone(eastern)),
              transform=f.transFigure, horizontalalignment="center")
 
-    plt.savefig("stony_brook_noon_year_{:04}.png".format(n))
+    plt.savefig("stonybrook_noon_{}_{:04}.png".format(proj, n))
     
     date += delta
 
