@@ -28,8 +28,80 @@ class trajectory:
         self.vy = numpy.zeros(self.maxpoints)
         self.t  = numpy.zeros(self.maxpoints)
 
+    def integrate(self, x_init, y_init, vx_init, vy_init, dt, tmax):
 
-def orbitalenergy():
+        # allocate storage for R-K intermediate results
+        k1 = numpy.zeros(4, numpy.float64)
+        k2 = numpy.zeros(4, numpy.float64)
+        k3 = numpy.zeros(4, numpy.float64)
+        k4 = numpy.zeros(4, numpy.float64)
+        
+        y = numpy.zeros(4, numpy.float64)
+        f = numpy.zeros(4, numpy.float64)
+
+        t = 0.0
+
+        # initial conditions
+        y[0] = x_init   
+        y[1] = y_init   
+
+        y[2] = vx_init   
+        y[3] = vy_init     
+
+        # store the initial conditions
+        self.x[0] = y[0]
+        self.y[0] = y[1]
+        
+        self.vx[0] = y[2]
+        self.vy[0] = y[3]
+    
+        self.t[0] = t
+
+        n = 1
+        while (n < self.maxpoints and t < tmax):
+
+            f = self.rhs(t, y)
+            k1[:] = dt*f[:]
+
+            f = self.rhs(t+0.5*dt, y[:]+0.5*k1[:])
+            k2[:] = dt*f[:]
+
+            f = self.rhs(t+0.5*dt, y[:]+0.5*k2[:])
+            k3[:] = dt*f[:]
+
+            f = self.rhs(t+dt, y[:]+k3[:])
+            k4[:] = dt*f[:]
+
+            y[:] += (1.0/6.0)*(k1[:] + 2.0*k2[:] + 2.0*k3[:] + k4[:])
+
+            t += dt
+
+            self.x[n]  = y[0]
+            self.y[n]  = y[1]
+            self.vx[n] = y[2]
+            self.vy[n] = y[3]
+            self.t[n]  = t
+
+            n += 1
+
+        self.npts = n
+
+
+    def rhs(self, t, y):
+
+        f = numpy.zeros(4, numpy.float64)
+
+        # y[0] = x, y[1] = y, y[2] = v_x, y[3] = v_y
+        f[0] = y[2]
+        f[1] = y[3]
+        r = numpy.sqrt(y[0]**2 + y[1]**2)
+        f[2] = -G*M_E*y[0]/r**3
+        f[3] = -G*M_E*y[1]/r**3
+
+        return f
+
+
+def doit():
 
     # set the semi-major axis and eccentricity
     a = 1.0*d
@@ -38,7 +110,6 @@ def orbitalenergy():
     # compute the period of the orbit from Kepler's law and make
     # the timestep by 1/720th of a period
     P_orbital = math.sqrt(4*math.pi*math.pi*a**3/(G*M_E))
-
 
     # set the rotation period
     P_rotation = P_orbital
@@ -63,7 +134,7 @@ def orbitalenergy():
     dt = P_orbital/720.0
     tmax = 2*P_orbital
 
-    integrate_projectile(orbit,x_init,y_init,vx_init,vy_init,dt,tmax)
+    orbit.integrate(x_init, y_init, vx_init, vy_init, dt, tmax)
 
 
     # plotting
@@ -106,88 +177,6 @@ def orbitalenergy():
 
         pylab.savefig("moon_rotation_%04d.png" % n)
 
-
-
-def integrate_projectile(orbit,x_init,y_init,vx_init,vy_init,dt,tmax):
-
-    SMALL = 1.e-16
-
-    # allocate storage for R-K intermediate results
-    k1 = numpy.zeros(4, numpy.float64)
-    k2 = numpy.zeros(4, numpy.float64)
-    k3 = numpy.zeros(4, numpy.float64)
-    k4 = numpy.zeros(4, numpy.float64)
-
-    y = numpy.zeros(4, numpy.float64)
-    f = numpy.zeros(4, numpy.float64)
-
-    t = 0.0
-
-    # initial conditions
-    y[0] = x_init   
-    y[1] = y_init   
-
-    y[2] = vx_init   
-    y[3] = vy_init     
-
-    # store the initial conditions
-    orbit.x[0] = y[0]
-    orbit.y[0] = y[1]
-
-    orbit.vx[0] = y[2]
-    orbit.vy[0] = y[3]
-
-    orbit.t[0] = t
-
-
-    n = 1
-    while (n < orbit.maxpoints and t < tmax):
-
-        f = rhs(t, y)
-        k1[:] = dt*f[:]
-
-        f = rhs(t+0.5*dt, y[:]+0.5*k1[:])
-        k2[:] = dt*f[:]
-
-        f = rhs(t+0.5*dt, y[:]+0.5*k2[:])
-        k3[:] = dt*f[:]
-
-        f = rhs(t+dt, y[:]+k3[:])
-        k4[:] = dt*f[:]
-
-        y[:] += (1.0/6.0)*(k1[:] + 2.0*k2[:] + 2.0*k3[:] + k4[:])
-
-        t = t + dt
-
-        orbit.x[n]  = y[0]
-        orbit.y[n]  = y[1]
-        orbit.vx[n] = y[2]
-        orbit.vy[n] = y[3]
-        orbit.t[n]  = t
-
-        n += 1
-
-    
-    orbit.npts = n
-
-
-def rhs(t,y):
-
-    f = numpy.zeros(4, numpy.float64)
-
-    # y[0] = x, y[1] = y, y[2] = v_x, y[3] = v_y
-    f[0] = y[2]
-    f[1] = y[3]
-    r = numpy.sqrt(y[0]**2 + y[1]**2)
-    f[2] = -G*M_E*y[0]/r**3
-    f[3] = -G*M_E*y[1]/r**3
-
-    return f
-    
     
 if __name__== "__main__":
-    orbitalenergy()
-
-
-    
-        
+    doit()
