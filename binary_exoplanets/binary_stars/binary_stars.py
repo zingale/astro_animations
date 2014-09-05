@@ -31,7 +31,7 @@ def find_scinotat(number):
 def radial_velocity():
 
     # set the masses
-    M_star1 = 4.0*M_sun      # star 1's mass
+    M_star1 = M_sun      # star 1's mass
     M_star2 = M_sun      # star 2's mass
 
     # set the semi-major axis of the star 2 (and derive that of star 1)
@@ -46,7 +46,7 @@ def radial_velocity():
     theta = math.pi/6.0
 
     # display additional information
-    annotate = True
+    annotate = False
 
     # create the binary object
     b = bi.Binary(M_star1, M_star2, a_star1 + a_star2, ecc, theta, annotate=annotate)
