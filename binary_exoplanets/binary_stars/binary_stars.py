@@ -40,7 +40,7 @@ def radial_velocity():
     a_star1 = (M_star2/M_star1)*a_star2  
 
     # set the eccentricity
-    ecc = 0.0
+    ecc = 0.4
 
     # set the angle to rotate the semi-major axis wrt the observer
     theta = math.pi/6.0
