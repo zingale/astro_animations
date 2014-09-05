@@ -22,8 +22,8 @@ class _PlanetHistory:
 
 
 class SolarSystem:
-    """ 
-    Integrate a solar system with the Sun at the center and an 
+    """
+    Integrate a solar system with the Sun at the center and an
     arbitrary number of planets---we don't model the planet-planet
     interactions.
 
@@ -38,11 +38,17 @@ class SolarSystem:
 
     We work in units of AU, yr, and M_sun
     In these units, G = 4 pi^2
+
+    Note, we can override these defaults by explicitly setting GM and
+    year in the initialization and then passing in a in whatever units
+    are desired.
+
     """
 
-    def __init__(self):
+    def __init__(self, GM=4.0*math.pi**2, year=1.0):
 
-        self.GM = 4.0*math.pi**2
+        self.GM = GM
+        self.year = year
 
         self.num_planets = 0
 
@@ -84,6 +90,15 @@ class SolarSystem:
         self.pos0.append(pos_vel)
 
 
+    def period(self, num):
+        """
+        return the orbital period of planet num
+        """
+
+        a = self.a[num]
+        return math.sqrt(4*math.pi**2*a**3/(self.GM))
+
+
     def integrate(self, nsteps_per_year, num_years):
         """ 
         integrate our system to time num_years (given in years), taking
@@ -92,7 +107,7 @@ class SolarSystem:
         """
         
         # we will advance each planet separately
-        dt = 1.0/nsteps_per_year
+        dt = self.year/nsteps_per_year
 
         # intermediate results storage
         k1 = np.zeros(4, np.float64)
