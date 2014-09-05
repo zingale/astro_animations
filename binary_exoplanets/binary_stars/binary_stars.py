@@ -31,7 +31,7 @@ def find_scinotat(number):
 def radial_velocity():
 
     # set the masses
-    M_star1 = M_sun      # star 1's mass
+    M_star1 = 2.0*M_sun      # star 1's mass
     M_star2 = M_sun      # star 2's mass
 
     # set the semi-major axis of the star 2 (and derive that of star 1)
