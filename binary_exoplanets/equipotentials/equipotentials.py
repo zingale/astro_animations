@@ -5,7 +5,7 @@
 
 import math
 import numpy
-import pylab
+import matplotlib.pyplot as plt
 
 def equipotentials():
 
@@ -22,7 +22,7 @@ def equipotentials():
     dx = (xmax - xmin)/npts
     dy = (ymax - ymin)/npts
 
-    mu = 0.3333
+    mu = 0.1   #0.3333
 
     x = numpy.arange(npts, dtype=numpy.float64)*dx + xmin
     y = numpy.arange(npts, dtype=numpy.float64)*dy + ymin
@@ -37,8 +37,7 @@ def equipotentials():
     # find L1
     x0 = 0.0
 
-    n = 0
-    while (n < NITER):
+    for n in range(NITER):
     
         dVX = dVXdx(-1.0, 1.0, mu, x0)
         d2VX = d2VXdx2(-1.0, 1.0, mu, x0)
@@ -46,11 +45,11 @@ def equipotentials():
         x1 = x0 - dVX/d2VX
         err = abs(x1 - x0)/abs(x0 + EPS)
 
-        if (err < EPS):
+        if err < EPS:
             break
 
         x0 = x1
-        n += 1
+
 
     print n
 
@@ -62,8 +61,7 @@ def equipotentials():
     # find L2
     x0 = -1.0
 
-    n = 0
-    while (n < NITER):
+    for n in range(NITER):
     
         dVX = dVXdx(-1.0, -1.0, mu, x0)
         d2VX = d2VXdx2(-1.0, -1.0, mu, x0)
@@ -71,13 +69,11 @@ def equipotentials():
         x1 = x0 - dVX/d2VX
         err = abs(x1 - x0)/abs(x0 + EPS)
 
-        if (err < EPS):
+        if err < EPS:
             break
 
         x0 = x1
-        n += 1
 
-    print n
 
     x_L2 = x1
     y_L2 = 0.0
@@ -87,20 +83,18 @@ def equipotentials():
     # find L3
     x0 = 1.0
 
-    n = 0
-    while (n < NITER):
-    
+    for n in range(NITER):
+
         dVX = dVXdx(1.0, 1.0, mu, x0)
         d2VX = d2VXdx2(1.0, 1.0, mu, x0)
 
         x1 = x0 - dVX/d2VX
         err = abs(x1 - x0)/abs(x0 + EPS)
 
-        if (err < EPS):
+        if err < EPS:
             break
 
         x0 = x1
-        n += 1
 
     print n
 
@@ -133,27 +127,42 @@ def equipotentials():
     dlogC = (math.log10(Vmax) - math.log10(Vmin))/nC
     C2 = 10.0**(numpy.arange(nC, dtype=numpy.float64)*dlogC + math.log10(Vmin))
 
-    pylab.contour(x, y, V, C, colors="b")
-    pylab.contour(x, y, V, C2, colors="b")
-    pylab.contour(x, y, V, [V_L1], colors="b")
-    pylab.contour(x, y, V, [V_L2], colors="b")
-    pylab.contour(x, y, V, [V_L3], colors="b")
+    plt.contour(x, y, V, C, colors="b")
+    plt.contour(x, y, V, C2, colors="b")
+    plt.contour(x, y, V, [V_L1], colors="b")
+    plt.contour(x, y, V, [V_L2], colors="b")
+    plt.contour(x, y, V, [V_L3], colors="b")
  
-    # draw L4 and L5
-    pylab.scatter([x_L4], [y_L4], marker="x", color="b", s=200)
-    pylab.scatter([x_L5], [y_L5], marker="x", color="b", s=200)
+    # mark the Lagrange points and write the names
+    xeps = 0.025
 
+    plt.scatter([x_L1], [y_L1], marker="x", color="r", s=50)
+    plt.text(x_L1+xeps, y_L1+xeps, "L1", color="r")
+
+    plt.scatter([x_L2], [y_L2], marker="x", color="r", s=50)
+    plt.text(x_L2+xeps, y_L2+xeps, "L2", color="r")
+
+    plt.scatter([x_L3], [y_L3], marker="x", color="r", s=50)
+    plt.text(x_L3+xeps, y_L3+xeps, "L3", color="r")
+
+    plt.scatter([x_L4], [y_L4], marker="x", color="r", s=50)
+    plt.text(x_L4+xeps, y_L4+xeps, "L4", color="r")
+
+    plt.scatter([x_L5], [y_L5], marker="x", color="r", s=50)
+    plt.text(x_L5+xeps, y_L5+xeps, "L5", color="r")
        
-    pylab.axis([xmin,xmax,ymin,ymax])
+    plt.axis([xmin,xmax,ymin,ymax])
 
-    pylab.title(r"Equipotentials",fontsize=11)
-    pylab.xlabel("x/(a + b)")
-    pylab.ylabel("y/(a + b)")
+    plt.title(r"Equipotentials",fontsize=11)
+    plt.xlabel("x/(a + b)")
+    plt.ylabel("y/(a + b)")
 
-    f = pylab.gcf()
-    f.set_size_inches(6.0,6.0)
+    f = plt.gcf()
+    f.set_size_inches(7.2,7.2)
 
-    pylab.savefig("equipotentials.png")
+    plt.tight_layout()
+
+    plt.savefig("equipotentials.png")
 
 
 def Vf(mu, x, y):
@@ -176,8 +185,6 @@ def d2VXdx2(h1, h2, mu, x):
     d2VX = 2.0*h1*(1.0 - mu)/(x - mu)**3 + 2.0*h2*mu/(x + 1.0 - mu)**3 + 1.0
     
     return d2VX
-
-
 
 
 
