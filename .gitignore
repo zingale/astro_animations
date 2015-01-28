@@ -53,3 +53,8 @@ coverage.xml
 docs/_build/
 
 *~
+
+# common output files
+*_????.png
+*_???.png
+*-???.png
