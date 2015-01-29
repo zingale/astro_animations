@@ -36,6 +36,9 @@ apparent position of Mars on the sky before and after.
 course of a year on the globe centered on Stony Brook, NY, with each
 frame at local noon.
 
+`seasons`: an animation showing how the Earth's axial tilt doesn't
+change over the course of the year, giving rise to the seasons.
+
 `second_law`: an animation showing the idea of Kepler's second
 law showing three different shaded regions of equal area and 
 equal time.
