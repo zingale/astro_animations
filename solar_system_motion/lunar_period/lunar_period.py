@@ -1,8 +1,8 @@
 #!/bin/env python
 
 import math
-import numpy
-import pylab
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Show how the time between full moons is longer than the sidereal orbital
 # period of the moon because of the motion of the Earth around the Sun.
@@ -31,9 +31,7 @@ y_E_c = 0.0
 phi_E = 3.0*math.pi/2.0
 phi_M = 3.0*math.pi/2.0
 
-
-
-# number of frames 
+# number of frames
 nframes = 500
 
 # number of frames at "freeze" scenes
@@ -43,7 +41,6 @@ eps = 1.e-8
 
 
 def lunar_period():
-
 
     # time and timestep
     t = 0
@@ -61,8 +58,7 @@ def lunar_period():
         iframe += 1
 
 
-
-    # part I: integrate up to sidereal period 
+    # part I: integrate up to sidereal period
     while (t < P_M_sid):
 
         draw_earth_moon(t, iframe, connect_EM = 0)
@@ -71,15 +67,13 @@ def lunar_period():
         iframe += 1
 
 
-
     # part II: freeze after 1 lunar sidereal period
     for n in range(nfreeze):
 
-        draw_earth_moon(t, iframe, connect_EM = 0, 
+        draw_earth_moon(t, iframe, connect_EM = 0,
                         annotation = "one sidereal lunar orbital period later")
-        
-        iframe += 1
 
+        iframe += 1
 
 
     # part III: integrate up to the synodic period -- next full moon
@@ -100,16 +94,15 @@ def lunar_period():
         iframe += 1
 
 
-
 def circle(xc, yc, r):
-    theta = numpy.arange(361)*2.0*math.pi/360
-    return r*numpy.cos(theta) + xc, r*numpy.sin(theta) + yc
+    theta = np.arange(361)*2.0*math.pi/360
+    return r*np.cos(theta) + xc, r*np.sin(theta) + yc
 
 
 def draw_earth_moon(t, iframe, connect_EM = 0, label = 0,
                     annotation = ""):
 
-    pylab.clf()
+    plt.clf()
 
     # compute positions of the Earth
     x_E = x_E_c + r_E*math.cos(omega_E*t + phi_E)
@@ -122,59 +115,59 @@ def draw_earth_moon(t, iframe, connect_EM = 0, label = 0,
 
 
     # plot the Sun
-    pylab.scatter([0], [0], s=1600, marker=(20,1), color="k")
-    pylab.scatter([0], [0], s=1500, marker=(20,1), color="#FFFF00")
+    plt.scatter([0], [0], s=1600, marker=(20,1), color="k")
+    plt.scatter([0], [0], s=1500, marker=(20,1), color="#FFFF00")
 
     # plot the Earth
-    pylab.scatter([x_E], [y_E], s=150, color="b")
+    plt.scatter([x_E], [y_E], s=150, color="b")
 
     if label:
-        pylab.text(1.05*x_E + 0.05, 1.05*y_E, 
+        plt.text(1.05*x_E + 0.05, 1.05*y_E,
                    "Earth", color="b", fontsize=12)
 
 
     # plot the Moon
-    pylab.scatter([x_M], [y_M], s=50, color="0.5")
+    plt.scatter([x_M], [y_M], s=50, color="0.5")
 
     if label:
-        pylab.text(1.05*x_M + 0.05, 1.05*y_M, 
+        plt.text(1.05*x_M + 0.05, 1.05*y_M,
                    "Moon", color="0.5", fontsize=12)
 
 
     # plot the orbit of Earth
     xo_E, yo_E = circle(0.0, 0.0, r_E)
-    pylab.plot(xo_E, yo_E, color="b", linestyle=":", lw=2)
+    plt.plot(xo_E, yo_E, color="b", linestyle=":", lw=2)
 
 
     # plot the orbit of the Moon
     xo_M, yo_M = circle(x_E, y_E, r_M)
-    pylab.plot(xo_M, yo_M, color="0.5", linestyle=":", lw=2)
+    plt.plot(xo_M, yo_M, color="0.5", linestyle=":", lw=2)
 
 
     if connect_EM:
         # draw a line connecting the Sun-Earth-Moon to show we are
         # at full Moon again
-        pylab.plot([0, x_M], [0, y_M], color="0.5", linestyle=":", lw=2)
+        plt.plot([0, x_M], [0, y_M], color="0.5", linestyle=":", lw=2)
 
 
     if not annotation == "":
-        pylab.text(-r_M, 1.5*r_M, annotation, fontsize=12)
+        plt.text(-r_M, 1.5*r_M, annotation, fontsize=12)
 
-    pylab.axis([-(2*r_M), 1.05*(r_E+r_M), 
+    plt.axis([-(2*r_M), 1.05*(r_E+r_M),
                 -1.05*(r_E+r_M),(2*r_M)])
 
-    pylab.axis("off")
+    plt.axis("off")
 
-    ax = pylab.gca()
+    ax = plt.gca()
     ax.set_aspect("equal", "datalim")
 
-    pylab.subplots_adjust(left=0.05,right=0.98,bottom=0.05,top=0.98)
+    plt.subplots_adjust(left=0.05,right=0.98,bottom=0.05,top=0.98)
 
-    f = pylab.gcf()
+    f = plt.gcf()
     f.set_size_inches(7.2,7.2)
 
-    pylab.savefig("lunar_period_%04d.png" % iframe)
+    plt.savefig("lunar_period_%04d.png" % iframe)
 
-    
+
 if __name__== "__main__":
     lunar_period()
