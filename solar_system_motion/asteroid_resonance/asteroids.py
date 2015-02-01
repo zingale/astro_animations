@@ -36,7 +36,7 @@ def asteroids():
         ss.add_planet(a, e, loc=loc, rot="random")
 
     # integrate
-    nsteps_per_year = 90.0
+    nsteps_per_year = 45.0
     sol = ss.integrate(nsteps_per_year, 2*P_jupiter)
     
     
@@ -60,8 +60,8 @@ def asteroids():
 
         # and the background asteroids
         for k in range(2, 2+n_asteroids):
-            plt.plot(sol[k].x, sol[k].y, color="0.75", zorder=-100)
-            plt.scatter([sol[k].x[n]], [sol[k].y[n]], s=25, color="0.75", zorder=-100)
+            plt.plot(sol[k].x, sol[k].y, color="0.85", zorder=-100)
+            plt.scatter([sol[k].x[n]], [sol[k].y[n]], s=25, color="0.5", zorder=-100)
 
 
         f = plt.gcf()
