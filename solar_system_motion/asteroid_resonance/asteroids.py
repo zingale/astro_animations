@@ -41,6 +41,8 @@ def asteroids():
     
     
     # plots
+    iframe = 0
+    
     for n in range(len(sol[0].t)):
 
         plt.clf()
@@ -71,9 +73,40 @@ def asteroids():
         
         ax = plt.gca()
         ax.set_aspect("equal", "datalim")
-                                                          
-        plt.savefig("asteroids_{:04d}.png".format(n))
 
+        # if jupiter is at perihelion, the pause and annotate
+        perihelion = False
+        if n == 0:
+            perihelion = True
+        elif n > 0 and n < len(sol[0].t)-1:
+            if sol[0].y[n]*sol[0].y[n+1] < 0.0 and sol[0].x[n] > 0.0:
+                perihelion = True
+
+        if perihelion:
+            plt.text(0.5, 0.96,
+                     "Jupiter and our asteroid are at their closest point",
+                     horizontalalignment="center", transform=f.transFigure,
+                     fontsize="large")
+
+            plt.text(0.5, 0.92,
+                     "The gravitational force on the asteroid is always",
+                     horizontalalignment="center", transform=f.transFigure)            
+
+            plt.text(0.5, 0.89,
+                     "strongest and in the same direction here",            
+                     horizontalalignment="center", transform=f.transFigure)            
+            
+
+            plt.arrow(sol[1].x[n], sol[1].y[n], 1.0, 0.0, color="r",
+                      length_includes_head=True,
+                      head_width = 0.2, width=0.05, overhang=-0.1)
+
+            for k in range(150):
+                plt.savefig("asteroids_{:04d}.png".format(iframe))
+                iframe += 1
+                 
+        plt.savefig("asteroids_{:04d}.png".format(iframe))
+        iframe += 1
 
 if __name__ == "__main__":
     asteroids()
