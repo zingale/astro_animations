@@ -2,6 +2,7 @@
 
 import math
 import matplotlib.pyplot as plt
+import random
 
 import anim_solvers.solar_system_integrator as solar_system_integrator
 
@@ -10,6 +11,11 @@ import anim_solvers.solar_system_integrator as solar_system_integrator
 # retrograde motion.
 
 # M. Zingale
+
+
+# extend our reference line (and star field) to both sides
+both_sides = False
+
 
 def doit():
 
@@ -89,6 +95,22 @@ def doit():
     sol = s.integrate(nsteps_year, nyears)
 
 
+    # some background stars
+    N = 10
+    xpos = []
+    ypos = []
+    for s in range(N):
+        xpos.append(random.uniform(3.0, 3.9))
+        ypos.append(random.uniform(-1.4,1.9))
+
+    if both_sides:
+        xpos_left = []
+        ypos_left = []
+        for s in range(N):
+            xpos_left.append(random.uniform(-2.4,-1.4))
+            ypos_left.append(random.uniform(-1.4,1.9))
+
+
     # ================================================================
     # plotting
     # ================================================================
@@ -97,8 +119,8 @@ def doit():
         f = plt.figure()
 
         # plot the foci
-        plt.scatter([0], [0], s=250,marker=(5,1), color="k")
-        plt.scatter([0], [0], s=200,marker=(5,1), color="y")
+        plt.scatter([0], [0], s=1600, marker=(20,1), color="k")
+        plt.scatter([0], [0], s=1500, marker=(20,1), color="#FFFF00")
 
         # plot Earth
         plt.plot(sol[0].x, sol[0].y, color="b")
@@ -117,13 +139,20 @@ def doit():
         plt.plot([sol[0].x[n], xpt], [sol[0].y[n], ypt], "b--")
 
         # draw some random background stars
-        plt.scatter([3.2],[ 1.9],s=200,marker=(5,1),color="c")
-        plt.scatter([3.6],[ 1.0],s=200,marker=(5,1),color="c")
-        plt.scatter([3.4],[-0.4],s=200,marker=(5,1),color="c")
-        plt.scatter([3.8],[-0.9],s=200,marker=(5,1),color="c")
-        plt.scatter([3.1],[-1.3],s=200,marker=(5,1),color="c")
+        for s in range(N):
+            plt.scatter([xpos[s]], [ypos[s]], s=200, marker=(5,1), color="c")
 
-        plt.axis([-2.,4.,-1.5,2.0])
+
+        if both_sides:
+            xpt = -2.5
+            ypt = sol[0].y[n] + slope*(xpt - sol[0].x[n])
+            plt.plot([sol[0].x[n], xpt], [sol[0].y[n], ypt], "b--")
+
+            for s in range(N):
+                plt.scatter([xpos_left[s]], [ypos_left[s]], s=200, marker=(5,1), color="c")
+
+
+        plt.axis([-2.5, 4.0, -1.5, 2.0])
         plt.axis("off")
 
         ax = plt.gca()
