@@ -1,0 +1,241 @@
+BODY, H1, H2, H3, H4, H5  
+{
+    font-family: Carlito, Calibri, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+BODY 
+{
+   background-color: #cccccc;
+   color: black;
+   padding: 2em;
+   text-align: center; /* IE hack -- margin-auto in container doesn't work */
+}
+
+
+#container
+{
+   border: 3px solid black;
+   border-radius: 25px;
+   -moz-border-radius: 25px; /* Mozilla */
+   -moz-box-shadow: 10px 10px 5px #888;
+   -webkit-box-shadow: 10px 10px 5px #888;
+   box-shadow: 10px 10px 5px #888;
+   width: 800px;
+   margin: 0;
+   margin-left: auto; 
+   margin-right: auto;
+   padding: 0;
+   text-align: left; /* undo IE hack to body */
+}
+
+#header
+{
+   background-color: #ff3333; 
+/* http://gradients.glrzad.com/ */
+background-image: linear-gradient(left , rgb(255,51,51) 0%, rgb(161,56,161) 100%);
+background-image: -o-linear-gradient(left , rgb(255,51,51) 0%, rgb(161,56,161) 100%);
+background-image: -moz-linear-gradient(left , rgb(255,51,51) 0%, rgb(161,56,161) 100%);
+background-image: -webkit-linear-gradient(left , rgb(255,51,51) 0%, rgb(161,56,161) 100%);
+background-image: -ms-linear-gradient(left , rgb(255,51,51) 0%, rgb(161,56,161) 100%);
+
+background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0, rgb(255,51,51)),
+    color-stop(1, rgb(161,56,161))
+);
+   color: white;
+   border-radius: 25px 25px 0 0; 
+   -moz-border-radius: 25px 25px 0 0; /* Mozilla */
+   padding: 1em;
+   margin: 0;
+   border-bottom: 3px solid black;
+   text-align: center;
+   font-family: "Tahoma", Arial, Helvetica, sans-serif;
+}
+
+#header H1 {
+   display: inline; 
+   line-height: 90%;
+   color: white;
+}
+
+#header p {margin: 0; 
+           padding: 0;
+           margin-top: 1em;}
+
+
+#other {
+   background-color: #ffffff;
+   color: #000000;
+   padding: 10px;
+   margin: 0;
+   line-height: 130%;
+   width: auto;
+   border-radius: 0 0 25px 25px;
+   -moz-border-radius: 0 0 25px 25px; /* Mozilla */
+}
+
+#ref {
+   font-size: small;
+}
+
+PRE {font-family: "Bitstream Vera Sans Mono",
+                  "Monospace",
+                  monospace;
+     color : #FFFFFF;}
+
+TT  
+{
+    font-family: "Bitstream Vera Sans Mono", "Monospace", monospace;
+    font-size: 90%;
+    color : #000000;
+}
+
+
+A:LINK {text-decoration: none;
+        color: green;}
+A:VISITED {text-decoration: none;
+           color: Gray;}
+A:HOVER {text-decoration: underline;
+         color: Green;}
+
+A.menu:LINK {color: #5588ff;}
+A.menu:VISITED {color: #5588ff;}
+A.menu:HOVER {color: red;
+	      text-decoration: underline;}
+
+
+
+    
+H1   {font: normal 32px "Tahoma", Arial, Helvetica, sans-serif;
+      text-align: center;
+      color: blue;
+      font-weight: normal;}
+
+H1.title {display:inline;}
+
+H2   {font: normal 22px "Tahoma", Arial, Helvetica, sans-serif;
+      color: red;
+      font-weight: normal;
+      display: inline; 	}
+
+H3   {font: normal 18px "Tahoma", Arial, Helvetica, sans-serif;
+      color: #ffffff;
+      line-height: 1.5;
+      display: inline; 	
+      padding-bottom: 0em;
+      font-weight: normal;}
+
+
+em {color: red}
+
+em.paper {color: purple}
+
+div.eq {text-align: center;
+        margin: 0.5em;}
+
+blockquote {margin-top: 0em;
+            padding-top: 0em;
+            border: 0;}
+
+div.abstract {width: 75%;
+              margin-left: 12.5%;
+	      margin-top: 0;
+              color: purple;
+              padding: 4px;
+	      padding-top: 0px;
+              border: none;}
+
+dt.paper {padding-top: 0.5em;
+          padding-left: 2em;
+          font-style: italic;
+          color: purple;}
+
+dd {padding-left: 2em;}
+
+div.right {float: right;
+           padding: 1em;
+           padding-top: 0em;
+           width: 425px;
+           color: #333333;
+           font-style: italic;
+           font-size: small;}
+
+div.right2 {float: right;
+            padding: 0;
+	    padding-left: 1em;
+	    padding-right: 1em;
+            width: 450px;
+            color: #333333;
+            font-style: italic;
+            font-size: small;}
+
+div.figcenter {text-align: center;
+               display: block;
+               color: blue;
+               font-style: italic;
+               width:85%;
+               margin-left: auto;
+               margin-right: auto;}
+
+div.figtext {display: block;
+             color: #333333;
+             font-style: italic;
+             font-size: small;
+             width:85%;
+             margin-left: auto;
+             margin-right: auto;}
+
+p.ack {margin-top: 3em;
+       font-size: small;}
+
+em.ack {color: gray}
+
+table {padding: 0.5em;
+       margin: 10px;
+       margin-top: 25px;
+       width: 760px;
+        border: 2px solid #cccccc;
+       border-spacing: 0; /* Mozilla */
+       border-collapse: collapse;
+
+}
+
+td.odd {background-color: #FFFFFF;   /* #DDBBFF; */
+        padding: 0.5em;
+        padding-top: 0.2em;
+}
+
+
+th.odd {/* background-color: #ddbbff; */
+        background-color: #000000;
+        padding: 0.2em;
+        padding-left: 0.5em;
+        border: 2px solid #000000;
+        border-spacing: 0; /* Mozilla */
+        border-collapse: collapse; }
+
+td.even {background-color: #FFFFFF;   /* #FFFFCC; */
+         padding: 0.5em;
+         padding-top: 0.2em;}
+
+th.even {/* background-color: #ffffcc; */
+         background-color: #000000;
+         padding: 0.2em;
+         padding-left: 0.5em;
+         border: 2px solid #000000;
+         border-spacing: 0; /* Mozilla */
+         border-collapse: collapse; }
+
+
+div.warning      
+{
+  margin: 2em;
+  padding: 1em;
+  border: 1px solid orange;
+  background-color: yellow;
+}
+

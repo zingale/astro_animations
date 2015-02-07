@@ -1,1 +1,905 @@
-My Page
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<HTML>
+<HEAD>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <TITLE>Introductory Astronomy Animations (and Figures)</TITLE>
+  <link rel="stylesheet" type="text/css" href="./codes.css">
+
+</HEAD>
+
+<body>
+
+<div id="container">
+
+<div id="header">
+<h1>Introductory Astronomy Animations (and Figures)</h1>
+<p>Michael Zingale
+</div>
+
+<div id="other">
+
+<P>Below are some simple animations that I put together for for
+<em>AST 105: Introduction to the Solar System</em>, <em>AST 203:
+Astronomy</em>, and <em>AST 205: Introduction to Planetary Sciences</em>.
+
+<P>All of these are coded in python, using the matplotlib library for
+plotting.  The source code is provided in each case.  These codes are
+not meant to be interactive -- they simply dump out frames of the
+animation that can be assembled into a movie using a program like
+<tt>mencoder</tt>.  This python script (<a href="https://github.com/zingale/astro_animations/blob/master/scripts/mkmovie.py">mkmovie.py</a>) provides an easy interface to <tt>mencoder</tt> for stringing a bunch of PNGs into movies.
+
+<div class="warning">
+New: all the codes and movies are
+now <a href="https://github.com/zingale/astro_animations">available on
+github</a>
+</div>
+
+<P>You are free to use these codes or animations for teaching purposes 
+(please credit Michael Zingale).  
+If you find a mistake or make an improvement, please send it along
+to Michael.Zingale&nbsp;@&nbsp;stonybrook.edu, or fork the github repo and issue a 
+pull request.
+
+<p>Many of these animations are now up on YouTube:
+
+<center><iframe width="640" height="360" src="http://www.youtube.com/embed/videoseries?list=PL5D1C3702F5D1E571&amp;hl=en_US" frameborder="0" allowfullscreen></iframe></center>
+
+<!-- <a href="http://www.youtube.com/playlist?list=PL5D1C3702F5D1E571&feature=plcp">YouTube</a></bf> -->
+
+<P>&nbsp;
+<P><H2 class="center">Solar System Motion / Kepler's Laws</H2>
+
+<P><TABLE>
+<tr><th class="odd" colspan="2">
+    <h3>Planetary Orbits and Kepler's Laws  [HD]</h3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Integrate the orbits of two planets around a star, neglecting
+    the gravitational force between the planets themselves.  This is
+    useful for demonstrating Kepler's third law.  We work in units of AU,
+    years, and solar masses.  The semi-major axes are picked such that
+    one planet has an orbital period of 1 year and the other of 2
+    years.  
+
+    <p>As the animation plays, you should see that the speed of the outer
+    planet varies, becoming fastest at perihelion and slowest a aphelion.
+    You will also see that the outer planet takes longer to complete its
+    orbit around the Sun, since P<sup>2</sup> ~ a<sup>3</sup>.
+
+    <p>Movie of orbits: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/orbit2/orbit2.avi?raw=true">orbit2.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/orbit2/orbit2.mp4?raw=true">orbit2.mp4</A> [H.264]
+    </TD>
+ 
+    <TD CLASS="odd"><IMG SRC="orbit2.png" WIDTH="240" HEIGHT="180" ALT="orbit2"></TD>
+</TR> 
+</TABLE>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <h3>Kepler's Second Law  [HD]</h3></th></tr>
+
+<tr><td class="even">
+    <p>Show equal areas in equal times, by shading the area swept out
+    by a planet in equal time intervals.
+
+    <p>second law animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/second_law/second_law.avi?raw=true">second_law.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/second_law/second_law.mp4?raw=true">second_law.mp4</A> [H.264]
+    </TD>
+ 
+    <TD CLASS="even"><IMG SRC="second_law.png" WIDTH="198" HEIGHT="132" ALT="second law"></TD>
+</TR> 
+</TABLE>
+
+
+<TABLE>
+<TR><th CLASS="odd" colspan="2">
+    <h3>Solar System Harmonic Law Figure</h3></th></tr>
+   
+<tr><td class="odd">
+    <p>A simple figure plotting the period of planets (+ pluto optionally) in 
+       our solar system vs. semi-major axis on a log-log plot, 
+       showing the P<sup>2</sup> ~ a<sup>3</sup> relation.  Optionally 
+       plot the Galilean moons of Jupiter on the same axes, showing that
+      they obey a P<sup>2</sup> ~ a<sup>3</sup> relation as well, but 
+      with a different constant.
+
+    <p>Harmonic law figure (just planets): <A HREF="https://raw.githubusercontent.com/zingale/astro_animations/master/solar_system_motion/harmonic_law_fig/harmonic_law.png">harmonic_law.png</A><br>
+       Harmonic law figure (planets + pluto + Galilean moons): <A HREF="https://raw.githubusercontent.com/zingale/astro_animations/master/solar_system_motion/harmonic_law_fig/harmonic_law_pluto_moons.png">harmonic_pluto_moons.png</A>
+
+    </TD>
+    <TD CLASS="odd"><IMG SRC="harmonic_law_sm.png" WIDTH="198" HEIGHT="198" ALT="harmonic law"></td></TR>
+</TABLE>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Retrograde Motion  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>Integrate Earth and Mars in their orbits around the Sun,
+    starting a bit before opposition, and draw a line indicating the
+    line-of-sight to Mars from Earth against some background stars to
+    show the change in apparent motion.
+
+    <p>Note: the orbits are simplified here -- the semi-major axis
+    and eccentricity are correct, but it is assumed that both ellipses
+    are oriented the same way.  For demonstration purposes, this is
+    not all that critical.
+
+    <p>Movie of retrograde motion: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/retrograde/retrograde.avi?raw=true">retrograde.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/retrograde/retrograde.mp4?raw=true">retrograde.mp4</A> [H.264]<br>
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="retrograde.png" WIDTH="198" HEIGHT="165" ALT="retrograde"></TD>
+</TR>
+</TABLE>
+
+
+<TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Parallax Animation  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A simple animation showing how parallax works, illustrating
+       the motion of the Earth around the Sun and the apparent
+       shift seen in the position of a nearby star against the
+       background, more distant stars.
+
+    <p>Parallax animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/parallax/parallax.avi?raw=true">parallax.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/parallax/parallax.mp4?raw=true">parallax.mp4</A> [H.264]
+  
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="parallax.png" WIDTH="215" HEIGHT="165" ALT="parallax"></TD>
+</TR>
+</TABLE>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Mercury's rotation  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>Illustrate a 3:2 resonance between the rotation period and
+       orbital period of Mercury.  The semi-major axis and eccentricity
+       for the planet drawn match Mercury.  The black dot on the surface
+       of the planet represents a person standing initially directly
+       under the Sun at perihelion.
+
+    <p>Mercury rotation animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/mercury_rotation/mercury.avi?raw=true">mercury.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/mercury_rotation/mercury.mp4?raw=true">mercury.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="mercury_rotation.png" WIDTH="180" HEIGHT="180" 
+        ALT="Mercury rotation">
+    </TD>
+</TR>
+</TABLE>
+
+
+<TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Moon's Synchronous Rotation  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Illustrate the synchronous rotation of the Moon.  The black dot
+       represents a person standing on the surface.  The orbit is 
+       taken to be circular, for simplicity.
+
+    <p>Moon rotation animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/moon_rotation/moon_rotation.avi?raw=true">moon_rotation.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/moon_rotation/moon_rotation.mp4?raw=true">moon_rotation.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><A HREF="moon_rotation.avi"><IMG SRC="moon_rotation.png" WIDTH="240" HEIGHT="240" 
+        ALT="Moon rotation"></A>
+    </TD>
+</TR>
+</TABLE>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Orbital Energy  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A simple showing the orbit of a planet around the Sun, outputting
+       the kinetic energy / unit mass, the potential energy / unit mass,
+       and the total energy / unit mass along the way.
+
+    <p>Orbital energy animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/orbitalenergy/orbitalenergy.avi?raw=true">orbitalenergy.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/orbitalenergy/orbitalenergy.mp4?raw=true">orbitalenergy.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="orbitalenergy.png" WIDTH="198" HEIGHT="198" 
+        ALT="orbital energy"></TD>
+</TR>
+</TABLE>
+
+
+<TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Lunar Period  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A simple animation showing how the time between successive full Moons
+       (the synodic lunar period) is greater than the true (sidereal)
+       orbital period of the Moon.
+
+    <p>Orbital energy animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/lunar_period/lunar_period.avi?raw=true">lunar_period.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/lunar_period/lunar_period.mp4?raw=true">lunar_period.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="lunar_period.png" WIDTH="198" HEIGHT="198" 
+        ALT="lunar period"></TD>
+</TR>
+</table>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Sidereal vs. Solar Day (for Earth)  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A simple animation showing how the true rotation period of Earth
+       (the sidereal day) is shorter than the time between noons 
+       (the solar day).
+
+    <p>Orbital energy animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/sidereal_solar_day/earth.avi?raw=true">earth.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/sidereal_solar_day/earth.mp4?raw=true">earth.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="even"><A HREF="earth.avi"><IMG SRC="sidereal_day.png" WIDTH="238" HEIGHT="238" 
+        ALT="lunar period"></A>
+    </TD>
+</TR>
+
+</TABLE>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Phases of the Moon  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A simple animation showing the phases of the Moon and the corresponding
+       point in the Moons orbit around the Earth, with respect to the Sun.
+
+    <p>Phases animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/lunar_phases/lunar-phases.avi?raw=true">lunar-phases.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/lunar_phases/lunar-phases.mp4?raw=true">lunar-phases.mp4</A> [H.264] <br>
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="phase-sm.png" WIDTH="240" HEIGHT="135" 
+        ALT="lunar period"></TD>
+</TR>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Solstices and Equinox  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A simple animation showing the Earth at either solstice or
+       and equinox (with the time set as noon UTC).
+
+    <p>Summer Solstice: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox/summer_solstice.avi?raw=true">summer_solstice.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox/summer_solstice.mp4?raw=true">summer_solstice.mp4</A> [H.264] <br>
+
+    <p>Winter Solstice: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox/winter_solstice.avi?raw=true">winter_solstice.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox/winter_solstice.mp4?raw=true">winter_solstice.mp4</A> [H.264] <br>
+
+    <p>Equinox: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox/equinox.avi?raw=true">equinox.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox/equinox.mp4?raw=true">equinox.mp4</A> [H.264] <br>
+
+    <p>Another rendering, this time from noon to noon, centered on Stony Brook, NY
+
+    <p>Summer Solstice: <br>
+      <a href="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox_over_day/sb_summer_solstice_ortho.avi?raw=true">sb_summer_solstice_ortho.avi</a> [MS MPEG-4v2] <br>
+      <a href="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/solstice-equinox_over_day/sb_summer_solstice_ortho.mp4?raw=true">sb_summer_solstice_ortho.mp4</a> [H.264] <br>
+
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="solstice_equinox.png" WIDTH="238" HEIGHT="238" 
+        ALT="solstice equinox"></A>
+    </TD>
+</TR>
+
+</TABLE>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Seasons  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A simple animation showing how the Earth's axial tilt does not
+       change direction over the course of an orbit, giving rise to 
+       the seasons.
+
+    <p>Seasons animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/seasons/seasons.avi?raw=true">seasons.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/seasons/seasons.mp4?raw=true">seasons.mp4</A> [H.264] <br>
+
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="seasons.png" WIDTH="240" HEIGHT="180" 
+        ALT="seasons"></A>
+    </TD>
+</TR>
+
+
+<TABLE>
+<TR><th CLASS="even" colspan="2">
+    <H3>Resonances in the Asteroid Belt  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A 2:1 resonance between an asteroid (shown in red) and Jupiter (black)
+       as they orbit around the Sun.  Some randomly placed asteroids are
+       also shown.
+
+    <p>Seasons animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/asteroid_resonance/asteroids.avi?raw=true">asteroids.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/solar_system_motion/asteroid_resonance/asteroids.mp4?raw=true">asteroids.mp4</A> [H.264] <br>
+
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="asteroids.png" WIDTH="216" HEIGHT="216" 
+        ALT="asteroids"></A>
+    </TD>
+</TR>
+
+
+</TABLE>
+
+<P>&nbsp;
+<P><H2 class="center">Ellipse Properties</H2>
+
+<P><TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Ellipse Geometry Figure</H3></th></tr>
+
+<TR><TD CLASS="odd">   
+    <p>A simple figure used to illustrate the geometry of an ellipse.  
+    Here, <em>a</em> is the semi-major axis, <em>e</em> is the eccentricity,
+    and <em>b</em> is the semi-minor axis.  <em>r</em> and <em>r'</em> are
+    lines connecting a point on the ellipse (the black dot) to the foci.
+
+    <p>Ellipse geometry figure: <A HREF="ellipse_geom.png">ellipse_geom.png</A>
+
+    </TD>
+    <TD CLASS="odd"><A HREF="ellipse_geom.png"><IMG SRC="ellipse_geom_sm.png" WIDTH="198" HEIGHT="198" ALT="ellipse geometry"></A>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Eccentricity of Ellipses  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A demonstration of how varying the eccentricity of an ellipse
+    changes the shape.
+
+    <p>Ellipse eccentricity animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/ellipses/eccentricity/eccentricity.avi?raw=true">eccentricity.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/ellipses/eccentricity/eccentricity.mp4?raw=true">eccentricity.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="eccentricity.png" WIDTH="198" HEIGHT="198" ALT="eccentricity"></TD>
+</TR>
+</table>
+
+<table>
+<tr><th class="odd" colspan="2">
+    <H3>How to Draw an Ellipse  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A demonstration of how to draw an ellipse.  Here we show the
+    distance from each foci to the position on the ellipse, and show
+    that their sum is constant.
+    changes the shape.
+
+    <p>Drawing and ellipse animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/ellipses/ellipsedraw/ellipsedraw.avi?raw=true">ellipsedraw.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/ellipses/ellipsedraw/ellipsedraw.mp4?raw=true">ellipsedraw.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="ellipsedraw.png" WIDTH="198" HEIGHT="198" ALT="drawing an ellipse"></TD>
+</TR>
+</TABLE>
+
+<P>&nbsp;
+<P><H2 class="center">Mechanics</H2>
+
+<P><TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Achieving an Orbit  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A simple animation that shows a projectile with increasing horizontal
+       velocity, working up to the circular velocity.
+
+    (This script uses the image <a href="earth.png">earth.png</a>;
+    image credit: NASA/Apollo 17)
+
+    <p>Achieving orbit animation:<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/mechanics/achievingorbit/achieveorbit.avi?raw=true">achieveorbit.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/mechanics/achievingorbit/achieveorbit.mp4?raw=true">achieveorbit.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><A HREF="achieveorbit.avi"><IMG SRC="achieveorbit.png" WIDTH="198" HEIGHT="149" 
+        ALT="achieving orbit"></A>
+    </TD>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Circular vs. Escape Velocity Animation  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>A simple animation showing how the orbit of a projectile around
+       Earth changes as we increase the change the tangential 
+       velocity from less than the circular velocity to greater than
+       the escape velocity.
+
+    (This script uses the image <a href="earth.png">earth.png</a>;
+    image credit: NASA/Apollo 17)
+
+    <p>Escape velocity animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/mechanics/escapevelocity/escape.avi?raw=true">escape.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/mechanics/escapevelocity/escape.mp4?raw=true">escape.mp4</A> [H.264]<br>
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="escapevelocity.png" WIDTH="198" HEIGHT="149" 
+        ALT="escape velocity"></TD>
+</TR>
+</table>
+
+
+<table>
+<tr><th class="odd" colspan="2">
+    <H3>Changing An Orbit  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A simple animation showing how an initially circular orbit is
+       changed into an elliptical one by increasing the velocity at
+       perihelion.  Two boosts are modeled.
+
+    (This script uses the image <a href="earth.png">earth.png</a>;
+    image credit: NASA/Apollo 17)
+
+    <p>Changing orbit animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/mechanics/changing_orbit/changing_orbit.avi?raw=true">changing_orbit.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/mechanics/changing_orbit/changing_orbit.mp4?raw=true">changing_orbit.mp4</A> [H.264]<br>
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="changing_orbit.png" WIDTH="198" HEIGHT="198" ALT="changing orbit"></TD>
+</TR>
+</TABLE>
+
+
+<P>&nbsp;
+<P><H2 class="center">Radiation / Thermodynamics</H2>
+
+<P><TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Blackbody Spectrum (frequency)  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Show how the Planck function varies as temperature is changed.
+       A "thermometer" on the right keeps track of the temperature.  Some
+       reference Planck function curves are plotted every 2 orders-of-magnitude
+       in temperature to illustrate the shift in the location of peak 
+       intensity with increasing temperature.  Also, the visible frequencies
+       are highlighted with a blue shading.
+
+    <p>Blackbody spectrum animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/radiation_thermodynamics/blackbody/blackbody.avi?raw=true">blackbody.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/radiation_thermodynamics/blackbody/blackbody.mp4?raw=true">blackbody.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="blackbody.png" WIDTH="188" HEIGHT="150" 
+        ALT="blackbody"></TD>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Blackbody Spectrum (wavelength)  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>Similar to the animation above, but in terms of wavelenght instead of frequency.
+       Show how the Planck function varies as temperature is changed.
+       A "thermometer" on the right keeps track of the temperature.  Some
+       reference Planck function curves are plotted every 2 orders-of-magnitude
+       in temperature to illustrate the shift in the location of peak 
+       intensity with increasing temperature.  Also, the visible wavelengths
+       are highlighted with a blue shading.
+
+    <p>Blackbody spectrum animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/radiation_thermodynamics/blackbody_wavelength/blackbody_wavelength.avi?raw=true">blackbody_wavelength.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/radiation_thermodynamics/blackbody_wavelength/blackbody_wavelength.mp4?raw=true">blackbody_wavelength.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="blackbody_wavelength.png" WIDTH="188" HEIGHT="150" 
+        ALT="blackbody wavelength"></TD>
+</TR>
+</table>
+
+
+<table>
+<tr><th class="odd" colspan="2">
+    <H3>Random Walk  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A demonstration of a random walk process.  A number of small hops are
+    taken in random directions, until the overall displacement is equal to the
+    radius of the circle.  
+ 
+    <p>If you change the seed used for the random number generator,
+    you will get a different result.
+
+    <p>Random walk animation: <A HREF="https://github.com/zingale/astro_animations/blob/master/radiation_thermodynamics/random_walk/random_walk.avi?raw=true">random_walk.avi</A> [MS MPEG-4v2]<br>
+    Random walk animation: <A HREF="https://github.com/zingale/astro_animations/blob/master/radiation_thermodynamics/random_walk/random_walk.mp4?raw=true">random_walk.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="random_walk.png" WIDTH="165" HEIGHT="165" ALT="random walk"></TD>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Thermal Motion</H3></th></tr>
+
+<tr><td class="even">
+    <p>A demonstration of the effect of temperature on random thermal
+       motion.  Many particles in a gas are shown at two different
+       temperatures.  
+
+     <p>Note: for simplicity, we do not model collisions between the 
+        particles.
+
+    <p>Thermal motion animation: 
+    <ul>
+    <li>cool:<br>
+       <A HREF="thermal_motion_normal.avi">thermal_motion_normal.avi</A> [MS MPEG-4v2]<br>
+       <A HREF="thermal_motion_normal.mp4">thermal_motion_normal.mp4</A> [H.264]<br>
+    </li>
+    <li>hot:<br>
+       <A HREF="thermal_motion_hot.avi">thermal_motion_hot.avi</A> [MS MPEG-4v2]<br>
+       <A HREF="thermal_motion_hot.mp4">thermal_motion_hot.mp4</A> [H.264]<br>
+    </li>
+    </ul>
+    </TD>
+
+    <TD CLASS="even"><A HREF="thermal_motion_normal.avi"><IMG SRC="thermal_motion_hot.png" WIDTH="165" HEIGHT="165" 
+        ALT="thermal motion"></A>
+    </TD>
+</TR>
+</TABLE>
+
+
+<P>&nbsp;
+<P><H2 class="center">Waves</H2>
+
+<P><TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Wave Propagation  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Show two waves of different wavelengths to illustrate the difference
+       between wavelength and frequency.  The propagation speed of the 
+       two waves is the same.  The wavelengths are 1 and 1/4 cm, and the
+       velocity is 2.0 cm/s.  A point "fixed" to a vertical line moves up
+       and down as the wave passes by, to illustrate the concept of frequency.
+
+    <p>Wave propagation animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/waves/waves/waves.avi?raw=true">waves.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/waves/waves/waves.mp4?raw=true">waves.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><A HREF="waves.avi"><IMG SRC="waves.png" WIDTH="198" HEIGHT="198" 
+        ALT="waves"></A>
+    </TD>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Doppler Effect</H3></th></tr>
+
+<tr><td class="even">
+    <p>Show a moving source emitting waves.  The wavefronts are plotted
+       as red circles.  The source has a speed of 1 m/s and the waves have
+       a propagation speed of 2 m/s.  The wave frequency is 3 Hz.
+
+    <p>Doppler effect animation: <br>
+    <A HREF="doppler.avi">doppler.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="doppler.mp4">doppler.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="even"><A HREF="doppler.avi"><IMG SRC="doppler.png" WIDTH="165" HEIGHT="165" 
+        ALT="doppler effect"></A>
+    </TD>
+</TR>
+</table>
+
+
+<table>
+<tr><th class="odd" colspan="2">
+    <H3>Doppler Effect 2</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Show two moving sources emitting waves.  The top source has a
+       speed of 1 m/s and the bottom source has a speed of 0.5 m/s.
+       The waves have a propagation speed of 2 m/s and frequency of 3
+       Hz.
+
+       This version shows how the compression of wave fronts depends
+       on the line of sight velocity.
+
+    <p>Doppler effect 2 animation: <br>
+    <A HREF="doppler2.avi">doppler2.avi</A> [MS MPEG-4v2] <br>
+    <A HREF="doppler2.mp4">doppler2.mp4</A> [H.264] <br>
+    </TD>
+
+    <TD CLASS="odd"><A HREF="doppler2.avi"><IMG SRC="doppler2.png" WIDTH="149" HEIGHT="198" 
+        ALT="doppler effect 2"></A>
+    </TD>
+</TR>
+</TABLE>
+
+
+<P>&nbsp;
+<P><H2 class="center">Binary Systems / Exoplanets</H2>
+
+<P><TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>Binary Star Orbits  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Animation of a binary pair orbiting their common center of mass
+       (shown as the black "x").  The case of e = 0 and e = 0.4 are
+       shown, with a mass ratio of 1 or 2.  These animations show that, in
+       a binary system, the two stars are always opposite one another,
+       with respect to the center of mass, and must have the same period.
+
+    <p>binary star animations:
+    <ul>
+    <li>mass ratio = 1; e = 0.0: <br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=1_e=0.0.avi?raw=true">binary_mratio=1_e=0.0.avi</A> [MS-MPEG-4v2]<br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=1_e=0.0.mp4?raw=true">binary_mratio=1_e=0.0.mp4</A> [H.264]
+    </li>
+    <li>mass ratio = 1; e = 0.4: <br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=1_e=0.4.avi?raw=true">binary_mratio=1_e=0.4.avi</A>  [MS-MPEG-4v2]<br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=1_e=0.4.mp4?raw=true">binary_mratio=1_e=0.4.mp4</A>  [H.264]
+    </li>
+    <li>mass ratio = 2; e = 0.0: <br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=2_e=0.0.avi?raw=true">binary_mratio=2_e=0.0.avi</A> [MS-MPEG-4v2]<br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=2_e=0.0.mp4?raw=true">binary_mratio=2_e=0.0.mp4</A> [H.264]
+    </li>
+    <li>mass ratio = 2; e = 0.4: <br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=2_e=0.4.avi?raw=true">binary_mratio=2_e=0.4.avi</A> [MS-MPEG-4v2]<br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/binary_stars/binary_mratio=2_e=0.4.mp4?raw=true">binary_mratio=2_e=0.4.mp4</A> [H.264]
+    </li>
+    </ul>
+
+    <TD CLASS="odd"><p>
+       <IMG SRC="binary_star_mratio=1_e=0.0_sm.png" WIDTH="120" HEIGHT="120" 
+        ALT="binary stars (mass ratio = 1; e = 0)">
+
+       
+       <IMG SRC="binary_star_mratio=1_e=0.4_sm.png" WIDTH="120" HEIGHT="120" 
+        ALT="binary stars (mass ratio = 1; e = 0.4)"><BR>
+       
+       <p>
+       <IMG SRC="binary_star_mratio=2_e=0.0_sm.png" WIDTH="120" HEIGHT="120" 
+        ALT="binary stars (mass ratio = 2; e = 0.0)">
+
+       
+       <IMG SRC="binary_star_mratio=2_e=0.4_sm.png" WIDTH="120" HEIGHT="120" 
+        ALT="binary stars (mass ratio = 2; e = 0.4)">
+
+    </TD>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Planetary Orbit and Stellar Motion  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>Animation of a small body (planet) orbiting around a larger body
+       (star) showing the small motion of the larger body around the
+       center of mass.  This uses a mass ratio of 50 between the two
+       objects.
+
+    <p>planetary orbit animations:<br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/planetary_orbit/planetary_orbits.avi?raw=true">planetary_orbits.avi</A> [MS-MPEG-4v2]<br>
+        <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/planetary_orbit/planetary_orbits.avi?raw=true">planetary_orbits.mp4</A> [H.264]
+
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="planetary_orbit.png" WIDTH="198" HEIGHT="198" 
+        ALT="planetary orbit"></TD>
+</TR>
+</table>
+
+
+<table>
+<tr><th class="odd" colspan="2">
+    <H3>Radial Velocity Planet Detection (circular orbit)  [HD]</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Illustrate the radial velocity of a star with an unseen planet
+       over the course of a period.  Here, the planet's mass was greatly
+       exaggerated to enhance the effect.  We also restrict ourselves to
+       being in the plane of the orbits.
+
+    <p>radial velocity animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/radial_velocity/radial_velocity.avi?raw=true">radial_velocity.avi</a> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/radial_velocity/radial_velocity.mp4?raw=true">radial_velocity.mp4</a> [H.264]
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="radial_velocity.png" WIDTH="264" HEIGHT="132" 
+        ALT="radial velocity"></TD>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Radial Velocity Planet Detection (elliptical orbit)  [HD]</H3></th></tr>
+
+<tr><td class="even">
+    <p>Illustrate the radial velocity of a star with an unseen planet
+       over the course of a period.  Here, the planet's mass was
+       greatly exaggerated to enhance the effect.  We use an
+       elliptical orbit but restrict ourselves to being in the plane
+       of the orbits.  The semi-major axis is not perpendicular to the
+       observer.
+
+    <p>radial velocity animation: <br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/radial_velocity_ell/radial_velocity_ell.avi?raw=true">radial_velocity_ell.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="https://github.com/zingale/astro_animations/blob/master/binary_exoplanets/radial_velocity_ell/radial_velocity_ell.mp4?raw=true">radial_velocity_ell.mp4</A> [H.264]
+    </TD>
+
+    <TD CLASS="even"><IMG SRC="radial_velocity_ell.png" WIDTH="264" HEIGHT="132" 
+        ALT="radial velocity (ellipses)"></TD>
+</TR>
+</table>
+
+
+<table>
+<tr><th class="odd" colspan="2">
+    <H3>Eclipsing Binary System</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>Show an eclipsing binary system and the resulting lightcurve.
+       Here we assume that the smaller star is hotter.
+
+    <p>eclipsing binary animation: <A
+    HREF="eclipsing_binary.avi">eclipsing_binary.avi</A>
+    </TD>
+
+    <TD CLASS="odd"><A HREF="eclipsing_binary.avi"><IMG SRC="eclipsingbinary.png" WIDTH="165" HEIGHT="215" 
+        ALT="eclipsing binary"></A>
+    </TD>
+</TR>
+</table>
+
+
+<table>
+<TR><th CLASS="even" colspan="2">
+    <H3>Transiting Planet System</H3></th></tr>
+
+<tr><td class="even">
+    <p>Show a planet transiting across its parent star, and the resulting
+       lightcurve.  This is similar to the eclipsing binary system animation
+       above, but now we assume that the smaller object (the planet) is cool.
+
+    <p>transiting planet animation:<br>
+    <A HREF="planetary_transit.avi">planetary_transit.avi</A> [MS MPEG-4v2]<br>
+    <A HREF="planetary_transit.mp4">planetary_transit.mp4</A> [H.264]<br>
+    </TD>
+
+    <TD CLASS="even"><A HREF="planetary_transit.avi"><IMG SRC="planet_transit.png" WIDTH="165" HEIGHT="215" 
+        ALT="transiting planet"></A>
+    </TD>
+</TR>
+</TABLE>
+
+
+<P>&nbsp;
+<P><H2 class="center">Stars</H2>
+
+<P><TABLE>
+<tr><th class="odd" colspan="2">
+    <H3>H-R diagram figure</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A simple H-R diagram.  The main sequence properties are found from
+       Carroll and Ostlie, Appendix G.  Lines of constant radius are
+       drawn in, as well as the location of the white dwarfs.
+
+    <p>H-R diagram figure: <A HREF="HR_radius_wd.png">HR_radius_wd.png</A>
+    </TD>
+
+    <TD CLASS="odd"><A HREF="HR_radius_wd.png"><IMG SRC="HR_radius_wd.png" WIDTH="198" HEIGHT="231" 
+        ALT="H-R diagram"></A>
+    </TD>
+</TR>
+</TABLE>
+
+
+<P>&nbsp;
+<P><H2 class="center">Radioactive Decay</H2>
+
+<P><TABLE>
+
+<tr><th class="odd" colspan="2">
+    <H3>Radioactive decay figures</H3></th></tr>
+
+<TR><TD CLASS="odd">
+    <p>A sequence of figures (each represent 1 half life) illustrating
+       the radioactive decay of a sample.  Initially 2500 markers are
+       "parents".  Each half life, there is a 50% chance a marker decays.
+       After a number of half lifes, no parents remain.  A plot showing 
+       the exponential decay follows.
+
+    <p>radioactive decay animation:<br>
+    <a href="decay.mp4">decay.mp4</a> [H.264]
+
+    <p>radioactive decay figures: <br>
+       <A HREF="radioactive_decay/radioactive_decay_0000.png">radioactive_decay_0000.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0001.png">radioactive_decay_0001.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0002.png">radioactive_decay_0002.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0003.png">radioactive_decay_0003.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0004.png">radioactive_decay_0004.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0005.png">radioactive_decay_0005.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0006.png">radioactive_decay_0006.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0007.png">radioactive_decay_0007.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0008.png">radioactive_decay_0008.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0009.png">radioactive_decay_0009.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0010.png">radioactive_decay_0010.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0011.png">radioactive_decay_0011.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0012.png">radioactive_decay_0012.png</A><br>
+       <A HREF="radioactive_decay/radioactive_decay_0013.png">radioactive_decay_0013.png</A><br>
+    </TD>
+
+    <TD CLASS="odd"><IMG SRC="radioactive_decay/radioactive_decay_sm1.png" WIDTH="248" HEIGHT="248" 
+        ALT="radioactive decay 1"><IMG SRC="radioactive_decay/radioactive_decay_sm2.png" WIDTH="248" HEIGHT="248" 
+        ALT="radioactive decay 1">
+    </TD>
+</TR>
+</TABLE>
+
+
+<p>&nbsp;
+<p>updated <!--#echo var="Last_Modified" -->
+
+</div>  <!-- other -->
+</div>  <!-- container -->
+
+</BODY>
+</HTML>
