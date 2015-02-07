@@ -117,12 +117,23 @@ H1   {font: normal 32px "Tahoma", Arial, Helvetica, sans-serif;
 
 H1.title {display:inline;}
 
-H2   {font: normal 22px "Tahoma", Arial, Helvetica, sans-serif;
-      color: red;
+    
+H2   {color: red;
+      font-size: 24pt;
       font-weight: normal;
       display: inline; 	}
 
-H3   {font: normal 18px "Tahoma", Arial, Helvetica, sans-serif;
+h2.banner {
+    float: left;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+    background-color: white;
+    color: red;
+    text-align: center;
+    font-size: 24pt;
+}
+
+H3   {font-size: 18px;
       color: #ffffff;
       line-height: 1.5;
       display: inline; 	
