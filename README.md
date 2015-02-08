@@ -1,6 +1,8 @@
 astro_animations
 ================
 
+See http://zingale.github.io/astro_animations/
+
 Various animations (and some figures) used for teaching introductory
 astronomy concepts.  
 
