@@ -1,81 +1,16 @@
 #!/usr/bin/env python
 
+import anim_solvers.stick_figure as sf
 import numpy as np
 import matplotlib.pylab as plt
 
-def rotate(point, center, theta):
-    """ apply a rotation matrix
-
-         / cos theta   -sin theta \
-         |                        |
-         \ sin theta    cos theta /
-
-        to a point, and return the transformed point """
-
-    x = point[0] - center[0]
-    y = point[1] - center[1]
-
-    return (x*np.cos(theta) - y*np.sin(theta) + center[0],
-            x*np.sin(theta) + y*np.cos(theta) + center[1])
-
-
-def draw_person(center, L, rot):
-    """ draw a stick figure at the position given by center
-        of height L and rotated by an angle (radians) rot """
-
-    # our person is 4 segments
-
-    # head: upper L/4, so the center of the head is L/8
-    # above bottom
-    head_center = (center[0], center[1]+0.375*L)
-    head_radius = L/8.0
-
-    # arms start at the center
-    left_arm_end = (center[0]-0.25*L, center[1]+0.25*L)
-    right_arm_end = (center[0]+0.25*L, center[1]+0.25*L)
-
-    # torso is the middle two segments
-    torso_start = (center[0], center[1]-0.25*L)
-    torso_end = (center[0], center[1]+0.25*L)
-
-    # feet start at torso_star
-    left_foot_end = (center[0]-0.2*L, center[1]-0.5*L)
-    right_foot_end = (center[0]+0.2*L, center[1]-0.5*L)
-
-    # draw our person
-    theta = np.radians(np.arange(0,361))
-    hc = rotate(head_center, center, rot)
-
-    plt.plot(hc[0] + head_radius*np.cos(theta),
-             hc[1] + head_radius*np.sin(theta), color="k")
-
-    cc = rotate(center, center, rot)
-
-    lc = rotate(left_arm_end, center, rot)
-    rc = rotate(right_arm_end, center, rot)
-    
-    plt.plot([cc[0], lc[0]], [cc[1], lc[1]], color="k")
-    plt.plot([cc[0], rc[0]], [cc[1], rc[1]], color="k")
-
-
-    ts = rotate(torso_start, center, rot)
-    te = rotate(torso_end, center, rot)
-
-    plt.plot([ts[0], te[0]], [ts[1], te[1]], color="k")
-
-
-    lf = rotate(left_foot_end, center, rot)
-    rf = rotate(right_foot_end, center, rot)
-
-    plt.plot([ts[0], lf[0]], [ts[1], lf[1]], color="k")
-    plt.plot([ts[0], rf[0]], [ts[1], rf[1]], color="k")
-
-
 def doit():
-    # test it out
 
-    L = 1
+    # latitude
+    lat = 40
 
+    # scalings for the person and earth
+    L = 1.5
     R = 10
 
     theta = np.radians(np.arange(0,361))
@@ -83,30 +18,69 @@ def doit():
     # draw a circle
     plt.plot(R*np.cos(theta), R*np.sin(theta), c="b")
 
+    # draw equator and rotation axis
+    plt.plot([-R, R], [0,0], c="k")
+    plt.plot([0,0], [-R, R], c="k", ls="--")
 
-    # draw some people
-    angles = [30, 60, 90, 120, 180, 270, 300]
+    plt.text(-0.5*R, 0.25, "equator", horizontalalignment="center")
+    
+    # draw a person
+    center = ( (R + 0.5*L)*np.cos(np.radians(lat)),
+               (R + 0.5*L)*np.sin(np.radians(lat)) )
+    sf.draw_person(center, L, np.radians(lat - 90), color="r")
 
-    for l in angles:
-        center = ( (R + 0.5*L)*np.cos(np.radians(l)),
-                   (R + 0.5*L)*np.sin(np.radians(l)) )
-        draw_person(center, L, np.radians(l - 90))
-        L = 1.1*L
+
+    # draw the latitude angle line to zenith
+    npts = 10
+    x = np.arange(npts)*2*R/npts
+    y = center[1]/center[0] * x
+
+    plt.plot(x, y, "k", ls=":")
+
+    plt.text(0.2*R, 0.5*0.2*R*np.sin(lat), r"$l$",
+             fontsize=16, verticalalignment="center")
     
     plt.axis("off")
     
     ax = plt.gca()
     ax.set_aspect("equal", "datalim")
-    
-    
+        
     plt.subplots_adjust(left=0.05, right=0.98, bottom=0.05, top=0.98)
-    plt.axis([-1.2*R, 1.2*R, -1.2*R, 1.2*R])
+    plt.axis([-1.2*R, 1.8*R, -1.2*R, 1.8*R])
 
     f = plt.gcf()
-    f.set_size_inches(6.0, 6.0)
+    f.set_size_inches(7.2, 7.2)
                             
-    plt.savefig("test.png")
+    plt.savefig("latitude1.png") #, transparent=True)
 
+
+
+    # add the zenith label
+    plt.text(x[0.7*npts], y[0.7*npts], "points to zenith",
+             horizontalalignment="center", verticalalignment="center",
+             rotation = lat)
+
+    plt.savefig("latitude2.png")
+
+
+    # draw the local horizon -- it passed through center, perpendicular
+    # to lat
+    scenter = ( R*np.cos(np.radians(lat)),
+                R*np.sin(np.radians(lat)) )
+
+    p = (scenter[0] + R*np.cos(np.radians(90+lat)),
+         scenter[1] + R*np.sin(np.radians(90+lat)) )
+
+    yh = (p[1] - scenter[1])/(p[0] - scenter[0])*(x - scenter[0]) + scenter[1]
+
+    plt.plot(x, yh, color="c")
+    plt.text(x[0.7*npts], yh[0.7*npts], "local horizon",
+             rotation=270+lat, color="c")             
+
+    
+    plt.savefig("latitude3.png")
+    
+    
     
 if __name__ == "__main__":
     doit()
