@@ -1,6 +1,7 @@
 import math
 
 import numpy as np
+import random
 
 class PlanetPosVel:
 
@@ -19,13 +20,6 @@ class _PlanetHistory:
         self.y = np.zeros(num_steps, np.float64)
         self.vx = np.zeros(num_steps, np.float64)
         self.vy = np.zeros(num_steps, np.float64)
-
-
-# CGS units
-G = 6.67428e-8        # cm^3 g^{-1} s^{-2}
-M_sun = 1.98892e33    # g
-AU = 1.49598e13       # cm
-year = 3.1556926e7    # s
 
 
 class SolarSystem:
@@ -62,8 +56,16 @@ class SolarSystem:
         self.a = []
         self.e = []
         self.pos0 = []
+        self.rot = []    # rotation of the semi-major axis
         
-    def add_planet(self, a, e, loc="perihelion", pos_vel=None):
+        
+    def add_planet_by_period(self, P, e, loc="perihelion", pos_vel=None):
+
+        a = (self.GM*P**2/(4*math.pi**2))**(1./3.)
+        self.add_planet(a, e, loc=loc, pos_vel=pos_vel)
+        
+        
+    def add_planet(self, a, e, loc="perihelion", pos_vel=None, rot=0.0):
 
         self.num_planets += 1
 
@@ -96,6 +98,11 @@ class SolarSystem:
 
         self.pos0.append(pos_vel)
 
+        if rot == "random":
+            self.rot.append(random.uniform(0.0, 2.0*math.pi))
+        else:
+            self.rot.append(np.radians(rot))
+        
 
     def period(self, num):
         """
@@ -171,6 +178,22 @@ class SolarSystem:
                 solution[p].vx[n] = Y[2]
                 solution[p].vy[n] = Y[3]
 
+
+            # do we need to rotate?
+            if not self.rot[p] == 0.0:
+                oldx = solution[p].x.copy()
+                oldy = solution[p].y.copy()
+
+                solution[p].x = oldx*np.cos(self.rot[p]) - oldy*np.sin(self.rot[p])
+                solution[p].y = oldy*np.cos(self.rot[p]) + oldx*np.sin(self.rot[p])                
+
+                oldvx = solution[p].vx.copy()
+                oldvy = solution[p].vy.copy()
+
+                solution[p].vx = oldvx*np.cos(self.rot[p]) - oldvy*np.sin(self.rot[p])
+                solution[p].vy = oldvy*np.cos(self.rot[p]) + oldvx*np.sin(self.rot[p])                
+                
+                
         return solution
 
         

@@ -1,3 +1,6 @@
+`asteroid_resonance`: show an asteroid and Jupiter in a 2:1 orbital
+resonance around the Sun as a way to explain the Kirkwood gaps.
+
 `harmonic_law_fig`: show Kepler's third law by plotting log P vs. log
 a for the planets in our solar system.  Optionally include Pluto, and
 optionally show that the same scaling applies to the Galilean moons
