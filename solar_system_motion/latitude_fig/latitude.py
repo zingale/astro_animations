@@ -9,6 +9,8 @@ def doit():
     # latitude
     lat = 40
 
+    transparent = True
+    
     # scalings for the person and earth
     L = 1.5
     R = 10
@@ -51,7 +53,7 @@ def doit():
     f = plt.gcf()
     f.set_size_inches(7.2, 7.2)
                             
-    plt.savefig("latitude1.png") #, transparent=True)
+    plt.savefig("latitude1.png", transparent=transparent)
 
 
 
@@ -60,7 +62,7 @@ def doit():
              horizontalalignment="center", verticalalignment="center",
              rotation = lat)
 
-    plt.savefig("latitude2.png")
+    plt.savefig("latitude2.png", transparent=transparent)
 
 
     # draw the local horizon -- it passed through center, perpendicular
@@ -78,7 +80,7 @@ def doit():
              rotation=270+lat, color="c")             
 
     
-    plt.savefig("latitude3.png")
+    plt.savefig("latitude3.png", transparent=transparent)
     
     
     
