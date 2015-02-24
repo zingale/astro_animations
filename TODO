@@ -1,8 +1,15 @@
 -- longitudinal vs. shear waves (for earthquakes)
 
--- propagation of waves through Earth's interior
+   propagation of waves through Earth's interior
 
 -- tidal friction: show the tidal elongation of an orbiting moon
    when synchronous vs. non-synchronous rotation.
 
+-- horizon plane rotating in the celestial sphere at a
+   given latitude (use Vpython / visual)
+
+   or matplotlib: http://stackoverflow.com/questions/11140163/python-matplotlib-plotting-a-3d-cube-a-sphere-and-a-vector
+
+
+   
 
