@@ -13,21 +13,18 @@ class Circle:
         
 
 class Ellipse:
-    def __init__(self, a, e, rot):
-        theta = np.radians(np.arange(361))
-        # polar relative to a foci
-        r = a*(1.0-e**2)/(1.0+e*np.cos(theta))
-
-        self.x = r*np.cos(theta)
-        self.y = r*np.sin(theta)
-
-        # shift to be with respect to center
-        self.x += a*e
-
-        # rotate it
-        for n in range(len(self.x)):
-            self.x[n], self.y[n] = sf._rotate([self.x[n], self.y[n]], (0.,0.), rot)
-
+    def __init__(self, a, e, rot, theta_range=None):
+        if theta_range == None:
+            theta = np.radians(np.arange(361))
+        else:
+            # should probably use linspace...
+            theta = np.radians(np.arange(theta_range[0],theta_range[1]+1))
+            
+        self.x = np.zeros_like(theta)
+        self.y = np.zeros_like(theta)
+        for n in range(len(theta)):
+            self.x[n], self.y[n] = ellipse_point(a, e, theta[n], rot)
+        
 
 def ellipse_point(a, e, theta, rot):
     """ return the x, y coordinates of a point on a ellipse an angle
@@ -96,10 +93,24 @@ def doit():
         # draw the tides
         a = 1.4*R_moon
         e = 0.6
-        tides = Ellipse(a, e, omega_orbit*t)
 
-        plt.fill(x_m + tides.x, y_m + tides.y, color="0.5", zorder=-100, alpha=0.5)
+        #tides = Ellipse(a, e, omega_orbit*t)
+        #plt.fill(x_m + tides.x, y_m + tides.y, color="0.5", zorder=-100, alpha=0.5)
 
+        # color the quadrants differently to show the rotation more clearly
+        for l, q in enumerate([(0,90), (90,180), (180,270), (270,360)]):
+            theta_range = (q[0] + np.degrees((omega_rotate-omega_orbit)*t),
+                           q[1] + np.degrees((omega_rotate-omega_orbit)*t))
+            tides = Ellipse(a, e, omega_orbit*t, theta_range=theta_range)
+            if l % 2 == 0:
+                c = "m"
+            else:
+                c = "0.5"
+                
+            plt.fill([x_m] + list(x_m + tides.x) + [x_m],
+                     [y_m] + list(y_m + tides.y) + [y_m],
+                     color=c, zorder=-100, alpha=0.5)
+        
         
         # draw the person
 
@@ -124,7 +135,10 @@ def doit():
         sf.draw_person(center, L, omega_rotate*t-np.pi/2, color="r")
 
         # and a line to the person
-        plt.plot([x_m, x_m + xp], [y_m, y_m + yp], "k")
+        # plt.plot([x_m, x_m + xp], [y_m, y_m + yp], "k", ls="--")
+
+        # and a line to the Sun and Moon
+        plt.plot([0, x_m], [0, y_m], "k", ls="--")
         
         plt.axis("off")
 
