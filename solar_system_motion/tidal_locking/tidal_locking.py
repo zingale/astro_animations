@@ -101,8 +101,9 @@ def doit():
             a = 1.4*R_moon
             e = 0.6
 
-            # color the quadrants differently to show the rotation more clearly
-            for l, q in enumerate([(0,90), (90,180), (180,270), (270,360)]):
+            # color the ellipse in segments to show the rotation more clearly
+            n_segments = 12 
+            for l, q in enumerate(zip(np.arange(n_segments)*360.0/n_segments, (np.arange(n_segments)+1)*360.0/n_segments)):
                 theta_range = (q[0] + np.degrees((omega_rotate-omega_orbit)*t),
                                q[1] + np.degrees((omega_rotate-omega_orbit)*t))
                 tides = Ellipse(a, e, omega_orbit*t, theta_range=theta_range)
