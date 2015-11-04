@@ -23,6 +23,7 @@ def equipotentials():
     dy = (ymax - ymin)/npts
 
     mu = 0.1   #0.3333
+    #mu = 0.333
 
     x = numpy.arange(npts, dtype=numpy.float64)*dx + xmin
     y = numpy.arange(npts, dtype=numpy.float64)*dy + ymin
@@ -122,7 +123,7 @@ def equipotentials():
     # draw contours -- below critical points
     Vmin = numpy.min(V)
     Vmax = min([V_L1, V_L2, V_L3])
-    nC = 4
+    nC = 7
     
     dlogC = (math.log10(Vmax) - math.log10(Vmin))/nC
     C2 = 10.0**(numpy.arange(nC, dtype=numpy.float64)*dlogC + math.log10(Vmin))
@@ -153,7 +154,7 @@ def equipotentials():
        
     plt.axis([xmin,xmax,ymin,ymax])
 
-    plt.title(r"Equipotentials",fontsize=11)
+    plt.title(r"Equipotentials, q = {}".format(mu) ,fontsize=12)
     plt.xlabel("x/(a + b)")
     plt.ylabel("y/(a + b)")
 
