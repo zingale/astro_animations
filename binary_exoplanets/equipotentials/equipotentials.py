@@ -172,9 +172,9 @@ def equipotentials(mu):
        
     plt.axis([xmin,xmax,ymin,ymax])
 
-    plt.title(r"Equipotentials, mu = {:5.3f}".format(mu) ,fontsize=12)
-    plt.xlabel("x/(a + b)")
-    plt.ylabel("y/(a + b)")
+    plt.title(r"Equipotentials, $\mu = M_2/(M_1 + M_2) = {:5.3f}$".format(mu) ,fontsize=12)
+    plt.xlabel("$x/(a + b)$")
+    plt.ylabel("$y/(a + b)$")
 
     f = plt.gcf()
     f.set_size_inches(10.8,10.8)
