@@ -4,12 +4,16 @@
 # Introduction to Computational Astrophysics" by Paul Hellings
 
 import math
-import numpy
+import numpy as np
 import matplotlib.pyplot as plt
 
-def equipotentials():
+def equipotentials(mu):
+    # here mu is the mass parameter.  mu = 1/2 is equal mass
+    # this is related to the q parameter (M2 / M1; with q <= 1).  
 
-    npts = 400
+    # note, if you make mu significant at many digits, you need to
+    # have many points to resolve features
+    npts = 1024
 
     xmin = -2.0
     xmax = 2.0
@@ -17,22 +21,16 @@ def equipotentials():
     ymax = 2.0
 
     EPS = 1.e-12
+
     NITER = 100
 
-    dx = (xmax - xmin)/npts
-    dy = (ymax - ymin)/npts
+    x = np.linspace(xmin, xmax, npts, dtype=np.float64)
+    y = np.linspace(ymin, ymax, npts, dtype=np.float64)
 
-    mu = 0.1   #0.3333
-    #mu = 0.333
+    X, Y = np.meshgrid(x, y)
 
-    x = numpy.arange(npts, dtype=numpy.float64)*dx + xmin
-    y = numpy.arange(npts, dtype=numpy.float64)*dy + ymin
-
-    X, Y = numpy.meshgrid(x, y)
-
-    V = (1.0 - mu)/numpy.sqrt( (X - mu)**2 + Y**2 ) + \
-        mu/numpy.sqrt( (X + 1.0 - mu)**2 + Y**2 ) + \
-        0.5*(X**2 + Y**2)
+    # this is the dimensionless potential, in the z=0 plane
+    V = Vf(mu, X, Y)
 
 
     # find L1
@@ -46,13 +44,9 @@ def equipotentials():
         x1 = x0 - dVX/d2VX
         err = abs(x1 - x0)/abs(x0 + EPS)
 
-        if err < EPS:
-            break
+        if err < EPS: break
 
         x0 = x1
-
-
-    print n
 
     x_L1 = x1
     y_L1 = 0.0
@@ -70,8 +64,7 @@ def equipotentials():
         x1 = x0 - dVX/d2VX
         err = abs(x1 - x0)/abs(x0 + EPS)
 
-        if err < EPS:
-            break
+        if err < EPS: break
 
         x0 = x1
 
@@ -92,12 +85,10 @@ def equipotentials():
         x1 = x0 - dVX/d2VX
         err = abs(x1 - x0)/abs(x0 + EPS)
 
-        if err < EPS:
-            break
+        if err < EPS: break
 
         x0 = x1
 
-    print n
 
     x_L3 = x1
     y_L3 = 0.0
@@ -110,30 +101,29 @@ def equipotentials():
     x_L5 = mu - 0.5
     y_L5 = -math.sin(math.pi/3.0)
 
-    print V_L1, V_L2, V_L3
     
-    # draw contours -- above critical points
-    Vmin = max([V_L1, V_L2, V_L3])
-    Vmax = numpy.max(V)
-    nC = 10
-    
-    dlogC = (math.log10(Vmax) - math.log10(Vmin))/nC
-    C = 10.0**(numpy.arange(nC, dtype=numpy.float64)*dlogC + math.log10(Vmin))
+    # do imshow
+    plt.clf()
 
-    # draw contours -- below critical points
-    Vmin = numpy.min(V)
-    Vmax = min([V_L1, V_L2, V_L3])
-    nC = 7
+    print mu,  V.min(), V.max()
+    plt.imshow(np.log10(V), origin="lower", cmap="Accent",
+               extent=[xmin, xmax, ymin, ymax])
+
+    # draw contours -- these values seem reasonable for a range of mu's
+    Vmin = 1.5 
+    Vmax = 1000.0  # np.max(V)
+    nC = 25
     
-    dlogC = (math.log10(Vmax) - math.log10(Vmin))/nC
-    C2 = 10.0**(numpy.arange(nC, dtype=numpy.float64)*dlogC + math.log10(Vmin))
+    C = np.logspace(math.log10(Vmin), math.log10(Vmax), nC)
 
     plt.contour(x, y, V, C, colors="b")
-    plt.contour(x, y, V, C2, colors="b")
+
+    # special contours right through the lagrange points
     plt.contour(x, y, V, [V_L1], colors="b")
     plt.contour(x, y, V, [V_L2], colors="b")
     plt.contour(x, y, V, [V_L3], colors="b")
  
+    
     # mark the Lagrange points and write the names
     xeps = 0.025
 
@@ -154,42 +144,39 @@ def equipotentials():
        
     plt.axis([xmin,xmax,ymin,ymax])
 
-    plt.title(r"Equipotentials, q = {}".format(mu) ,fontsize=12)
+    plt.title(r"Equipotentials, mu = {:5.3f}".format(mu) ,fontsize=12)
     plt.xlabel("x/(a + b)")
     plt.ylabel("y/(a + b)")
 
     f = plt.gcf()
-    f.set_size_inches(7.2,7.2)
+    f.set_size_inches(10.8,10.8)
 
     plt.tight_layout()
 
-    plt.savefig("equipotentials.png")
+    plt.savefig("equipotentials_mu_{:5.3f}.png".format(mu))
 
 
 def Vf(mu, x, y):
-
-    V = (1.0 - mu)/numpy.sqrt( (x - mu)**2 + y**2 ) + \
-        mu/numpy.sqrt( (x + 1.0 - mu)**2 + y**2 ) + \
+    V = (1.0 - mu)/np.sqrt( (x - mu)**2 + y**2 ) + \
+        mu/np.sqrt( (x + 1.0 - mu)**2 + y**2 ) + \
         0.5*(x**2 + y**2)    
     return V
 
 
 def dVXdx(h1, h2, mu, x):
-
     dVX = -h1*(1.0 - mu)/(x - mu)**2 - h2*mu/(x + 1.0 - mu)**2 + x
-    
     return dVX
 
 
 def d2VXdx2(h1, h2, mu, x):
-
     d2VX = 2.0*h1*(1.0 - mu)/(x - mu)**3 + 2.0*h2*mu/(x + 1.0 - mu)**3 + 1.0
-    
     return d2VX
 
 
 
 if __name__== "__main__":
-    equipotentials()
+
+    for mu in np.linspace(0.005, 0.5, 200):
+        equipotentials(mu)
 
 
