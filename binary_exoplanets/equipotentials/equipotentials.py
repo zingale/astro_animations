@@ -8,11 +8,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def equipotentials(mu):
-    # here mu is the mass parameter.  mu = 1/2 is equal mass
-    # this is related to the q parameter (M2 / M1; with q <= 1).  
+    # here mu is the mass parameter, which we can think of as mu = M_2
+    # / (M_1 + M_2).  mu = 1/2 is equal mass, but in general, with M_1
+    # > M_2, mu will be less than 1.  The normalized mass of the
+    # primary (more massive star) is then 1 - mu
 
-    # note, if you make mu significant at many digits, you need to
-    # have many points to resolve features
+    # we work in coordinates normalized by the sum of the semi-major
+    # axis, a and b (such that M_1 a = M_2 b
+
+    # in these reduced coordinates, the distance a becomes a / (a + b)
+    # = 1 - mu.  We put the center of mass at the origin, so this is
+    # at x = mu - 1 (negative x axis) likewise star 2 is at b / (a +
+    # b) = mu
+
+    # the final potential, 
+    #
+    # f = -G M_1 / r_1 - G M_2 / r_2 - omega^2 (x^2 + y^2)/2
+    #
+    # is written in these reduced coordinates and is defined as f =
+    # -V, defined in the function Vf() below.  This is written such
+    # that V is always positive.
+
+    # the positions of the Lagrange points are found iteratively using
+    # dV/dx and d^2 V/dx^2, also defined as functions below.
+
     npts = 1024
 
     xmin = -2.0
