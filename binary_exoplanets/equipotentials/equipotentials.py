@@ -148,11 +148,27 @@ class Equipotentials(object):
         return V
 
     def dVXdx(self, h1, h2, x):
-        dVX = -h1*(1.0 - self.mu)/(x - self.mu)**2 - h2*self.mu/(x + 1.0 - self.mu)**2 + x
+        # this is the first derivative of V(x, y = 0) -- this is used
+        # to find L1, L2, and L3 (all of which lie on y = 0).
+        #
+        # Here, h1 and h2 are sign parameters:
+        #
+        # h1 = sign(x - mu)
+        # h2 = sign(x + 1 - mu)
+        #
+        # these appear in the denominator of V when we set y = 0,
+        # and take the sqrt([...]^2) as an absolute value
+
+        dVX = -h1*(1.0 - self.mu)/(x - self.mu)**2 - \
+               h2*self.mu/(x + 1.0 - self.mu)**2 + x
         return dVX
 
     def d2VXdx2(self, h1, h2, x):
-        d2VX = 2.0*h1*(1.0 - self.mu)/(x - self.mu)**3 + 2.0*h2*self.mu/(x + 1.0 - self.mu)**3 + 1.0
+        # this is the second derivative of V(x, y = 0) -- this is used
+        # to find L1, L2, and L3 (all of which lie on y = 0).
+
+        d2VX = 2.0*h1*(1.0 - self.mu)/(x - self.mu)**3 + \
+               2.0*h2*self.mu/(x + 1.0 - self.mu)**3 + 1.0
         return d2VX
 
 
