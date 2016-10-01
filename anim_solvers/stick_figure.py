@@ -10,7 +10,7 @@ def _rotate(point, center, theta):
          |                        |
          \ sin theta    cos theta /
 
-        to a point about center, and return the 
+        to a point about center, and return the
         transformed point """
 
     x = point[0] - center[0]
@@ -54,7 +54,7 @@ def draw_person(center, L, rot, color="k"):
 
     lc = _rotate(left_arm_end, center, rot)
     rc = _rotate(right_arm_end, center, rot)
-    
+
     plt.plot([cc[0], lc[0]], [cc[1], lc[1]], color=color)
     plt.plot([cc[0], rc[0]], [cc[1], rc[1]], color=color)
 
@@ -93,23 +93,21 @@ def doit():
                    (R + 0.5*L)*np.sin(np.radians(l)) )
         draw_person(center, L, np.radians(l - 90), color="r")
         L = 1.1*L
-    
+
     plt.axis("off")
-    
+
     ax = plt.gca()
     ax.set_aspect("equal", "datalim")
-    
-    
+
+
     plt.subplots_adjust(left=0.05, right=0.98, bottom=0.05, top=0.98)
     plt.axis([-1.2*R, 1.2*R, -1.2*R, 1.2*R])
 
     f = plt.gcf()
     f.set_size_inches(6.0, 6.0)
-                            
+
     plt.savefig("test.png")
 
-    
+
 if __name__ == "__main__":
     doit()
-
-    
