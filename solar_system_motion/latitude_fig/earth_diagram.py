@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import anim_solvers.stick_figure as sf
+import anim_solvers.myarrows as arrow
 import numpy as np
 import matplotlib.pylab as plt
 
@@ -33,10 +34,10 @@ class Earth(object):
 
         if show_day_night:
             theta_half = np.radians(np.arange(90,271))
-            plt.fill(list(self.x0 + self.R*np.cos(theta_half)) + 
+            plt.fill(list(self.x0 + self.R*np.cos(theta_half)) +
                      [self.x0 +self.R*np.cos(theta_half[0])],
-                     list(self.y0 + self.R*np.sin(theta_half)) + 
-                     [self.y0 +self.R*np.sin(theta_half[0])], "0.75", 
+                     list(self.y0 + self.R*np.sin(theta_half)) +
+                     [self.y0 +self.R*np.sin(theta_half[0])], "0.75",
                      zorder=-1)
 
 
@@ -44,10 +45,10 @@ class Earth(object):
 
         L = 5.0
 
-        plt.plot([self.x0 -1.2*self.R, self.x0 + L*self.R], 
+        plt.plot([self.x0 -1.2*self.R, self.x0 + L*self.R],
                  [self.y0, self.y0], ls=":", color="k")
 
-        plt.plot([self.x0, self.x0], 
+        plt.plot([self.x0, self.x0],
                  [self.y0-self.R, self.y0+self.R], ls=":", color="k")
 
         plt.text(self.x0 + L*self.R, self.y0 + 0.1*self.R,
@@ -65,16 +66,24 @@ class Earth(object):
         te = sf._rotate(pe, (self.x0, self.y0), np.radians(self.tilt))
 
         plt.plot([ts[0], te[0]], [ts[1], te[1]], color="b")
-                 
+
+
+        a = arrow.ArcArrow((0, 0), 0.5*self.R, theta_start=90+self.tilt, theta_end=90.0)
+        a.draw(color="b")
+
+        mid = 0.5*(90 + self.tilt + 90)
+        plt.text(0.51*self.R*np.cos(np.radians(mid)),
+                 0.51*self.R*np.sin(np.radians(mid)), r"$\alpha$", color="b", horizontalalignment="left")
+
 
     def draw_equator(self):
 
         ps = (self.x0, self.y0 - self.R)
         pe = (self.x0, self.y0 + self.R)
 
-        ts = sf._rotate(ps, (self.x0, self.y0), 
+        ts = sf._rotate(ps, (self.x0, self.y0),
                         np.radians(90+self.tilt))
-        te = sf._rotate(pe, (self.x0, self.y0), 
+        te = sf._rotate(pe, (self.x0, self.y0),
                         np.radians(90+self.tilt))
 
         plt.plot([ts[0], te[0]], [ts[1], te[1]], color="b")
@@ -88,6 +97,22 @@ class Earth(object):
                    (self.R + 0.5*self.L)*np.sin(np.radians(angle)) )
         sf.draw_person(center, self.L, np.radians(angle - 90), color="r")
 
+
+        zenith = 3.0*self.R
+        plt.plot([0.0, zenith*np.cos(np.radians(angle))],
+                 [0.0, zenith*np.sin(np.radians(angle))], color="r", ls=":")
+        plt.text(zenith*np.cos(np.radians(angle)),
+                 zenith*np.sin(np.radians(angle)), "zenith", color="r",
+                 horizontalalignment="left")
+
+        equator = 0 + self.tilt
+
+        a = arrow.ArcArrow((0, 0), 0.5*self.R, theta_start=equator, theta_end=angle)
+        a.draw(color="r")
+
+        mid = 0.5*(equator + angle)
+        plt.text(0.51*self.R*np.cos(np.radians(mid)),
+                 0.51*self.R*np.sin(np.radians(mid)), r"$l$", color="r", horizontalalignment="left")
 
     def draw_zenith(self):
         pass
