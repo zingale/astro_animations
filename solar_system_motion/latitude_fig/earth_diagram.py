@@ -79,7 +79,7 @@ class Earth(object):
                  r"$\alpha$", color="b", horizontalalignment="left")
 
 
-    def draw_parallel(self, l, color="k", ls="-"):
+    def draw_parallel(self, l, color="k", ls="-", label=None):
         """ draw a line of latitude """
 
         # working in Earth coordinates
@@ -101,17 +101,27 @@ class Earth(object):
 
         plt.plot([ts[0], te[0]], [ts[1], te[1]], color=color, ls=ls)
 
+        if label is not None:
+            if l > 0:
+                va = "bottom"
+            elif l == 0:
+                va = "center"
+            else:
+                va = "top"
+
+            plt.text(ts[0]-0.01*self.R, ts[1], label, 
+                     horizontalalignment="right", verticalalignment=va, color=color)
 
     def draw_equator(self):
-        self.draw_parallel(0, color="b")
+        self.draw_parallel(0, color="b", label="equator")
 
     def draw_tropics(self):
-        self.draw_parallel(np.abs(self.tilt), color="g", ls="--")
-        self.draw_parallel(-np.abs(self.tilt), color="g", ls="--")
+        self.draw_parallel(np.abs(self.tilt), color="g", ls="--", label="tropic of cancer")
+        self.draw_parallel(-np.abs(self.tilt), color="g", ls="--", label="tropic of capricorn")
 
     def draw_arctic_circles(self):
-        self.draw_parallel(90-np.abs(self.tilt), color="g", ls="--")
-        self.draw_parallel(-90+np.abs(self.tilt), color="g", ls="--")
+        self.draw_parallel(90-np.abs(self.tilt), color="g", ls="--", label="arctic circle")
+        self.draw_parallel(-90+np.abs(self.tilt), color="g", ls="--", label="antarctic circle")
 
 
     def draw_my_latitude(self):
@@ -186,7 +196,7 @@ def doit():
     f.set_size_inches(12.8, 7.2)
 
     plt.tight_layout()
-    plt.savefig("test.png")
+    plt.savefig("earth_diagram.png")
 
 
 
