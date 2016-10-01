@@ -3,6 +3,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+class Cap(object):
+    """ caps are simple two lines making a 'V' that we rotate """
+
+    def __init__(self, c, angle, L=1.0):
+
+        self.L = L
+        self.c = c
+        self.angle = angle
+
+        self.cap_x = [-0.5*self.L, 0, 0.5*self.L]
+        self.cap_y = [-self.L, 0, -self.L]
+
+    def draw(self, color="k", ls="-"):
+
+        # arrow at start
+        xa = []
+        ya = []
+        for x, y in zip(self.cap_x, self.cap_y):
+            p = sf._rotate((x, y), (0,0), self.angle)
+            xa += [self.c[0] + p[0]]
+            ya += [self.c[1] + p[1]]
+
+        plt.plot(xa, ya, color=color, ls=ls)
+
+
 class ArcArrow(object):
     """ draw an arc with arrows on the end, in data coordinates """
 
@@ -22,7 +47,7 @@ class ArcArrow(object):
         plt.plot(self.x0 + self.R*np.cos(theta),
                  self.y0 + self.R*np.sin(theta), color=color, ls=ls)
 
-        # caps are simple two lines making a 'V' that we rotate
+
         start_point = (self.x0 + self.R*np.cos(theta[0]),
                        self.y0 + self.R*np.sin(theta[0]))
 
@@ -30,29 +55,13 @@ class ArcArrow(object):
                      self.y0 + self.R*np.sin(theta[-1]))
 
 
-        L = 0.05
-        cap_x = [-0.5*L*self.R, 0, 0.5*L*self.R]
-        cap_y = [-L*self.R, 0, -L*self.R]
-
         # arrow at start
-        xa = []
-        ya = []
-        for x, y in zip(cap_x, cap_y):
-            p = sf._rotate((x, y), (0,0), self.theta0 + np.pi)
-            xa += [start_point[0] + p[0]]
-            ya += [start_point[1] + p[1]]
-
-        plt.plot(xa, ya, color=color, ls=ls)
+        c = Cap(start_point, self.theta0+np.pi, L=0.05*self.R)
+        c.draw(color=color, ls=ls)
 
         # arrow at end
-        xa = []
-        ya = []
-        for x, y in zip(cap_x, cap_y):
-            p = sf._rotate((x, y), (0,0), self.theta1)
-            xa += [end_point[0] + p[0]]
-            ya += [end_point[1] + p[1]]
-
-        plt.plot(xa, ya, color=color, ls=ls)
+        c = Cap(end_point, self.theta1, L=0.05*self.R)
+        c.draw(color=color, ls=ls)
 
 
 if __name__ == "__main__":
