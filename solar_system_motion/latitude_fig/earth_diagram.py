@@ -258,7 +258,7 @@ def doit():
     sc.addto(e.draw_rot_axis)
     sc.draw(ofile="earth_{:02d}".format(n), 
             description="Earth's axial tilt:\n" +
-            r"Earth's rotation axis is tilted and angle $\alpha$ with respect to the ecliptic")
+            r"Earth's rotation axis is tilted and angle $\alpha = 23.5^\circ$ with respect to the ecliptic")
 
     n += 1
     sc.addto(e.draw_equator)
@@ -290,14 +290,15 @@ def doit():
     sc.addto(e.draw_tropics)
     sc.draw(ofile="earth_{:02d}".format(n), 
             description="the tropics:\n" + 
-            r"the tropic lines are +/- $\alpha$ in latitude -- note that the Sun is directly overhead for an observer on that Tropic of Cancer on the summer solstice")
+            r"the tropic lines are +/- $\alpha$ in latitude -- note that the Sun is directly overhead for an observer on the Tropic of Cancer on the summer solstice")
 
     n += 1
     sc.addto(e.draw_arctic_circles)
     sc.draw(ofile="earth_{:02d}".format(n), 
             description="the arctic and antarctic circles:\n" +
-            "On the summer solstice the Sun never sets between the arctic circle and North Pole -- note how everything is in daylight at these high latitudes\n" +
-            "The opposite is true between the antarctic circle and the South Pole -- the Sun is never above the horizon (always night)")
+            "on the summer solstice the Sun never sets between the arctic circle and North Pole -- note how everything is in daylight at these high latitudes\n" +
+            "the opposite is true between the antarctic circle and the South Pole -- the Sun is never above the horizon (always night)\n" +
+            r"these latitudes are just +/- $(90^\circ - \alpha)$")
 
     n += 1
     sc.addto(e.draw_horizon)
