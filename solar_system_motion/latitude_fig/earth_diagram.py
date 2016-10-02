@@ -25,7 +25,7 @@ class Earth(object):
         self.x0 = 0.0
         self.y0 = 0.0
 
-    def draw_earth(self, show_day_night=False):
+    def draw_earth(self):
 
         # draw a circle
         theta = np.radians(np.arange(0,361))
@@ -33,13 +33,14 @@ class Earth(object):
                  self.y0 + self.R*np.sin(theta), c="b")
 
 
-        if show_day_night:
-            theta_half = np.radians(np.arange(90,271))
-            plt.fill(list(self.x0 + self.R*np.cos(theta_half)) +
-                     [self.x0 +self.R*np.cos(theta_half[0])],
-                     list(self.y0 + self.R*np.sin(theta_half)) +
-                     [self.y0 +self.R*np.sin(theta_half[0])], "0.75",
-                     zorder=-1)
+    def draw_day_night(self):
+
+        theta_half = np.radians(np.arange(90,271))
+        plt.fill(list(self.x0 + self.R*np.cos(theta_half)) +
+                 [self.x0 +self.R*np.cos(theta_half[0])],
+                 list(self.y0 + self.R*np.sin(theta_half)) +
+                 [self.y0 +self.R*np.sin(theta_half[0])], "0.75",
+                 zorder=-1)
 
 
     def draw_ecliptic(self):
@@ -174,29 +175,106 @@ class Earth(object):
 
 
 
+class Scene(object):
+    """ a container to hold the sequence of function calls we will do to
+        compose the scene.  This way we can incrementally add to the
+        figure """
+
+    def __init__(self, other, xlim=None, ylim=None):
+        self.other = other
+        self.funcs = []
+        self.xlim = xlim
+        self.ylim = ylim
+
+    def addto(self, f):
+        self.funcs.append(f)
+
+    def draw(self, description=None, ofile="test.png"):
+
+        plt.clf()
+
+        for f in self.funcs:
+            f()
+
+        plt.axis("off")
+
+        ax = plt.gca()
+        ax.set_aspect("equal", "datalim")
+
+        f = plt.gcf()
+        f.set_size_inches(12.8, 7.2)
+
+        if description is not None:
+            plt.text(0.05, 0.05, description, transform=f.transFigure)
+
+        if self.xlim is not None:
+            plt.xlim(*self.xlim)
+
+        if self.ylim is not None:
+            plt.ylim(*self.ylim)
+
+        plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
+        plt.savefig(ofile)
+
+
 def doit():
 
     e = Earth(latitude=42)
 
-    e.draw_earth(show_day_night=True)
-    e.draw_ecliptic()
-    e.draw_rot_axis()
-    e.draw_equator()
-    e.draw_tropics()
-    e.draw_arctic_circles()
-    e.draw_my_latitude()
-    e.draw_horizon()
+    sc = Scene(e, xlim=(-2*e.R, 5*e.R), ylim=(-2*e.R, 2*e.R))
 
-    plt.axis("off")
+    n = 0
+    sc.addto(e.draw_earth)
+    sc.addto(e.draw_ecliptic)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="Earth and the ecliptic\n" +
+            "the ecliptic is the orbital plane, connecting the Earth and the Sun")
 
-    ax = plt.gca()
-    ax.set_aspect("equal", "datalim")
+    n += 1
+    sc.addto(e.draw_day_night)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="the day/night line\n" +
+            "night is the hemisphere pointed away from the Sun")
 
-    f = plt.gcf()
-    f.set_size_inches(12.8, 7.2)
+    n += 1
+    sc.addto(e.draw_rot_axis)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="Earth's axial tilt\n" +
+            r"Earth's rotation axis is tilted and angle $\alpha$ with respect to the ecliptic")
 
-    plt.tight_layout()
-    plt.savefig("earth_diagram.png")
+    n += 1
+    sc.addto(e.draw_equator)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="Earth's equator\n" +
+            "the equator is perpendicular to the rotation axis")
+
+
+    n += 1
+    sc.addto(e.draw_my_latitude)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="latitude on Earth\n" + 
+            r"latitude is just the angle above or below the equator.  Here is an observer at a latitude $l$" + "\n" +
+            "down is the direction connecting you to the center of the Earth (the direction gravity points)\n" +
+            "up is opposite down -- here the zenith is shown as the point directly above us")
+
+    n += 1
+    sc.addto(e.draw_tropics)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="test2")
+
+    n += 1
+    sc.addto(e.draw_arctic_circles)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="test2")
+
+
+    n += 1
+    sc.addto(e.draw_horizon)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="test2")
+
+    sc.draw()
+
 
 
 
