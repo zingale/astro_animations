@@ -113,12 +113,21 @@ class Earth(object):
             plt.text(ts[0]-0.01*self.R, ts[1], label, 
                      horizontalalignment="right", verticalalignment=va, color=color)
 
+
     def draw_equator(self):
         self.draw_parallel(0, color="b", label="equator")
+
+
+    def draw_sun(self):
+        plt.scatter([self.x0 + 4.5*self.R], [self.y0], 
+                    s=2000, marker=(16,1), zorder=100, color="k")
+        plt.scatter([self.x0 + 4.5*self.R], [self.y0], 
+                    s=1900, marker=(16,1), zorder=100, color="#FFFF00")
 
     def draw_tropics(self):
         self.draw_parallel(np.abs(self.tilt), color="g", ls="--", label="tropic of cancer")
         self.draw_parallel(-np.abs(self.tilt), color="g", ls="--", label="tropic of capricorn")
+
 
     def draw_arctic_circles(self):
         self.draw_parallel(90-np.abs(self.tilt), color="g", ls="--", label="arctic circle")
@@ -131,24 +140,34 @@ class Earth(object):
 
         center = ( (self.R + 0.5*self.L)*np.cos(np.radians(angle)),
                    (self.R + 0.5*self.L)*np.sin(np.radians(angle)) )
+
         sf.draw_person(center, self.L, np.radians(angle - 90), color="r")
-
-
-        zenith = 3.0*self.R
-        plt.plot([0.0, zenith*np.cos(np.radians(angle))],
-                 [0.0, zenith*np.sin(np.radians(angle))], color="r", ls=":")
-        plt.text(zenith*np.cos(np.radians(angle)),
-                 zenith*np.sin(np.radians(angle)), "zenith", color="r",
-                 horizontalalignment="left")
 
         equator = 0 + self.tilt
 
-        a = arrow.ArcArrow((0, 0), 0.5*self.R, theta_start=equator, theta_end=angle)
+        plt.plot([self.x0, self.R*np.cos(np.radians(angle))],
+                 [self.y0, self.R*np.sin(np.radians(angle))], color="r", ls="-")
+
+        a = arrow.ArcArrow((self.x0, self.y0), 0.5*self.R, theta_start=equator, theta_end=angle)
         a.draw(color="r")
 
         mid = 0.5*(equator + angle)
         plt.text(0.51*self.R*np.cos(np.radians(mid)),
                  0.51*self.R*np.sin(np.radians(mid)), r"$l$", color="r", horizontalalignment="left")
+
+
+    def draw_zenith(self):
+
+        angle = self.lat + self.tilt
+
+        print("here")
+        zenith = 3.0*self.R
+        plt.plot([self.x0, zenith*np.cos(np.radians(angle))],
+                 [self.y0, zenith*np.sin(np.radians(angle))], color="r", ls=":")
+
+        plt.text(zenith*np.cos(np.radians(angle)),
+                 zenith*np.sin(np.radians(angle)), "zenith", color="r",
+                 horizontalalignment="left")
 
 
     def draw_horizon(self):
@@ -168,10 +187,6 @@ class Earth(object):
                  horizontalalignment="left",
                  verticalalignment="top",
                  rotation=270+angle, color="c")             
-
-
-    def draw_zenith(self):
-        pass
 
 
 
@@ -205,7 +220,7 @@ class Scene(object):
         f.set_size_inches(12.8, 7.2)
 
         if description is not None:
-            plt.text(0.05, 0.05, description, transform=f.transFigure)
+            plt.text(0.025, 0.05, description, transform=f.transFigure)
 
         if self.xlim is not None:
             plt.xlim(*self.xlim)
@@ -214,7 +229,9 @@ class Scene(object):
             plt.ylim(*self.ylim)
 
         plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
-        plt.savefig(ofile)
+
+        # dpi = 100 for 720p, 150 for 1080p
+        plt.savefig(ofile, dpi=150)
 
 
 def doit():
@@ -226,52 +243,67 @@ def doit():
     n = 0
     sc.addto(e.draw_earth)
     sc.addto(e.draw_ecliptic)
+    sc.addto(e.draw_sun)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="Earth and the ecliptic\n" +
+            description="Earth and the ecliptic:\n" +
             "the ecliptic is the orbital plane, connecting the Earth and the Sun")
 
     n += 1
     sc.addto(e.draw_day_night)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="the day/night line\n" +
+            description="the day/night line:\n" +
             "night is the hemisphere pointed away from the Sun")
 
     n += 1
     sc.addto(e.draw_rot_axis)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="Earth's axial tilt\n" +
+            description="Earth's axial tilt:\n" +
             r"Earth's rotation axis is tilted and angle $\alpha$ with respect to the ecliptic")
 
     n += 1
     sc.addto(e.draw_equator)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="Earth's equator\n" +
+            description="Earth's equator:\n" +
             "the equator is perpendicular to the rotation axis")
+
+    n += 1
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="the Sun:\n" +
+            "the Sun is on the ecliptic (not shown to scale)\n" +
+            "here Earth's North Pole is maximally pointed toward the Sun -- this is the day of the summer solstice")
 
 
     n += 1
     sc.addto(e.draw_my_latitude)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="latitude on Earth\n" + 
-            r"latitude is just the angle above or below the equator.  Here is an observer at a latitude $l$" + "\n" +
+            description="latitude on Earth:\n" + 
+            r"latitude is just the angle above or below the equator.  Here is an observer at a latitude $l$")
+
+    n += 1
+    sc.addto(e.draw_zenith)
+    sc.draw(ofile="earth_{:02d}".format(n), 
+            description="your zenith:\n" + 
             "down is the direction connecting you to the center of the Earth (the direction gravity points)\n" +
             "up is opposite down -- here the zenith is shown as the point directly above us")
 
     n += 1
     sc.addto(e.draw_tropics)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="test2")
+            description="the tropics:\n" + 
+            r"the tropic lines are +/- $\alpha$ in latitude -- note that the Sun is directly overhead for an observer on that Tropic of Cancer on the summer solstice")
 
     n += 1
     sc.addto(e.draw_arctic_circles)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="test2")
-
+            description="the arctic and antarctic circles:\n" +
+            "On the summer solstice the Sun never sets between the arctic circle and North Pole -- note how everything is in daylight at these high latitudes\n" +
+            "The opposite is true between the antarctic circle and the South Pole -- the Sun is never above the horizon (always night)")
 
     n += 1
     sc.addto(e.draw_horizon)
     sc.draw(ofile="earth_{:02d}".format(n), 
-            description="test2")
+            description="horizon:\n" +
+            "your local horizon is tangent to the surface of the Earth where you are standing")
 
     sc.draw()
 
