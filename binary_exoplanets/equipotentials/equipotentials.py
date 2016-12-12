@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 class Equipotentials(object):
     """the general setup is two stars on the x-axis.  M_1 is the more
     massive and is at x = +a.  M_2 is the less massive and is at
@@ -86,18 +87,7 @@ class Equipotentials(object):
         # find L1
         x0 = 0.0
 
-        for n in range(self.NITER):
-            dVX = self.dVXdx(-1.0, 1.0, x0)
-            d2VX = self.d2VXdx2(-1.0, 1.0, x0)
-
-            x1 = x0 - dVX/d2VX
-            err = abs(x1 - x0)/abs(x0 + self.EPS)
-
-            if err < self.EPS: break
-
-            x0 = x1
-
-        x_L1 = x1
+        x_L1 = self._solve(-1.0, 1.0, x0)
         y_L1 = 0.0
         V_L1 = self.Vf(x_L1, y_L1)
 
@@ -107,18 +97,7 @@ class Equipotentials(object):
         # find L2
         x0 = -1.0
 
-        for n in range(self.NITER):
-            dVX = self.dVXdx(-1.0, -1.0, x0)
-            d2VX = self.d2VXdx2(-1.0, -1.0, x0)
-
-            x1 = x0 - dVX/d2VX
-            err = abs(x1 - x0)/abs(x0 + self.EPS)
-
-            if err < self.EPS: break
-
-            x0 = x1
-
-        x_L2 = x1
+        x_L2 = self._solve(-1.0, -1.0, x0)
         y_L2 = 0.0
         V_L2 = self.Vf(x_L2, y_L2)
 
@@ -128,18 +107,7 @@ class Equipotentials(object):
         # find L3
         x0 = 1.0
 
-        for n in range(self.NITER):
-            dVX = self.dVXdx(1.0, 1.0, x0)
-            d2VX = self.d2VXdx2(1.0, 1.0, x0)
-
-            x1 = x0 - dVX/d2VX
-            err = abs(x1 - x0)/abs(x0 + self.EPS)
-
-            if err < self.EPS: break
-
-            x0 = x1
-
-        x_L3 = x1
+        x_L3 = self._solve(1.0, 1.0, x0)
         y_L3 = 0.0
         V_L3 = self.Vf(x_L3, y_L3)
 
@@ -159,6 +127,20 @@ class Equipotentials(object):
 
         return x_L5, y_L5
 
+    def _solve(self, a, b, x0):
+
+        for n in range(self.NITER):
+            dVX = self.dVXdx(a, b, x0)
+            d2VX = self.d2VXdx2(a, b, x0)
+
+            x1 = x0 - dVX/d2VX
+            err = abs(x1 - x0)/abs(x0 + self.EPS)
+
+            if err < self.EPS: break
+            x0 = x1
+
+        return x0
+
     def Vf(self, x, y):
         V = (1.0 - self.mu)/np.sqrt( (x - self.mu)**2 + y**2 ) + \
             self.mu/np.sqrt( (x + 1.0 - self.mu)**2 + y**2 ) + \
@@ -166,11 +148,27 @@ class Equipotentials(object):
         return V
 
     def dVXdx(self, h1, h2, x):
-        dVX = -h1*(1.0 - self.mu)/(x - self.mu)**2 - h2*self.mu/(x + 1.0 - self.mu)**2 + x
+        # this is the first derivative of V(x, y = 0) -- this is used
+        # to find L1, L2, and L3 (all of which lie on y = 0).
+        #
+        # Here, h1 and h2 are sign parameters:
+        #
+        # h1 = sign(x - mu)
+        # h2 = sign(x + 1 - mu)
+        #
+        # these appear in the denominator of V when we set y = 0,
+        # and take the sqrt([...]^2) as an absolute value
+
+        dVX = -h1*(1.0 - self.mu)/(x - self.mu)**2 - \
+               h2*self.mu/(x + 1.0 - self.mu)**2 + x
         return dVX
 
     def d2VXdx2(self, h1, h2, x):
-        d2VX = 2.0*h1*(1.0 - self.mu)/(x - self.mu)**3 + 2.0*h2*self.mu/(x + 1.0 - self.mu)**3 + 1.0
+        # this is the second derivative of V(x, y = 0) -- this is used
+        # to find L1, L2, and L3 (all of which lie on y = 0).
+
+        d2VX = 2.0*h1*(1.0 - self.mu)/(x - self.mu)**3 + \
+               2.0*h2*self.mu/(x + 1.0 - self.mu)**3 + 1.0
         return d2VX
 
 
