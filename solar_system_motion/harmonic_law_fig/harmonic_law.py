@@ -10,25 +10,26 @@
 #
 # M. Zingale (2010-12-13)
 
-import math
-import numpy
-import pylab
+import numpy as np
+import matplotlib.pyplot as plt
 
 def harmonic_law():
 
-    plot_moons = 0
-    plot_pluto = 0
+    plot_moons = False
+    plot_pluto = False
+    
+    plot_extend_axes = True
 
     names = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", 
              "Uranus", "Neptune", "Pluto"]
 
     names_J = ["Io", "Europa", "Ganymede", "Callisto"]
 
-    a = numpy.zeros(9, numpy.float64)
-    P = numpy.zeros(9, numpy.float64)
+    a = np.zeros(9, np.float64)
+    P = np.zeros(9, np.float64)
 
-    a_J = numpy.zeros(4, numpy.float64)
-    P_J = numpy.zeros(4, numpy.float64)
+    a_J = np.zeros(4, np.float64)
+    P_J = np.zeros(4, np.float64)
 
     # solar system
     # semi-major axes
@@ -48,8 +49,8 @@ def harmonic_law():
     P_J[:] = P_J[:]/365.24 # (days / yr)
 
     
-    # minimum semi-major axis value on x-axis
-    if (plot_moons == 1):
+    # minimum semi-major axis value on x-axis    
+    if plot_moons or plot_extend_axes:
         min_a = 0.001
         min_P = 0.001
     else:
@@ -58,62 +59,62 @@ def harmonic_law():
 
     
 
-    ax = pylab.subplot(111)
+    ax = plt.subplot(111)
     ax.set_xscale('log')
     ax.set_yscale('log')
 
 
     # solar system
-    if plot_pluto == 1:
-        pylab.scatter(a, P, s=100, marker="+", color="r", lw=2)
+    if plot_pluto:
+        plt.scatter(a, P, s=100, marker="+", color="r", lw=2)
     else:
-        pylab.scatter(a[0:8], P[0:8], s=100, marker="+", color="r", lw=2)
+        plt.scatter(a[0:8], P[0:8], s=100, marker="+", color="r", lw=2)
 
-    atemp = numpy.arange(2)*(2*numpy.max(a) - 0.5*numpy.min(a)) + 0.5*numpy.min(a)
-    pylab.plot(atemp, atemp**1.5, 'k--')
+    atemp = np.arange(2)*(2*np.max(a) - 0.5*np.min(a)) + 0.5*np.min(a)
+    plt.plot(atemp, atemp**1.5, 'k--')
 
-    if plot_pluto == 1:
+    if plot_pluto:
         num = 9
     else:
         num = 8
 
     for i in range(num):
-        pylab.text(a[i]*0.8,P[i], names[i],horizontalalignment="right", 
+        plt.text(a[i]*0.8,P[i], names[i],horizontalalignment="right", 
                    color="r", fontsize=10)
 
 
-    if plot_moons == 1:
+    if plot_moons:
 
         # Galilean moons
-        pylab.scatter(a_J,P_J, s=50, marker="o", color="b", lw=2)
+        plt.scatter(a_J,P_J, s=50, marker="o", color="b", lw=2)
 
-        atemp = numpy.arange(2)*(2*numpy.max(a_J) - 0.5*numpy.min(a_J)) + 0.5*numpy.min(a_J)
-        pylab.plot(atemp, P_J[0]*(atemp/a_J[0])**1.5, 'k--')
+        atemp = np.arange(2)*(2*np.max(a_J) - 0.5*np.min(a_J)) + 0.5*np.min(a_J)
+        plt.plot(atemp, P_J[0]*(atemp/a_J[0])**1.5, 'k--')
 
         for i in range(4):
-            pylab.text(a_J[i]*1.5,P_J[i], names_J[i],horizontalalignment="left",
+            plt.text(a_J[i]*1.5,P_J[i], names_J[i],horizontalalignment="left",
                        verticalalignment="center",
                        color="b",fontsize=10)
 
 
-    pylab.xlabel("semi-major axis (AU)")
-    pylab.ylabel("period (yr)")
+    plt.xlabel("semi-major axis (AU)")
+    plt.ylabel("period (yr)")
         
-    pylab.axis([min_a,100,min_P,1000])
+    plt.axis([min_a,100,min_P,1000])
 
-    pylab.title(r"Kepler's Third Law",fontsize=11)
+    plt.title(r"Kepler's Third Law",fontsize=11)
 
-    f = pylab.gcf()
+    f = plt.gcf()
     f.set_size_inches(7.0,6.0)
 
-    pylab.tight_layout()
+    plt.tight_layout()
 
     outbase = "harmonic_law"
-    if plot_pluto == 1: outbase += "_pluto"
-    if plot_moons == 1: outbase += "_moons"
+    if plot_pluto: outbase += "_pluto"
+    if plot_moons: outbase += "_moons"
         
-    pylab.savefig(outbase + ".png")
-    pylab.savefig(outbase + ".eps")
+    plt.savefig(outbase + ".png")
+    plt.savefig(outbase + ".eps")
 
 
 
