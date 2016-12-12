@@ -83,7 +83,7 @@ plt.ylim(0.9995,1.0001)
 plt.gca().get_yaxis().get_major_formatter().set_useOffset(False)
 
 plt.xlabel(r"$t$ (hours)", fontsize="large")
-plt.ylabel(r"$f/f_0$", fontsize="large")
+plt.ylabel(r"$f/f_\star$", fontsize="large")
 plt.savefig("transit.png")
 plt.savefig("transit.eps")
 
