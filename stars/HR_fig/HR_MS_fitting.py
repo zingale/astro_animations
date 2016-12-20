@@ -4,8 +4,8 @@
 
 
 import math
-import numpy
-import pylab
+import numpy as np
+import matplotlib.pyplot as plt
 
 def HR_radius():
 
@@ -21,8 +21,8 @@ def HR_radius():
     #-------------------------------------------------------------------------
     # main sequence data 
     nstars = 13
-    M  = numpy.zeros(nstars, numpy.float64)
-    BV = numpy.zeros(nstars, numpy.float64)
+    M  = np.zeros(nstars, np.float64)
+    BV = np.zeros(nstars, np.float64)
 
     # B-V
     BV[:] = [-0.1, 0.0, 0.2, 0.3, 0.5, 0.8, 1.0, 1.2, 1.3, 1.4, 1.5, 1.6, 2.0]
@@ -31,31 +31,28 @@ def HR_radius():
     M[:] =  [0.5, 1,   2,   2.5, 4,   6,   6.75,7.5, 8,   8.75,11,  12,  16]
 
     #-------------------------------------------------------------------------
-    ax = pylab.subplot(111)
+    ax = plt.subplot(111)
     #ax.set_xscale('log')
     #ax.set_yscale('log')
     
     # draw and label the main sequence
-    pylab.plot(BV,M,'b-')     # true MS
-    pylab.plot(BV,M+5,'b:')   # cluster with unknown distance
+    plt.plot(BV,M,'b-')     # true MS
+    plt.plot(BV,M+5,'b:')   # cluster with unknown distance
 
 
     # reverse the x-axis
-    pylab.axis([BVmin, BVmax, Mmin, Mmax])
-    ax = pylab.gca()
+    plt.axis([BVmin, BVmax, Mmin, Mmax])
+    ax = plt.gca()
 
-    pylab.xlabel("$B-V$")
-    pylab.ylabel("$M$")
+    plt.xlabel("$B-V$")
+    plt.ylabel("$M$")
 
-    pylab.subplots_adjust(left=0.125,right=0.95,bottom=0.1,top=0.95)
+    plt.subplots_adjust(left=0.125,right=0.95,bottom=0.1,top=0.95)
 
-    f = pylab.gcf()
+    f = plt.gcf()
     f.set_size_inches(6.0,7.0)
 
-    pylab.savefig("HR_MS_fitting.png")
-    pylab.savefig("HR_MS_fitting.eps")
-
-
+    plt.savefig("HR_MS_fitting.pdf")
 
 if __name__== "__main__":
     HR_radius()
