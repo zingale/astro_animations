@@ -39,7 +39,7 @@ def doit():
     # set the angle to rotate the semi-major axis wrt the observer
     theta = math.pi/6.0
 
-    # create the solar system container
+    # create the binary container
     b = bi.Binary(M_star1, M_star2, a_star1 + a_star2, ecc, theta)
 
     
@@ -84,27 +84,27 @@ def doit():
 
     npts = len(s2.t)
 
-    xc = 0.5*(s2.x[0] + s2.x[0.25*npts])
-    yc = 0.5*(s2.y[0] + s2.y[0.25*npts])
+    xc = 0.5*(s2.x[0] + s2.x[npts//4])
+    yc = 0.5*(s2.y[0] + s2.y[npts//4])
     
     # compute the angle of f1 wrt the initial position (just for debugging)
-    a1 = math.atan2(s2.y[f1*npts] - yc, s2.x[f1*npts] - xc)
+    a1 = math.atan2(s2.y[int(f1*npts)] - yc, s2.x[int(f1*npts)] - xc)
     a0 = math.atan2(s2.y[0] - yc, s2.x[0] - xc)
 
     print (a1-a0)*180./math.pi
 
-    plt.scatter([s2.x[f1*npts]], [s2.y[f1*npts]], 
+    plt.scatter([s2.x[int(f1*npts)]], [s2.y[int(f1*npts)]], 
                 s=symsize, color="g", marker='h')
-    plt.scatter([s2.x[f2*npts]], [s2.y[f2*npts]], 
+    plt.scatter([s2.x[int(f2*npts)]], [s2.y[int(f2*npts)]], 
                 s=symsize, color="g", marker='h')
-    plt.scatter([s2.x[f3*npts]], [s2.y[f3*npts]], 
+    plt.scatter([s2.x[int(f3*npts)]], [s2.y[int(f3*npts)]], 
                 s=symsize, color="g", marker='h')
 
     # label the points
     plt.text(s2.x[n]*1.15, s2.y[n], "A4")
-    plt.text(s2.x[f1*npts]*1.15, s2.y[f1*npts]*1.15, "A1")
-    plt.text(s2.x[f2*npts]*1.15, s2.y[f2*npts], "A2")
-    plt.text(s2.x[f3*npts]*0.85, s2.y[f3*npts]*1.15, "A3")
+    plt.text(s2.x[int(f1*npts)]*1.15, s2.y[int(f1*npts)]*1.15, "A1")
+    plt.text(s2.x[int(f2*npts)]*1.15, s2.y[int(f2*npts)], "A2")
+    plt.text(s2.x[int(f3*npts)]*0.85, s2.y[int(f3*npts)]*1.15, "A3")
 
 
     plt.axis([-1.4*b.a2,0.8*b.a2,-1.4*b.a2,0.8*b.a2])
@@ -112,7 +112,7 @@ def doit():
     f = plt.gcf()
     f.set_size_inches(7.2,7.2)
   
-    plt.savefig("binary_fig.eps", bbox_inches="tight")
+    plt.savefig("binary_fig.pdf", bbox_inches="tight")
 
     
 if __name__== "__main__":
