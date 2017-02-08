@@ -1,6 +1,5 @@
 # integrate a system of binary stars
 
-import math
 import numpy as np
 
 # we work in CGS units
@@ -10,7 +9,8 @@ AU = 1.49598e13       # cm
 year = 3.1556926e7
 
 
-class _StarHistory:
+class _StarHistory(object):
+    """ a simple container to hold the solution """
 
     def __init__(self, num_steps):
         self.t = np.zeros(num_steps, np.float64)
@@ -22,12 +22,12 @@ class _StarHistory:
 
 
 # a simple class to integrate a binary system
-class Binary:
-    
+class Binary(object):
+
     def __init__ (self, M1, M2, a, e, theta, annotate=False):
         """
         define a binary system:
-        
+
         M1 is the mass of object (star/planet) 1
         M2 is the mass of object (star/planet) 2
         a is the sum of the semi-major axes (a1 + a2)
@@ -46,38 +46,39 @@ class Binary:
         self.a1 = self.a/(1.0 + self.M1/self.M2)
         self.a2 = self.a - self.a1
 
-        # we put the center of mass at the origin 
+        # we put the center of mass at the origin
         # we put star 1 on the -x axis and star 2 on the +x axis
-        self.x1_init = -self.a1*(1.0 - self.e)*math.cos(self.theta)
-        self.y1_init = -self.a1*(1.0 - self.e)*math.sin(self.theta)
+        self.x1_init = -self.a1*(1.0 - self.e)*np.cos(self.theta)
+        self.y1_init = -self.a1*(1.0 - self.e)*np.sin(self.theta)
 
-        self.x2_init = self.a2*(1.0 - self.e)*math.cos(self.theta)
-        self.y2_init = self.a2*(1.0 - self.e)*math.sin(self.theta)
+        self.x2_init = self.a2*(1.0 - self.e)*np.cos(self.theta)
+        self.y2_init = self.a2*(1.0 - self.e)*np.sin(self.theta)
 
         # Kepler's laws should tell us the orbital period
         # P^2 = 4 pi^2 (a_star1 + a_star2)^3 / (G (M_star1 + M_star2))
-        self.P = math.sqrt(4*math.pi**2*(self.a1 + self.a2)**3/(G*(self.M1 + self.M2)))
+        self.P = np.sqrt(4*np.pi**2*(self.a1 + self.a2)**3/(G*(self.M1 + self.M2)))
 
-        # compute the initial velocities velocities 
+        # compute the initial velocities velocities
 
         # first compute the velocity of the reduced mass at perihelion
         # (C&O Eq. 2.33)
-        v_mu = math.sqrt( (G*(self.M1 + self.M2)/(self.a1 + self.a2)) *
-                          (1.0 + self.e)/(1.0 - self.e) )
+        v_mu = np.sqrt( (G*(self.M1 + self.M2)/(self.a1 + self.a2)) *
+                        (1.0 + self.e)/(1.0 - self.e) )
 
         # then v_star2 = (mu/m_star2)*v_mu
-        self.vx2_init = -(self.M1/(self.M1 + self.M2))*v_mu*math.sin(self.theta)
-        self.vy2_init =  (self.M1/(self.M1 + self.M2))*v_mu*math.cos(self.theta)
+        self.vx2_init = -(self.M1/(self.M1 + self.M2))*v_mu*np.sin(self.theta)
+        self.vy2_init =  (self.M1/(self.M1 + self.M2))*v_mu*np.cos(self.theta)
 
         # then v_star1 = (mu/m_star1)*v_mu
-        self.vx1_init =  (self.M2/(self.M1 + self.M2))*v_mu*math.sin(self.theta)
-        self.vy1_init = -(self.M2/(self.M1 + self.M2))*v_mu*math.cos(self.theta)
+        self.vx1_init =  (self.M2/(self.M1 + self.M2))*v_mu*np.sin(self.theta)
+        self.vy1_init = -(self.M2/(self.M1 + self.M2))*v_mu*np.cos(self.theta)
 
 
         self.annotate = annotate
-        
+
 
     def integrate(self, dt, tmax):
+        """ integrate our system to tmax using a stepsize dt """
 
         # allocate storage for R-K intermediate results
         # y[0:3] will hold the star1 info, y[4:7] will hold the star2 info
@@ -102,7 +103,7 @@ class Binary:
         # star 2
         y[4] = self.x2_init  # initial x position
         y[5] = self.y2_init  # initial y position
-        
+
         y[6] = self.vx2_init # initial x-velocity
         y[7] = self.vy2_init # initial y-velocity
 
@@ -113,7 +114,7 @@ class Binary:
         # solution storage
         s1 = _StarHistory(nsteps+1)
         s2 = _StarHistory(nsteps+1)
-        
+
         s1.x[0] = self.x1_init
         s1.y[0] = self.y1_init
         s1.vx[0] = self.vx1_init
@@ -126,7 +127,7 @@ class Binary:
 
         s1.t[0] = s2.t[0] = t
 
-        for n in range(1,nsteps+1):
+        for n in range(1, nsteps+1):
 
             k1[:] = dt*self.rhs(t, y, self.M1, self.M2)
             k2[:] = dt*self.rhs(t+0.5*dt, y[:]+0.5*k1[:], self.M1, self.M2)
@@ -153,6 +154,7 @@ class Binary:
 
 
     def rhs(self,t, y, M_star1, M_star2):
+        """ the RHS of our system """
 
         f = np.zeros(8, np.float64)
 
@@ -189,5 +191,3 @@ class Binary:
         f[7] = -G*M_star1*(y_star2 - y_star1)/r**3  # d(vy_star2) / dt
 
         return f
-    
-
