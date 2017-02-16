@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import math
 
 import numpy as np
@@ -22,7 +24,7 @@ class _PlanetHistory:
         self.vy = np.zeros(num_steps, np.float64)
 
 
-class SolarSystem:
+class SolarSystem(object):
     """
     Integrate a solar system with the Sun at the center and an
     arbitrary number of planets---we don't model the planet-planet
