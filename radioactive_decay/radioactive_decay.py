@@ -7,7 +7,7 @@ import random
 # markers and having each marker have a 50/50 chance of "decaying"
 # each half-life
 
-class marker:
+class Marker(object):
 
     def __init__(self, xc, yc):
 
@@ -22,23 +22,16 @@ class marker:
 
     def decay(self):
     
-        if (self.state == 1):
+        if self.state == 1:
             
             # random.random() returns a number in the range [0.0, 1.0)
-            if (random.random() >= 0.5):
+            if random.random() >= 0.5:
                 self.state = 0
 
 
 def num_decayed(markers):
 
-    nd = 0
-    n = 0
-    while (n < len(markers)):
-        if (markers[n].state == 0):
-            nd += 1
-
-        n += 1
-
+    nd = len([q for q in markers if q.state == 0])
     return nd
 
 
@@ -61,22 +54,12 @@ def radioactive_decay():
 
     # create a list of marker objects, one at each grid location
     markers = []
-    i = 0
-    while (i < nx):
-
-        j = 0
-        while (j < ny):
-
-            markers.append(marker(i, j))
-
-            j += 1
-
-        i += 1
-
+    for i in range(nx):
+        for j in range(ny):
+            markers.append(Marker(i, j))
 
     # loop over half-lives, and re-evaluate the marker state
-    t = 0
-    while (t < 2*nest):
+    for t in range(2*nest):
 
         pylab.clf()
 
@@ -87,23 +70,20 @@ def radioactive_decay():
                               bottom=0.0493333,top=0.9506666)
 
         # draw the current state
-        n = 0
-        while (n < len(markers)):
+        for m in markers:
 
-            if (markers[n].state == 1):
+            if m.state == 1:
                 c = "r"
             else:
                 c = "w"
 
-            pylab.fill([markers[n].xc-L/2, markers[n].xc-L/2,
-                        markers[n].xc+L/2, markers[n].xc+L/2,
-                        markers[n].xc-L/2],
-                       [markers[n].yc-L/2, markers[n].yc+L/2,
-                        markers[n].yc+L/2, markers[n].yc-L/2,
-                        markers[n].yc-L/2], 
+            pylab.fill([m.xc-L/2, m.xc-L/2,
+                        m.xc+L/2, m.xc+L/2,
+                        m.xc-L/2],
+                       [m.yc-L/2, m.yc+L/2,
+                        m.yc+L/2, m.yc-L/2,
+                        m.yc-L/2], 
                        c)
-
-            n += 1
 
             
         nd = num_decayed(markers)
@@ -120,19 +100,15 @@ def radioactive_decay():
         outfile = "radioactive_decay_%04d.png" % t
         pylab.savefig(outfile)
 
-        print t, nd
+        print(t, nd)
 
         # if all are decayed, stop making plots
-        if (nd == nx*ny):
+        if nd == nx*ny:
             break
 
         # now give each marker a chance to "decay"
-        n = 0
-        while (n < len(markers)):
-            markers[n].decay()
-            n += 1
-        
-        t += 1
+        for m in markers:
+            m.decay()
 
 
     # now make a plot of the number that decayed as a function of half-life
