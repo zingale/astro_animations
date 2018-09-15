@@ -1,9 +1,9 @@
 # illustrate the Gamov peak as well as an approximate Gaussian fit to it.
 # compare to Clayton Fig. 4-7
 
-import numpy
+import numpy as np
 import math
-import pylab
+import matplotlib.pyplot as plt
 
 # this is all based on Clayton, Ch. 4.
 
@@ -30,7 +30,7 @@ E_0 = (b*k_keV*T/2.0)**(2./3.)  # Clayton Eq. 4-46
 
 def gamow(E, T):
     # E should be in keV
-    return numpy.exp(-E/(k_keV*T) - b/numpy.sqrt(E))
+    return np.exp(-E/(k_keV*T) - b/np.sqrt(E))
 
 
 def gaussian_fit(E, T):
@@ -39,28 +39,28 @@ def gaussian_fit(E, T):
     C = math.exp(-tau)
     Delta = 4.0/math.sqrt(3) * math.sqrt(E_0 * k_keV*T)
 
-    return C*numpy.exp(-((E-E_0)*2/Delta)**2)
+    return C*np.exp(-((E-E_0)*2/Delta)**2)
 
 
 E_0 = (b*k_keV*T/2.0)**(2./3.)
 
-print "E_0 = ", E_0
+print("E_0 = ", E_0)
 
-E = numpy.linspace(0, 100, 200)
-
-
-pylab.plot(E, gamow(E,T), label=r"$e^{-E/kT - bE^{-1/2}}$")
-pylab.plot(E, gaussian_fit(E,T), color="r", ls=":", label=r"$e^{-\tau} \cdot e^{-[(E-E_0)/(\Delta/2)]^2}$")
-
-pylab.legend(frameon=False, fontsize=12)
-
-ax = pylab.gca()
-ax.yaxis.set_major_formatter(pylab.ScalarFormatter(useMathText=True))
+E = np.linspace(0, 100, 200)
 
 
-pylab.xlabel("E (keV)")
-pylab.title(r"Gamow peak + approximate Gaussian: $^{12}\mathrm{C}(p,\gamma){^{13}\mathrm{N}},\ T = 3\times 10^7~\mathrm{K}$", fontsize=12)
+plt.plot(E, gamow(E,T), label=r"$e^{-E/kT - bE^{-1/2}}$")
+plt.plot(E, gaussian_fit(E,T), color="r", ls=":", label=r"$e^{-\tau} \cdot e^{-[(E-E_0)/(\Delta/2)]^2}$")
 
-pylab.tight_layout()
+plt.legend(frameon=False, fontsize=12)
 
-pylab.savefig("gamow.png")
+ax = plt.gca()
+ax.yaxis.set_major_formatter(plt.ScalarFormatter(useMathText=True))
+
+
+plt.xlabel("E (keV)")
+plt.title(r"Gamow peak + approximate Gaussian: $^{12}\mathrm{C}(p,\gamma){^{13}\mathrm{N}},\ T = 3\times 10^7~\mathrm{K}$", fontsize=12)
+
+plt.tight_layout()
+
+plt.savefig("gamow.png")
