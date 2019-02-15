@@ -1,61 +1,72 @@
-#!/bin/env python
+#!/bin/env python3
 
-import math
-import numpy
-import pylab
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axisartist.axislines import SubplotZero
 
 # draw ellipses of varying eccentricity
 
-# M. Zingale (2008-09-02)
+# M. Zingale
 
 def ellipse():
 
     # theta ranges from 0 to 2pi
     npts = 360
-    theta = numpy.arange(npts)*2.0*math.pi/(npts-1)
+    theta = np.linspace(0, 2*np.pi, npts)
 
+    # well go through a range of eccentricities (forwards and backwards)
     n_ecc = 200
-    e_tmp = numpy.arange(n_ecc)*.95/n_ecc
-    e = numpy.zeros(2*n_ecc)
-    e[0:n_ecc] = e_tmp[:]
-    e[n_ecc:] = e_tmp[::-1]
+    e_tmp = np.linspace(0, 0.95, n_ecc)
+
+    ecc = np.zeros(2*n_ecc)
+    ecc[0:n_ecc] = e_tmp[:]
+    ecc[n_ecc:] = e_tmp[::-1]
 
     a = 1.0
 
-    for n in range(2*n_ecc):
- 
-        r = a*(1.0 - e[n]*e[n])/(1.0 + e[n]*numpy.cos(theta))
+    for n, e in enumerate(ecc):
 
-        x = r*numpy.cos(theta)
-        y = r*numpy.sin(theta)
+        r = a*(1.0 - e**2)/(1.0 + e*np.cos(theta))
+
+        x = r*np.cos(theta)
+        y = r*np.sin(theta)
 
         # plotting
-        pylab.clf()
+        fig = plt.figure(1)
+        fig.clear()
 
-        ax = pylab.gca()
+        ax = SubplotZero(fig, 111)
+        fig.add_subplot(ax)
+
         ax.set_aspect("equal", "datalim")
 
-        pylab.plot(x,y,color="b")
+        ax.plot(x, y, color="k", linewidth=2)
 
         # second foci
-        pylab.scatter([-2.0*a*e[n]], [0], color="r", marker="x", s=100)
+        ax.scatter([-2.0*a*e], [0], color="C0", marker="x", s=100)
 
         # primary foci
-        pylab.scatter([0],[0],color="g",marker="x",s=100)
+        ax.scatter([0], [0],color="C1", marker="x", s=100)
 
-        pylab.axis([-2.5,1.5,-2.,2.])
+        ax.set_xlim(-2.5, 1.5)
+        ax.set_ylim(-2., 2.)
 
-        pylab.text(-1.5,-1.5,"a = %5.3f, e = %6.4f" % (a, e[n]))
+        ax.text(-2.0, -1.5, "a = %5.3f, e = %6.4f" % (a, e))
 
-        f = pylab.gcf()
-        f.set_size_inches(7.2,7.2)
+        for direction in ["xzero", "yzero"]:
+            # adds arrows at the ends of each axis
+            ax.axis[direction].set_axisline_style("-|>")
 
-        pylab.savefig("ellipse_%03d.png" % n)
+            # adds X and Y-axis from the origin
+            ax.axis[direction].set_visible(True)
 
+        for direction in ["left", "right", "bottom", "top"]:
+            # hides borders
+            ax.axis[direction].set_visible(False)
+
+        fig.set_size_inches(7.2, 7.2)
+
+        plt.savefig("ellipse_{:03d}.png".format(n))
 
 if __name__== "__main__":
     ellipse()
-
-
-    
-        
