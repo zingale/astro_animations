@@ -116,21 +116,19 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
 
         # energies
         if annotate:
-            KE1 = 0.5*b.M1*(s1.vx[n]**2 + s1.vy[n]**2)
-            KE2 = 0.5*b.M2*(s2.vx[n]**2 + s2.vy[n]**2)
-            PE = -G*b.M1*b.M2/ \
-                np.sqrt((s1.x[n] - s2.x[n])**2 + (s1.y[n] - s2.y[n])**2)
+            KE1, KE2 = b.kinetic_energies()
+            PE = b.potential_energy()
 
             print(KE1, KE2, PE, KE1 + KE2 + PE)
 
             # KE 1
             sig, ex = find_scinotat(KE1)
             ax.text(0.05, 0.4, r"$K_1 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
-                    transform=ax.transAxes)
+                    transform=ax.transAxes, color="C0")
 
             sig, ex = find_scinotat(KE2)
             ax.text(0.05, 0.35, r"$K_2 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
-                    transform=ax.transAxes)
+                    transform=ax.transAxes, color="C1")
 
             sig, ex = find_scinotat(PE)
             ax.text(0.05, 0.3, r"$U = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
