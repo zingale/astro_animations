@@ -1,15 +1,10 @@
 #!/bin/env python3
 
+import argparse
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 
 import anim_solvers.binary_integrator as bi
-
-# font sizes -- for mpl 2.0
-mpl.rcParams['font.size'] = 12
-mpl.rcParams['legend.fontsize'] = 'large'
-mpl.rcParams['figure.titlesize'] = 'medium'
 
 
 M_sun = bi.M_sun
@@ -36,7 +31,7 @@ def find_scinotat(number):
     return a, b
 
 
-def radial_velocity(M1=1, M2=1, a2=10, e=0.0):
+def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
 
     # set the masses
     M_star1 = M1*M_sun      # star 1's mass
@@ -53,9 +48,6 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0):
     # set the angle to rotate the semi-major axis wrt the observer
     theta = np.pi/6.0
 
-    # display additional information
-    annotate = False
-
     # create the binary object
     b = bi.Binary(M_star1, M_star2, a_star1 + a_star2, ecc, theta, annotate=annotate)
 
@@ -71,22 +63,21 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0):
     # plotting
     # ================================================================
 
-    plt.rc('text', usetex=True)
-    plt.rc('font', family='serif')
-
     iframe = 0
 
     for n in range(len(s1.t)):
 
-        plt.clf()
+        fig = plt.figure(1)
+        fig.clear()
 
-        plt.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9)
+        ax = fig.add_subplot(111)
 
-        a = plt.gca()
-        a.set_aspect("equal", "datalim")
-        plt.axis("off")
+        plt.subplots_adjust(left=0.025, right=0.975, bottom=0.025, top=0.975)
 
-        plt.scatter([0], [0], s=150, marker="x", color="k")
+        ax.set_aspect("equal", "datalim")
+        ax.set_axis_off()
+
+        ax.scatter([0], [0], s=150, marker="x", color="k")
 
         # if e = 0 and M_star1 = M_star2, then the orbits lie on top of one
         # another, so plot only a single orbital line.
@@ -94,36 +85,34 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0):
         # plot star 1's orbit and position
         symsize = 200
         if not (b.M1 == b.M2 and b.e == 0.0):
-            plt.plot(s1.x, s1.y, color="C0")
+            ax.plot(s1.x, s1.y, color="C0")
         else:
-            plt.plot(s1.x, s1.y, color="k")
+            ax.plot(s1.x, s1.y, color="k")
 
-        plt.scatter([s1.x[n]], [s1.y[n]], s=symsize, color="C0")
+        ax.scatter([s1.x[n]], [s1.y[n]], s=symsize, color="C0", zorder=100)
 
         # plot star 2's orbit and position
         symsize = 200*(b.M2/b.M1)
         if not (b.M1 == b.M2 and b.e == 0.0):
-            plt.plot(s2.x, s2.y, color="C1")
+            ax.plot(s2.x, s2.y, color="C1")
 
-        plt.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="C1")
-
+        ax.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="C1", zorder=100)
 
         if annotate:
             # plot a reference line
-            plt.plot([0,1*AU], [-1.2*b.a2,-1.2*b.a2], color="k")
-            plt.text(0.5*AU, -1.4*b.a2, "1 AU",
-                     horizontalalignment='center')
+            ax.plot([0, 1*AU], [-1.2*b.a2, -1.2*b.a2], color="k")
+            ax.text(0.5*AU, -1.4*b.a2, "1 AU",
+                    horizontalalignment='center')
 
             # display time
-            plt.text(-1.4*b.a2, -1.3*b.a2,
-                     "time = %6.3f yr" % (s1.t[n]/year))
+            ax.text(0.05, 0.05, "time = {:6.3f} yr".format(s1.t[n]/year),
+                    transform=ax.transAxes)
 
         # display information about stars
-        plt.text(-1.4*b.a2, 1.3*b.a2,
-                 r"mass ratio: %3.2f" % (b.M1/b.M2), color="k")
-        plt.text(-1.4*b.a2, 1.1*b.a2,
-                 r"eccentricity: %3.2f" % (b.e), color="k")
-
+        ax.text(0.05, 0.95, r"mass ratio: {:3.2f}".format(b.M1/b.M2),
+                transform=ax.transAxes, color="k", fontsize="large")
+        ax.text(0.05, 0.9, r"eccentricity: {:3.2f}".format(b.e),
+                transform=ax.transAxes, color="k", fontsize="large")
 
         # energies
         if annotate:
@@ -136,30 +125,41 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0):
 
             # KE 1
             sig, ex = find_scinotat(KE1)
-            plt.text(0, 1.3*b.a2, r"$K_1 =$")
-            plt.text(0.3*b.a2, 1.3*b.a2, r"$%+4.2f \times 10^{%2d}$ erg" % (sig,ex))
+            ax.text(0.05, 0.4, r"$K_1 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+                    transform=ax.transAxes)
 
             sig, ex = find_scinotat(KE2)
-            plt.text(0, 1.15*b.a2, r"$K_2 =$")
-            plt.text(0.3*b.a2, 1.15*b.a2, r"$%+4.2f \times 10^{%2d}$ erg" % (sig,ex))
+            ax.text(0.05, 0.35, r"$K_2 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+                    transform=ax.transAxes)
 
             sig, ex = find_scinotat(PE)
-            plt.text(0, 1.0*b.a2, r"$U =$")
-            plt.text(0.3*b.a2, 1.0*b.a2, r"$%+4.2f \times 10^{%2d}$ erg" % (sig,ex))
+            ax.text(0.05, 0.3, r"$U = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+                    transform=ax.transAxes)
 
             sig, ex = find_scinotat(KE1 + KE2 + PE)
-            plt.text(0, 0.85*b.a2, r"$E =$")
-            plt.text(0.3*b.a2, 0.85*b.a2, r"$%+4.2f \times 10^{%2d}$ erg" % (sig,ex))
+            ax.text(0.05, 0.25, r"$E = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+                    transform=ax.transAxes)
 
-        plt.axis([-1.4*b.a2,1.4*b.a2,-1.4*b.a2,1.4*b.a2])
+        #ax.set_xlim(-2.0*b.a2, 2.0*b.a2)
+        #ax.set_ylim(-1.75*b.a2, 1.75*b.a2)
 
-        f = plt.gcf()
-        f.set_size_inches(12.8, 7.2)
+        fig.set_size_inches(12.8, 7.2)
 
-        plt.savefig("binary_star_%04d.png" % iframe)
+        plt.tight_layout()
+        plt.savefig("binary_star_mratio={:3.2f}_e={:3.2f}_{:04d}.png".format(M_star1/M_star2, e, iframe))
 
         iframe += 1
 
 
-if __name__== "__main__":
-    radial_velocity()
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-a", help="the semi-major axis of star 2", type=float, default=10.0)
+    parser.add_argument("-e", help="the eccentricity", type=float, default=0.0)
+    parser.add_argument("--mass1", help="mass of star 1", type=float, default=1.0)
+    parser.add_argument("--mass2", help="mass of star 2", type=float, default=1.0)
+    parser.add_argument("--annotate", help="--show energy details", action="store_true")
+
+    args = parser.parse_args()
+
+    radial_velocity(M1=args.mass1, M2=args.mass2, e=args.e, a2=args.a, annotate=args.annotate)
