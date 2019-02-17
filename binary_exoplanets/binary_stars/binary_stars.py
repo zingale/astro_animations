@@ -1,3 +1,5 @@
+#!/bin/env python3
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -34,19 +36,19 @@ def find_scinotat(number):
     return a, b
 
 
-def radial_velocity():
+def radial_velocity(M1=1, M2=1, a2=10, e=0.0):
 
     # set the masses
-    M_star1 = 2.0*M_sun      # star 1's mass
-    M_star2 = M_sun      # star 2's mass
+    M_star1 = M1*M_sun      # star 1's mass
+    M_star2 = M2*M_sun      # star 2's mass
 
     # set the semi-major axis of the star 2 (and derive that of star 1)
     # M_star2 a_star2 = -M_star1 a_star1 (center of mass)
-    a_star2 = 10.0*AU
+    a_star2 = a2*AU
     a_star1 = (M_star2/M_star1)*a_star2
 
     # set the eccentricity
-    ecc = 0.4
+    ecc = e
 
     # set the angle to rotate the semi-major axis wrt the observer
     theta = np.pi/6.0
@@ -78,7 +80,7 @@ def radial_velocity():
 
         plt.clf()
 
-        plt.subplots_adjust(left=0.1,right=0.9,bottom=0.1,top=0.9)
+        plt.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9)
 
         a = plt.gca()
         a.set_aspect("equal", "datalim")
@@ -92,18 +94,18 @@ def radial_velocity():
         # plot star 1's orbit and position
         symsize = 200
         if not (b.M1 == b.M2 and b.e == 0.0):
-            plt.plot(s1.x, s1.y, color="r")
+            plt.plot(s1.x, s1.y, color="C0")
         else:
             plt.plot(s1.x, s1.y, color="k")
 
-        plt.scatter([s1.x[n]], [s1.y[n]], s=symsize, color="r")
+        plt.scatter([s1.x[n]], [s1.y[n]], s=symsize, color="C0")
 
         # plot star 2's orbit and position
         symsize = 200*(b.M2/b.M1)
         if not (b.M1 == b.M2 and b.e == 0.0):
-            plt.plot(s2.x, s2.y, color="g")
+            plt.plot(s2.x, s2.y, color="C1")
 
-        plt.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="g")
+        plt.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="C1")
 
 
         if annotate:
@@ -152,7 +154,7 @@ def radial_velocity():
         plt.axis([-1.4*b.a2,1.4*b.a2,-1.4*b.a2,1.4*b.a2])
 
         f = plt.gcf()
-        f.set_size_inches(7.2,7.2)
+        f.set_size_inches(12.8, 7.2)
 
         plt.savefig("binary_star_%04d.png" % iframe)
 
