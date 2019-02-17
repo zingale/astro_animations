@@ -3,6 +3,7 @@
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
+import progressbar
 
 import anim_solvers.binary_integrator as bi
 
@@ -56,8 +57,9 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
     dt = b.P/360.0
     tmax = 2.0*b.P  # maximum integration time
 
-    s1, s2 = b.integrate(dt, tmax)
-
+    b.integrate(dt, tmax)
+    s1 = b.orbit1
+    s2 = b.orbit2
 
     # ================================================================
     # plotting
@@ -65,7 +67,12 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
 
     iframe = 0
 
-    for n in range(len(s1.t)):
+    KE1, KE2 = b.kinetic_energies()
+    PE = b.potential_energy()
+
+    bar = progressbar.ProgressBar()
+
+    for n in bar(range(len(s1.t))):
 
         fig = plt.figure(1)
         fig.clear()
@@ -99,11 +106,6 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
         ax.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="C1", zorder=100)
 
         if annotate:
-            # plot a reference line
-            ax.plot([0, 1*AU], [-1.2*b.a2, -1.2*b.a2], color="k")
-            ax.text(0.5*AU, -1.4*b.a2, "1 AU",
-                    horizontalalignment='center')
-
             # display time
             ax.text(0.05, 0.05, "time = {:6.3f} yr".format(s1.t[n]/year),
                     transform=ax.transAxes)
@@ -116,35 +118,47 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
 
         # energies
         if annotate:
-            KE1, KE2 = b.kinetic_energies()
-            PE = b.potential_energy()
-
-            print(KE1, KE2, PE, KE1 + KE2 + PE)
 
             # KE 1
-            sig, ex = find_scinotat(KE1)
+            sig, ex = find_scinotat(KE1[n])
             ax.text(0.05, 0.4, r"$K_1 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
                     transform=ax.transAxes, color="C0")
 
-            sig, ex = find_scinotat(KE2)
+            sig, ex = find_scinotat(KE2[n])
             ax.text(0.05, 0.35, r"$K_2 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
                     transform=ax.transAxes, color="C1")
 
-            sig, ex = find_scinotat(PE)
+            sig, ex = find_scinotat(PE[n])
             ax.text(0.05, 0.3, r"$U = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
                     transform=ax.transAxes)
 
-            sig, ex = find_scinotat(KE1 + KE2 + PE)
+            sig, ex = find_scinotat(KE1[n] + KE2[n] + PE[n])
             ax.text(0.05, 0.25, r"$E = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
                     transform=ax.transAxes)
 
-        #ax.set_xlim(-2.0*b.a2, 2.0*b.a2)
-        #ax.set_ylim(-1.75*b.a2, 1.75*b.a2)
+        xmin = 1.05*min(s1.x.min(), s2.x.min())
+        xmax = 1.05*max(s1.x.max(), s2.x.max())
+
+        ymin = 1.05*min(s1.y.min(), s2.y.min())
+        ymax = 1.05*max(s1.y.max(), s2.y.max())
+
+        if annotate:
+            # plot a reference line
+            ax.plot([0, 1*AU], [0.93*ymin, 0.93*ymin], color="k")
+            ax.text(0.5*AU, 0.975*ymin, "1 AU",
+                    horizontalalignment="center", verticalalignment="top")
+
+
+        ax.set_xlim(xmin, xmax)
+        ax.set_ylim(ymin, ymax)
 
         fig.set_size_inches(12.8, 7.2)
 
         plt.tight_layout()
-        plt.savefig("binary_star_mratio={:3.2f}_e={:3.2f}_{:04d}.png".format(M_star1/M_star2, e, iframe))
+        if annotate:
+            plt.savefig("binary_star_mratio={:3.2f}_e={:3.2f}_{:04d}_energy.png".format(M_star1/M_star2, e, iframe))
+        else:
+            plt.savefig("binary_star_mratio={:3.2f}_e={:3.2f}_{:04d}.png".format(M_star1/M_star2, e, iframe))
 
         iframe += 1
 

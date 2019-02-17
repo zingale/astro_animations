@@ -48,9 +48,9 @@ rm -f binary_star_mratio=2.00_e=0.40_????.png
 
 # make the movie
 ./binary_stars.py --mass1 2.0 --mass2 1.0 -e 0.4 -a 1.0 --annotate
-mkmovie.py -o binary_mratio=2_e=0.4_energy binary_star_mratio=2.00_e=0.40_energy_????.png
+mkmovie.py -o binary_mratio=2_e=0.4_energy binary_star_mratio=2.00_e=0.40_????_energy.png
 
 # store one of the frames as the preview frame for the webpage and clean-up
-cp binary_star_mratio=2.00_e=0.40_energy_0150.png binary_mratio=2_e=0.4_energy_preview.png
-rm -f binary_star_mratio=2.00_e=0.40_energy_????.png
+cp binary_star_mratio=2.00_e=0.40_0150_energy.png binary_mratio=2_e=0.4_energy_preview.png
+rm -f binary_star_mratio=2.00_e=0.40_????_energy.png
 
