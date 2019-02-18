@@ -74,62 +74,92 @@ def radial_velocity():
 
     iframe = 0
 
+    xmin = 1.05*(s2.x - s1.x).min()
+    xmax = 1.05*(s2.x - s1.x).max()
+
+    ymin = 1.05*(s2.y - s1.y).min()
+    ymax = 1.05*(s2.y - s1.y).max()
+
     for n in range(len(s1.t)):
 
         fig = plt.figure(1)
         fig.clear()
 
-        ax = fig.add_subplot(111)
+        plt.subplots_adjust(left=0.025, right=0.975, bottom=0.025, top=0.95)
 
-        plt.subplots_adjust(left=0.025, right=0.975, bottom=0.025, top=0.975)
+        axl = fig.add_subplot(121)
+        axr = fig.add_subplot(122)
 
-        ax.set_aspect("equal", "datalim")
-        ax.set_axis_off()
+        for i in range(2):
 
-        # offsets -- we want star 1 at the origin
-        xoffset = s1.x[n]
-        yoffset = s1.y[n]
+            if i == 0:
+                ax = axl
 
-        ax.scatter([0-xoffset], [0-yoffset], s=150, marker="x", color="k")
+                # offsets -- we want star 1 at the origin
+                xoffset = s1.x[n]
+                yoffset = s1.y[n]
 
-        # plot star 1's position
-        symsize = 200
-        ax.scatter([s1.x[n]-xoffset], [s1.y[n]-yoffset], s=symsize, color="C0")
+            else:
+                ax = axr
 
-        # plot star 2's orbit and position
-        symsize = 200*(b.M2/b.M1)
-        ax.plot(s2.x-s1.x, s2.y-s1.y, color="C1")
+                # no offsets
+                xoffset = 0.0
+                yoffset = 0.0
 
-        ax.scatter([s2.x[n]-xoffset], [s2.y[n]-yoffset], s=symsize, color="C1", zorder=100)
+            ax.set_aspect("equal", "datalim")
+            ax.set_axis_off()
 
-        if annotate:
-            # display time
-            ax.text(0.05, 0.05, "time = {:6.3f} yr".format(s1.t[n]/year),
-                    transform=ax.transAxes)
+            # center of mass
+            ax.scatter([0-xoffset], [0-yoffset], s=150, marker="x", color="k")
 
-        # display information about stars
-        ax.text(0.05, 0.95, r"mass ratio: {:3.2f}".format(b.M1/b.M2),
-                transform=ax.transAxes, color="k", fontsize="large")
-        ax.text(0.05, 0.9, r"eccentricity: {:3.2f}".format(b.e),
-                transform=ax.transAxes, color="k", fontsize="large")
+            if i == 0:
+                # plot star 1's position
+                symsize = 200
+                ax.scatter([s1.x[n]-xoffset], [s1.y[n]-yoffset], s=symsize, color="C0")
+
+                # plot star 2's orbit and position
+                symsize = 200*(b.M2/b.M1)
+                ax.plot(s2.x-s1.x, s2.y-s1.y, color="C1")
+
+                ax.scatter([s2.x[n]-xoffset], [s2.y[n]-yoffset], s=symsize, color="C1", zorder=100)
+
+            else:
+                # plot star 1's orbit position
+                symsize = 200
+                ax.scatter([s1.x[n]], [s1.y[n]], s=symsize, color="C0", zorder=100)
+                ax.plot(s1.x, s1.y, color="C0")
+
+                # plot star 2's orbit and position
+                symsize = 200*(b.M2/b.M1)
+                ax.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="C1", zorder=100)
+                ax.plot(s2.x, s2.y, color="C1")
+
+            if i == 0 and annotate:
+                # display time
+                ax.text(0.05, 0.05, "time = {:6.3f} yr".format(s1.t[n]/year),
+                        transform=ax.transAxes)
+
+                # display information about stars
+                ax.text(0.025, 0.9, r"mass ratio: {:3.2f}".format(b.M1/b.M2),
+                        transform=ax.transAxes, color="k", fontsize="medium")
+                ax.text(0.025, 0.86, r"eccentricity: {:3.2f}".format(b.e),
+                        transform=ax.transAxes, color="k", fontsize="medium")
 
 
-        plt.axis([-1.8*b.a2, 1.0*b.a2, -1.8*b.a2, 1.0*b.a2])
 
-        xmin = 1.05*(s2.x - s1.x).min()
-        xmax = 1.05*(s2.x - s1.x).max()
+            if annotate:
+                # plot a reference line
+                ax.plot([0, 1*AU], [0.93*ymin, 0.93*ymin], color="k")
+                ax.text(0.5*AU, 0.975*ymin, "1 AU",
+                        horizontalalignment="center", verticalalignment="top")
 
-        ymin = 1.05*(s2.y - s1.y).min()
-        ymax = 1.05*(s2.y - s1.y).max()
+            ax.set_xlim(xmin, xmax)
+            ax.set_ylim(ymin, ymax)
 
-        if annotate:
-            # plot a reference line
-            ax.plot([0, 1*AU], [0.93*ymin, 0.93*ymin], color="k")
-            ax.text(0.5*AU, 0.975*ymin, "1 AU",
-                    horizontalalignment="center", verticalalignment="top")
-
-        ax.set_xlim(xmin, xmax)
-        ax.set_ylim(ymin, ymax)
+            if i == 0:
+                ax.set_title("massive star frame of reference")
+            else:
+                ax.set_title("center of mass frame of reference")
 
         fig.set_size_inches(12.8, 7.2)
 
