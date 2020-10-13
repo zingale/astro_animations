@@ -10,10 +10,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def HR_radius():
+import stellar_properties as sp
 
-    # solar temperature
-    T_sun = 5777.
+def HR_radius():
 
     # temperature plotting range
     Tmin = 2000
@@ -32,40 +31,14 @@ def HR_radius():
     # label the stars by mass?
     label_masses = 1
 
-    #-------------------------------------------------------------------------
-    # main sequence data taken from Carroll & Ostlie, Appendix G
-    nstars = 11
-    M = np.zeros(nstars, np.float64)
-    T = np.zeros(nstars, np.float64)
-    R = np.zeros(nstars, np.float64)
-    L = np.zeros(nstars, np.float64)
-
-    # spectral type
-    spectral_types = ['O8', 'B0', 'B3', 'B5', 'A0', 'A5', 'F5', 'Sun', 'K5', 'M0', 'M5']
-
-    # mass (solar masses)
-    M[:] = [23, 17.5, 7.6, 5.9, 2.9, 1.8, 1.2, 1, 0.67, 0.51, 0.21]
-
-    # temperature (K)
-    T[:] = [35800, 32500, 18800, 15200, 9800, 8190, 6650, T_sun, 4410, 3840, 3170]
-
-    # radius (solar radii)
-    R[:] = [10.0, 6.7, 3.8, 3.2, 2.2, 1.8, 1.2, 1.0, 0.80, 0.63, 0.29]
-
-    # luminosity (solar luminosities)
-    L[:] = [147000, 32500, 1580, 480, 39.4, 12.3, 2.56, 1.0, 0.216, 0.077, 0.0076]
-
-    #-------------------------------------------------------------------------
-
-
     ax = plt.subplot(111)
     ax.set_xscale('log')
     ax.set_yscale('log')
 
     # draw and label the main sequence
-    plt.scatter(T, L, s=100, marker="+", color="r", lw=2)
-    plt.plot(T, L, 'b-')
-    for mstar, tstar, lstar, spec_star in zip(M, T, L, spectral_types):
+    plt.scatter(sp.T, sp.L, s=100, marker="+", color="r", lw=2)
+    plt.plot(sp.T, sp.L, 'b-')
+    for mstar, tstar, lstar, spec_star in zip(sp.M, sp.T, sp.L, sp.spectral_types):
 
         if label_masses:
             if mstar >= 1.0:
@@ -83,16 +56,13 @@ def HR_radius():
         # draw in lines of constant radius
         Rvals = [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000, 10000]
 
-        nTpts = 25
-        dlogT = (np.log10(Tmax) - np.log10(Tmin))/(nTpts-1)
-
-        Tplot = 10.0**(np.arange(nTpts)*dlogT + np.log10(Tmin))
+        Tplot = np.logspace(np.log10(Tmin), np.log10(Tmax), 25)
 
         for n in range(len(Rvals)):
 
             # L/L_sun = (R/R_sun)**2 (T/T_sun)**4
             # compute L in L_sun units
-            L = Rvals[n]**2 * (Tplot/T_sun)**4
+            L = Rvals[n]**2 * (Tplot/sp.T_sun)**4
 
             plt.plot(Tplot, L, linestyle='--', color="0.5")
 
@@ -103,7 +73,7 @@ def HR_radius():
             xpos = np.log10(40000) + slope*(np.log10(Rvals[n]) - np.log10(1.e-4))
             xpos = 10.0**xpos
 
-            ypos = Rvals[n]**2 * (xpos/T_sun)**4
+            ypos = Rvals[n]**2 * (xpos/sp.T_sun)**4
 
 
             if (xpos > Tmin and xpos < Tmax and ypos > Lmin and ypos < Lmax):
@@ -113,12 +83,12 @@ def HR_radius():
 
         # draw a box along the R = 0.01 R_sun line to indicate the approximate
         # position of the white dwarfs
-        L3 = 0.01**2 * (30000./T_sun)**4
-        L75 = 0.01**2 * (7500./T_sun)**4
+        L3 = 0.01**2 * (30000./sp.T_sun)**4
+        L75 = 0.01**2 * (7500./sp.T_sun)**4
         plt.fill([30000, 30000, 7500, 7500], [1.5*L3, 0.66*L3, 0.66*L75, 1.5*L75],
                  alpha=0.20, facecolor="b")
 
-        L15 = 0.01**2 * (15000./T_sun)**4
+        L15 = 0.01**2 * (15000./sp.T_sun)**4
         plt.text(15000, L15, "white dwarfs", color="b", horizontalalignment="center")
 
     # draw x-axis (temperature) labels in a few spots
