@@ -64,7 +64,8 @@ def draw():
              [aymin, aymax, aymax, aymin, aymin], color="C8", zorder=-100)
 
     plt.text(0.5*(axmin+axmax), 0.98*aymin, "atomic scale\n(mean free path)", 
-             fontsize="large", horizontalalignment="center", verticalalignment="top")
+             fontsize="large", horizontalalignment="center", verticalalignment="top",
+             color="black")
 
     N = 100
 
@@ -99,7 +100,8 @@ def draw():
     plt.fill(xe, ye, color="C1")
 
 
-    plt.text(0.5*(xmin+xmax), 1.02*ymax, "fluid element", fontsize="large", horizontalalignment="center")
+    plt.text(0.5*(xmin+xmax), 1.02*ymax, "fluid element", 
+             fontsize="large", horizontalalignment="center", color="black")
     # connect
     zoom_box((0.4, 0.6), (0.404, 0.604), 
              (0.4, 0.604), (axmin, aymax),
@@ -121,18 +123,17 @@ def draw():
              (0.7, 0.2), (xmin, ymin), color="C2")
 
 
-    plt.text(1.05, 0.55, "star", horizontalalignment="left", fontsize="large")
+    plt.text(1.05, 0.55, "star", horizontalalignment="left", fontsize="large", color="black")
 
     ax = plt.gca()
     ax.set_aspect("equal", "datalim")
-
     plt.tight_layout()
 
     f = plt.gcf()
-    f.set_size_inches(8, 7)
+    f.set_size_inches(8, 6.5)
 
     plt.axis("off")
-    plt.savefig("fluid_scale.pdf", dpi=100)
+    plt.savefig("fluid_scale.pdf", dpi=100, bbox_inches="tight", pad_inches=0)
     plt.savefig("fluid_scale.png", dpi=100, transparent=True)
 
 

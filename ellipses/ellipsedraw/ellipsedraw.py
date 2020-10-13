@@ -1,8 +1,8 @@
-#!/bin/env python
+#!/bin/env python3
 
-import math
-import numpy
-import pylab
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axisartist.axislines import SubplotZero
 
 # show how ellipses are drawn
 
@@ -11,64 +11,76 @@ import pylab
 def ellipse():
 
     # theta ranges from 0 to 2pi
-    npts = 250
-    theta = numpy.arange(npts)*2.0*math.pi/(npts-1)
+    npts = 360
+    theta = np.linspace(0, 2*np.pi, npts)
 
     e = 0.5
     a = 1.0
 
-    n = 0
- 
-    r = a*(1.0 - e*e)/(1.0 + e*numpy.cos(theta))
+    r = a*(1.0 - e**3)/(1.0 + e*np.cos(theta))
 
-    x = r*numpy.cos(theta)
-    y = r*numpy.sin(theta)
+    x = r*np.cos(theta)
+    y = r*np.sin(theta)
 
 
     # plotting
     for n in range(npts):
 
-        pylab.clf()
+        fig = plt.figure(1)
+        fig.clear()
 
-        ax = pylab.gca()
+        ax = SubplotZero(fig, 111)
+        fig.add_subplot(ax)
+
         ax.set_aspect("equal", "datalim")
-        
+
+        ax = plt.gca()
+        ax.set_aspect("equal", "datalim")
+
         # draw the ellipse
-        pylab.plot(x, y, color="b")
+        ax.plot(x, y, color="k", linewidth=2)
 
         # draw our current point
-        pylab.scatter([x[n]], [y[n]], color="k", s=75)
+        ax.scatter([x[n]], [y[n]], color="k", s=75)
 
         # second foci
-        pylab.scatter([-2.0*a*e], [0], color="g", marker="x", s=200)
+        ax.scatter([-2.0*a*e], [0], color="C0", marker="x", s=200)
 
         # primary foci
-        pylab.scatter([0],        [0], color="r", marker="x", s=200)
+        ax.scatter([0], [0], color="C1", marker="x", s=200)
 
         # draw lines connecting the foci to the current point
-        pylab.plot([0,x[n]], [0,y[n]], color="r")
-        pylab.plot([-2.0*a*e,x[n]], [0,y[n]], color="g")
+        ax.plot([0, x[n]], [0, y[n]], color="C1", zorder=100, linewidth=2)
+        ax.plot([-2.0*a*e, x[n]], [0, y[n]], color="C0", zorder=100, linewidth=2)
 
-        pylab.axis([-2.5,1.5,-2.,2.])
+        ax.set_xlim(-2.5, 1.5)
+        ax.set_ylim(-2., 2.)
 
-        len1 = math.sqrt( (x[n] - 0)**2 + (y[n] - 0)**2)
-        len2 = math.sqrt( (x[n] - (-2.0*a*e))**2 + (y[n] - 0)**2)
+        len1 = np.sqrt((x[n] - 0)**2 + (y[n] - 0)**2)
+        len2 = np.sqrt((x[n] - (-2.0*a*e))**2 + (y[n] - 0)**2)
 
-        pylab.title("Ellipse, eccenticity = %5.3f" % e)
+        ax.set_title("Ellipse, eccenticity = {:5.3f}".format(e))
 
-        pylab.text(-1.5,-1.25, "r length: %5.3f" % len1,color="r")
-        pylab.text(-1.5,-1.5, "r' length: %5.3f" % len2, color="g")
-        pylab.text(-1.5,-1.75, "r + r' = %5.3f" % (len1 + len2) )
+        ax.text(-1.5, -1.25, "r length: {:5.3f}".format(len1), color="C1")
+        ax.text(-1.5, -1.5, "r' length: {:5.3f}".format(len2), color="C0")
+        ax.text(-1.5, -1.75, "r + r' = {:5.3f}".format(len1 + len2))
 
-        f = pylab.gcf()
-        f.set_size_inches(7.2,7.2)
+        for direction in ["xzero", "yzero"]:
+            # adds arrows at the ends of each axis
+            ax.axis[direction].set_axisline_style("-|>")
 
-        pylab.savefig("ellipsedraw_%03d.png" % n)
+            # adds X and Y-axis from the origin
+            ax.axis[direction].set_visible(True)
 
+        for direction in ["left", "right", "bottom", "top"]:
+            # hides borders
+            ax.axis[direction].set_visible(False)
+
+        fig.set_size_inches(7.2, 7.2)
+
+        fig.set_size_inches(7.2,7.2)
+
+        plt.savefig("ellipsedraw_{:03d}.png".format(n))
 
 if __name__== "__main__":
     ellipse()
-
-
-    
-        

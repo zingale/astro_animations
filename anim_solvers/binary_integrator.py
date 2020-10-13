@@ -76,6 +76,9 @@ class Binary(object):
 
         self.annotate = annotate
 
+        self.orbit1 = None
+        self.orbit2 = None
+
 
     def integrate(self, dt, tmax):
         """ integrate our system to tmax using a stepsize dt """
@@ -150,8 +153,18 @@ class Binary(object):
 
             s1.t[n] = s2.t[n] = t
 
-        return s1, s2
+        self.orbit1 = s1
+        self.orbit2 = s2
 
+    def kinetic_energies(self):
+        KE1 = 0.5 * self.M1 * (self.orbit1.vx**2 + self.orbit1.vy**2)
+        KE2 = 0.5 * self.M2 * (self.orbit2.vx**2 + self.orbit2.vy**2)
+        return KE1, KE2
+
+    def potential_energy(self):
+        PE = -G * self.M1 * self.M2 / np.sqrt((self.orbit1.x - self.orbit2.x)**2 +
+                                              (self.orbit1.y - self.orbit2.y)**2)
+        return PE
 
     def rhs(self,t, y, M_star1, M_star2):
         """ the RHS of our system """
