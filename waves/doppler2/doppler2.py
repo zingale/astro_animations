@@ -71,7 +71,7 @@ def doppler():
     wavefronts2 = []
     while t <= tmax:
 
-        x_emit = x_init + vel2*t
+        x_emit = x_init + vel2 * t
         y_emit = y_init
 
         wavefronts2.append(Wavefront(x_emit, y_emit, w, t))
