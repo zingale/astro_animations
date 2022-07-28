@@ -14,6 +14,22 @@ class Wavefront:
         self.w = w           # wave propagation speed
         self.t_emit = t_emit
 
+    def plot(self, t, ax=None, color="k"):
+
+        if ax is None or self.t_emit > t:
+            return
+
+        r_front = self.w * (t - self.t_emit)
+
+        # we will be drawing circles, so make an array with the polar angle
+        theta = np.linspace(0.0, 2.0 * np.pi, 360, endpoint=True)
+
+        # wavefronts are circles centered on their emitted coordinates
+        x_front = self.x_emit + r_front * np.cos(theta)
+        y_front = self.y_emit + r_front * np.sin(theta)
+
+        ax.plot(x_front, y_front, color=color)
+
 
 def doppler():
 
@@ -64,10 +80,6 @@ def doppler():
 
     xmax = x_init + max(vel1, vel2) * tmax
 
-    # we will be drawing circles, so make an array with the polar angle
-    npts = 360
-    theta = np.linspace(0.0, 2.0 * np.pi, npts, endpoint=True)
-
     # step forward in time (by dt) and draw any wavefronts that have
     # been emitted
     iframe = 0
@@ -92,17 +104,7 @@ def doppler():
         # loop over the wavefronts, and draw any that have been
         # emitted so far
         for wf in wavefronts1:
-
-            if wf.t_emit > t:
-                break
-
-            r_front = wf.w * (t - wf.t_emit)
-
-            # wavefronts are circles centered on their emitted coordinates
-            x_front = wf.x_emit + r_front * np.cos(theta)
-            y_front = wf.y_emit + r_front * np.sin(theta)
-
-            ax[0].plot(x_front, y_front, color='r')
+            wf.plot(t, ax=ax[0], color="r")
 
         ax[0].plot([-1.2*xmax, 1.2*xmax], [-0.8*xmax, -0.8*xmax], color='k', lw=2)
         ax[0].set_xlim(-1.2*xmax, 1.2*xmax)
@@ -123,17 +125,7 @@ def doppler():
         # loop over the wavefronts, and draw any that have been
         # emitted so far
         for wf in wavefronts2:
-
-            if wf.t_emit > t:
-                break
-
-            r_front = wf.w * (t - wf.t_emit)
-
-            # wavefronts are circles centered on their emitted coordinates
-            x_front = wf.x_emit + r_front * np.cos(theta)
-            y_front = wf.y_emit + r_front * np.sin(theta)
-
-            ax[1].plot(x_front, y_front, color='g')
+            wf.plot(t, ax=ax[1], color="g")
 
         ax[1].plot([-1.2*xmax, 1.2*xmax], [0.8*xmax, 0.8*xmax], color='k', lw=2)
         ax[1].set_xlim(-1.2*xmax, 1.2*xmax)
