@@ -1,18 +1,34 @@
-import math
-import numpy
-import pylab
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-# the wavefront class will hold the location and time that a wavefront
-# was emitted
-class wavefront:
+class Wavefront:
+    """The wavefront class will hold the location and time that a
+    wavefront was emitted
 
-    def __init__ (self, x_emit, y_emit, w, t_emit):
+    """
+
+    def __init__(self, x_emit, y_emit, w, t_emit):
         self.x_emit = x_emit
         self.y_emit = y_emit
-        self.w      = w           # wave propagation speed
+        self.w = w           # wave propagation speed
         self.t_emit = t_emit
 
+    def plot(self, t, ax=None, color="k"):
+
+        if ax is None or self.t_emit > t:
+            return
+
+        r_front = self.w * (t - self.t_emit)
+
+        # we will be drawing circles, so make an array with the polar angle
+        theta = np.linspace(0.0, 2.0 * np.pi, 360, endpoint=True)
+
+        # wavefronts are circles centered on their emitted coordinates
+        x_front = self.x_emit + r_front * np.cos(theta)
+        y_front = self.y_emit + r_front * np.sin(theta)
+
+        ax.plot(x_front, y_front, color=color)
 
 
 def doppler():
@@ -40,86 +56,56 @@ def doppler():
     t = 0
 
     wavefronts = []
-    while (t <= tmax):
-        
-        x_emit = x_init + vel*t
+    while t <= tmax:
+
+        x_emit = x_init + vel * t
         y_emit = y_init
 
-        wavefronts.append(wavefront(x_emit, y_emit, w, t))
-        
+        wavefronts.append(Wavefront(x_emit, y_emit, w, t))
+
         t += 1/f
 
-        
+    xmax = x_init + vel * tmax
 
-    # debug -- try printing out the wave propagation info
-    n = 0
-    while (n < len(wavefronts)):
-        print n, wavefronts[n].x_emit, wavefronts[n].y_emit, wavefronts[n].t_emit
-        n += 1
-
-
-    xmax = x_init + vel*tmax
-
-    # we will be drawing circles, so make an array with the polar angle
-    npts = 360
-    theta = numpy.arange(npts)*2*math.pi/(npts-1)
-
-
-    # step forward in time (by dt) and draw any wavefronts that have been emitted
+    # step forward in time (by dt) and draw any wavefronts that have
+    # been emitted
     iframe = 0
     t = 0
-    while (t <= tmax):
 
-        pylab.clf()
+    while t <= tmax:
 
-        x_source = x_init + vel*t
+        fig, ax = plt.subplots()
+
+        x_source = x_init + vel * t
         y_source = y_init
 
         # plot the sources's path
-        pylab.plot([-1.2*xmax,1.2*xmax],[y_init,y_init],color='k')
+        ax.plot([-1.2*xmax, 1.2*xmax], [y_init, y_init], color='k')
 
         # draw the source
-        pylab.scatter([x_source],[y_source], color='b')
+        ax.scatter([x_source], [y_source], color='b')
 
         # loop over the wavefronts, and draw any that have been
         # emitted so far
-        n = 0
-        while (n < len(wavefronts)):
+        for wf in wavefronts:
+            wf.plot(t, ax=ax, color="r")
 
-            if (wavefronts[n].t_emit > t):
-                break
+        fig.subplots_adjust(left=0, right=1.0, bottom=0, top=1.0)
 
-            r_front = wavefronts[n].w*(t - wavefronts[n].t_emit)
+        ax.set_xlim(-1.2*xmax, 1.2*xmax)
+        ax.set_ylim(-1.2*xmax, 1.2*xmax)
+        ax.set_aspect("equal")
+        ax.set_axis_off()
 
-            # wavefronts are circles centered on their emitted coordinates
-            x_front = wavefronts[n].x_emit + r_front*numpy.cos(theta)
-            y_front = wavefronts[n].y_emit + r_front*numpy.sin(theta)
-            
-            pylab.plot(x_front, y_front, color='r')
-            
-            n += 1
-            
-        
-        pylab.subplots_adjust(left=0,right=1.0,bottom=0,top=1.0)
+        fig.set_size_inches(12.8, 7.2)
 
-        pylab.axis([-1.2*xmax,1.2*xmax,-1.2*xmax,1.2*xmax])
-        pylab.axis("off")
-
-        f = pylab.gcf()
-        f.set_size_inches(5.0,5.0)
-
-        outfile = "doppler_%04d.png" % iframe
-        pylab.savefig(outfile)
-
-
+        outfile = f"doppler_{iframe:04d}.png"
+        fig.savefig(outfile)
 
         t += dt
         iframe += 1
-    
 
-    
+        plt.close(fig)
 
-
-if __name__== "__main__":
+if __name__ == "__main__":
     doppler()
-
