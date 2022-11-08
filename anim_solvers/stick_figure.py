@@ -8,7 +8,7 @@ def _rotate(point, center, theta):
 
          / cos theta   -sin theta \
          |                        |
-         \ sin theta    cos theta /
+         \\ sin theta    cos theta /
 
         to a point about center, and return the
         transformed point """

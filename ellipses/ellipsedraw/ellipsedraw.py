@@ -59,11 +59,11 @@ def ellipse():
         len1 = np.sqrt((x[n] - 0)**2 + (y[n] - 0)**2)
         len2 = np.sqrt((x[n] - (-2.0*a*e))**2 + (y[n] - 0)**2)
 
-        ax.set_title("Ellipse, eccenticity = {:5.3f}".format(e))
+        ax.set_title(f"Ellipse, eccenticity = {e:5.3f}")
 
-        ax.text(-1.5, -1.25, "r length: {:5.3f}".format(len1), color="C1")
-        ax.text(-1.5, -1.5, "r' length: {:5.3f}".format(len2), color="C0")
-        ax.text(-1.5, -1.75, "r + r' = {:5.3f}".format(len1 + len2))
+        ax.text(-1.5, -1.25, f"r length: {len1:5.3f}", color="C1")
+        ax.text(-1.5, -1.5, f"r' length: {len2:5.3f}", color="C0")
+        ax.text(-1.5, -1.75, f"r + r' = {len1 + len2:5.3f}")
 
         for direction in ["xzero", "yzero"]:
             # adds arrows at the ends of each axis
@@ -80,7 +80,7 @@ def ellipse():
 
         fig.set_size_inches(7.2,7.2)
 
-        plt.savefig("ellipsedraw_{:03d}.png".format(n))
+        plt.savefig(f"ellipsedraw_{n:03d}.png")
 
 if __name__== "__main__":
     ellipse()

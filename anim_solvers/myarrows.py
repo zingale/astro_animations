@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class Cap(object):
+class Cap:
     """ caps are simple two lines making a 'V' that we rotate """
 
     def __init__(self, c, angle, L=1.0):
@@ -28,7 +28,7 @@ class Cap(object):
         plt.plot(xa, ya, color=color, ls=ls)
 
 
-class ArcArrow(object):
+class ArcArrow:
     """ draw an arc with arrows on the end, in data coordinates """
 
     def __init__(self, center, radius, theta_start=90, theta_end=270):

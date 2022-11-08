@@ -9,7 +9,7 @@ AU = 1.49598e13       # cm
 year = 3.1556926e7
 
 
-class _StarHistory(object):
+class _StarHistory:
     """ a simple container to hold the solution """
 
     def __init__(self, num_steps):
@@ -22,7 +22,7 @@ class _StarHistory(object):
 
 
 # a simple class to integrate a binary system
-class Binary(object):
+class Binary:
 
     def __init__ (self, M1, M2, a, e, theta, annotate=False):
         """

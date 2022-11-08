@@ -136,13 +136,13 @@ def radial_velocity():
 
             if i == 0 and annotate:
                 # display time
-                ax.text(0.05, 0.05, "time = {:6.3f} yr".format(s1.t[n]/year),
+                ax.text(0.05, 0.05, f"time = {s1.t[n]/year:6.3f} yr",
                         transform=ax.transAxes)
 
                 # display information about stars
-                ax.text(0.025, 0.9, r"mass ratio: {:3.2f}".format(b.M1/b.M2),
+                ax.text(0.025, 0.9, fr"mass ratio: {b.M1/b.M2:3.2f}",
                         transform=ax.transAxes, color="k", fontsize="medium")
-                ax.text(0.025, 0.86, r"eccentricity: {:3.2f}".format(b.e),
+                ax.text(0.025, 0.86, fr"eccentricity: {b.e:3.2f}",
                         transform=ax.transAxes, color="k", fontsize="medium")
 
 
@@ -163,7 +163,7 @@ def radial_velocity():
 
         fig.set_size_inches(12.8, 7.2)
 
-        plt.savefig("binary_star_{:04d}.png".format(iframe))
+        plt.savefig(f"binary_star_{iframe:04d}.png")
 
         iframe += 1
 
