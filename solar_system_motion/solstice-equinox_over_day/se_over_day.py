@@ -16,7 +16,7 @@ proj = "ortho"
 #proj = "moll"
 
 
-# Stony Brook data 
+# Stony Brook data
 lat_sb = 40.906
 lon_sb = -73.128
 
@@ -28,11 +28,11 @@ else:
     lon = 0
 
 
-dmin = 5
+dmin = 2.5
 N = int(24*60.0/dmin)
 
 # work in UTC (+4 in summer for EDT)
-date = datetime(2014, 06, 21, 0+4, 0, 0)
+date = datetime(2022, 12, 21, 0+4, 0, 0)
 delta = timedelta(minutes=dmin)  # first argument is days
 
 utc = timezone("UTC")
@@ -43,34 +43,33 @@ for n in range(N):
 
     plt.clf()
 
-    map = Basemap(projection=proj, lat_0 = lat, lon_0 = lon,
-                  resolution = 'l', area_thresh = 1000.)
+    bmap = Basemap(projection=proj, lat_0 = lat, lon_0 = lon,
+                  resolution = 'l', area_thresh = 100.)
 
-    map.drawmapboundary()
+    bmap.drawmapboundary()
 
-    map.drawmeridians(np.arange(0, 360, 15), color="0.5", latmax=90)
-    map.drawparallels(np.arange(-90, 90, 15), color="0.5", latmax=90)
+    bmap.drawmeridians(np.arange(0, 360, 15), color="0.5", latmax=90)
+    bmap.drawparallels(np.arange(-90, 90, 15), color="0.5", latmax=90)
 
-    map.drawparallels(np.array([-66.5, -23.5, 0, 23.5, 66.5]),
+    bmap.drawparallels(np.array([-66.5, -23.5, 0, 23.5, 66.5]),
                       color="b", linewidth=2, latmax=90,
-                      dashes=[1000,0.001])    
+                      dashes=[1000,0.001])
 
-    map.drawcoastlines()
-    map.drawmapboundary(fill_color='aqua')
-    map.fillcontinents(color='coral',lake_color='aqua')
+    bmap.drawcoastlines()
+    bmap.drawmapboundary(fill_color='aqua')
+    bmap.fillcontinents(color='coral',lake_color='aqua')
 
-    CS=map.nightshade(date)
+    CS = bmap.nightshade(date)
 
     f = plt.gcf()
-    f.set_size_inches(7.2, 7.2)
+    f.set_size_inches(10.8, 10.8)
 
-    plt.text(0.5, 0.95, "Stony Brook on the Summer Solstice",
+    plt.text(0.5, 0.95, "Stony Brook on the Winter Solstice",
              transform=f.transFigure, horizontalalignment="center")
 
-    plt.text(0.5, 0.05, "{}".format(utc.localize(date).astimezone(eastern)),
+    plt.text(0.5, 0.05, f"{utc.localize(date).astimezone(eastern)}",
              transform=f.transFigure, horizontalalignment="center")
 
-    plt.savefig("sb_summer_solstice_{}_{:04}.png".format(proj, n))
-    
+    plt.savefig(f"sb_winter_solstice_{proj}_{n:04}.png")
+
     date += delta
-
