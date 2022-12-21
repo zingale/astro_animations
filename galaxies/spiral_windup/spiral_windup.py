@@ -33,7 +33,7 @@ def spiral():
 
     r = numpy.arange(npts, dtype=numpy.float64)*(rmax - rmin)/(npts - 1.0) + rmin
 
-    omega = numpy.zeros( (npts) )
+    omega = numpy.zeros( npts )
 
     n = 0
     while (n < npts):

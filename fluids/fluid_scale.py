@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from anim_solvers import simple_arrow
 
-class Atom(object):
+class Atom:
 
     def __init__(self, pos, angle, R=0.5, length=1.0, color="C0"):
         self.pos = pos

@@ -7,7 +7,7 @@ import random
 # markers and having each marker have a 50/50 chance of "decaying"
 # each half-life
 
-class Marker(object):
+class Marker:
 
     def __init__(self, xc, yc):
 

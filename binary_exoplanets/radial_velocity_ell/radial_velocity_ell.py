@@ -114,7 +114,7 @@ def radial_velocity():
 
         fig.set_size_inches(12.8,7.2)
 
-        plt.savefig("radial_velocity_{:04d}.png".format(iframe))
+        plt.savefig(f"radial_velocity_{iframe:04d}.png")
 
 
     # now plot the actual data
@@ -178,7 +178,7 @@ def radial_velocity():
 
         fig.set_size_inches(12.8,7.2)
 
-        plt.savefig("radial_velocity_{:04d}.png".format(iframe))
+        plt.savefig(f"radial_velocity_{iframe:04d}.png")
 
         iframe += 1
 

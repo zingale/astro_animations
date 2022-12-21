@@ -51,7 +51,7 @@ def ellipse():
         ax.set_xlim(-2.5, 1.5)
         ax.set_ylim(-2., 2.)
 
-        ax.text(-2.0, -1.5, "a = %5.3f, e = %6.4f" % (a, e))
+        ax.text(-2.0, -1.5, f"a = {a:5.3f}, e = {e:6.4f}")
 
         for direction in ["xzero", "yzero"]:
             # adds arrows at the ends of each axis
@@ -66,7 +66,7 @@ def ellipse():
 
         fig.set_size_inches(7.2, 7.2)
 
-        plt.savefig("ellipse_{:03d}.png".format(n))
+        plt.savefig(f"ellipse_{n:03d}.png")
 
 if __name__== "__main__":
     ellipse()

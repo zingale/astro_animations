@@ -96,7 +96,7 @@ def doit():
 
         fig.set_size_inches(12.8, 7.2)
 
-        plt.savefig("planetary_orbit_{:04d}.png".format(iframe))
+        plt.savefig(f"planetary_orbit_{iframe:04d}.png")
 
         iframe += 1
 

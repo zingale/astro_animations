@@ -110,7 +110,7 @@ def evolve(gr, pl, C, num, nolimit=1):
 
     gr.clean_axes(ylim=(-0.75, 2.5))
 
-    plt.text(0.5, 0.85, "evolved with C = {}".format(C),
+    plt.text(0.5, 0.85, f"evolved with C = {C}",
              horizontalalignment="center",
              fontsize="large", color="b", transform=ax.transAxes)
 

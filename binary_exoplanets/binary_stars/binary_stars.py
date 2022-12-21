@@ -107,13 +107,13 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
 
         if annotate:
             # display time
-            ax.text(0.05, 0.05, "time = {:6.3f} yr".format(s1.t[n]/year),
+            ax.text(0.05, 0.05, f"time = {s1.t[n]/year:6.3f} yr",
                     transform=ax.transAxes)
 
         # display information about stars
-        ax.text(0.05, 0.95, r"mass ratio: {:3.2f}".format(b.M1/b.M2),
+        ax.text(0.05, 0.95, fr"mass ratio: {b.M1/b.M2:3.2f}",
                 transform=ax.transAxes, color="k", fontsize="large")
-        ax.text(0.05, 0.9, r"eccentricity: {:3.2f}".format(b.e),
+        ax.text(0.05, 0.9, fr"eccentricity: {b.e:3.2f}",
                 transform=ax.transAxes, color="k", fontsize="large")
 
         # energies
@@ -121,19 +121,19 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
 
             # KE 1
             sig, ex = find_scinotat(KE1[n])
-            ax.text(0.05, 0.4, r"$K_1 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+            ax.text(0.05, 0.4, fr"$K_1 = {sig:+4.2f} \times 10^{{{ex:2d}}}$ erg",
                     transform=ax.transAxes, color="C0")
 
             sig, ex = find_scinotat(KE2[n])
-            ax.text(0.05, 0.35, r"$K_2 = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+            ax.text(0.05, 0.35, fr"$K_2 = {sig:+4.2f} \times 10^{{{ex:2d}}}$ erg",
                     transform=ax.transAxes, color="C1")
 
             sig, ex = find_scinotat(PE[n])
-            ax.text(0.05, 0.3, r"$U = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+            ax.text(0.05, 0.3, fr"$U = {sig:+4.2f} \times 10^{{{ex:2d}}}$ erg",
                     transform=ax.transAxes)
 
             sig, ex = find_scinotat(KE1[n] + KE2[n] + PE[n])
-            ax.text(0.05, 0.25, r"$E = {:+4.2f} \times 10^{{{:2d}}}$ erg".format(sig, ex),
+            ax.text(0.05, 0.25, fr"$E = {sig:+4.2f} \times 10^{{{ex:2d}}}$ erg",
                     transform=ax.transAxes)
 
         xmin = 1.05*min(s1.x.min(), s2.x.min())
@@ -156,9 +156,9 @@ def radial_velocity(M1=1, M2=1, a2=10, e=0.0, annotate=False):
 
         plt.tight_layout()
         if annotate:
-            plt.savefig("binary_star_mratio={:3.2f}_e={:3.2f}_{:04d}_energy.png".format(M_star1/M_star2, e, iframe))
+            plt.savefig(f"binary_star_mratio={M_star1/M_star2:3.2f}_e={e:3.2f}_{iframe:04d}_energy.png")
         else:
-            plt.savefig("binary_star_mratio={:3.2f}_e={:3.2f}_{:04d}.png".format(M_star1/M_star2, e, iframe))
+            plt.savefig(f"binary_star_mratio={M_star1/M_star2:3.2f}_e={e:3.2f}_{iframe:04d}.png")
 
         iframe += 1
 
