@@ -101,7 +101,7 @@ while i < len(lon_center):
     pylab.axis("off")
 
 
-    pylab.savefig("phase-{:03d}.png".format(i), facecolor=fig.get_facecolor())
+    pylab.savefig(f"phase-{i:03d}.png", facecolor=fig.get_facecolor())
     pylab.close()
 
     i += 1

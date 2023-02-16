@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class Equipotentials(object):
+class Equipotentials:
     """the general setup is two stars on the x-axis.  M_1 is the more
     massive and is at x = +a.  M_2 is the less massive and is at
     x = -b.
@@ -222,7 +222,7 @@ def make_plot(mu):
 
     plt.axis([eq.xmin, eq.xmax, eq.ymin, eq.ymax])
 
-    plt.title(r"Equipotentials, $\mu = M_2/(M_1 + M_2) = {:5.3f}$".format(mu),
+    plt.title(fr"Equipotentials, $\mu = M_2/(M_1 + M_2) = {mu:5.3f}$",
               fontsize=12)
     plt.xlabel("$x/(a + b)$")
     plt.ylabel("$y/(a + b)$")
