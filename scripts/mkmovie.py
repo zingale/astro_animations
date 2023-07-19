@@ -3,6 +3,7 @@
 import os
 import argparse
 import re
+import subprocess
 
 # routines for natural/human sorting
 def atoi(text):
@@ -18,8 +19,10 @@ parser = argparse.ArgumentParser(description="python driver to mencoder.  Take a
                                  usage="./mkmovie.py [options] <list of PNG files>",
                                  epilog="Note: for the mp4 movies, we duplicate the frames at the start to get\n"
                                         "around a bug (?) in mencoder that skips some frames at the start.\n\n"
-                                        "M. Zingale (2013-02-19)\n\nR. Orvedahl (2014-07-18)\n\t-add more options\n\t"
-                                        "-change calling sequences\n\n C. Gobat (2023-07-19)\n\t-use argparse instead of getopt",
+                                        "M. Zingale (2013-02-19)\n\nR. Orvedahl (2014-09-02)\n\t-add more options\n\t"
+                                        "-change calling sequences\n\n C. Gobat (2023-07-19)\n\t-use argparse instead of getopt;"
+                                        " subprocess instead of os.system\n\t-add OpenCV fallback if mencoder fails\n\t"
+                                        "-general modernization and cleanup",
                                  formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("-f", "--fps", metavar="x", default=15, type=int, help="set frames per second to be x (default: 15)")
 duplication = parser.add_mutually_exclusive_group()
@@ -40,87 +43,88 @@ print("number of frames: ", len(frames))
 # sort frames
 frames.sort(key=natural_keys)
 
-# create temporary files that list the movie frames -- these are inputs
-# to mencoder
 
 if (args.avi):
-    f = open("_mkmovie1.list", "w")
+    avi_frames = []
 
     for img in frames:
-        f.write("%s\n" % (img))
+        avi_frames.append(img)
         if args.double:
-            f.write("%s\n" % (img))
+            avi_frames.append(img)
         elif args.ncopies > 1:
             for i in range(args.ncopies):
-                f.write("%s\n" % (img))
+                avi_frames.append(img)
 
-    if args.endFrames > 1:
-        n = 0
-        while (n < args.endFrames-1):
-            f.write("%s\n" % (frames[len(frames)-1]))        
-            n += 1
+    avi_frames += [frames[-1]]*(args.endFrames-1)
 
-    f.close()
+    with open("_mkmovie1.list", "w+") as f:
+        # input list file for mencoder
+        f.writelines(avi_frames)
 
+    try:
+        p = subprocess.run("mencoder mf://@_mkmovie1.list -ovc lavc -lavcopts "
+                           "vcodec=msmpeg4v2:vbitrate=3000:vhq:mbd=2:trell "
+                           f"-mf type=png:fps={args.fps}"
+                           f" -o {args.prefix}.avi".split(),
+                           check=True, )
+    except:
+        import cv2
+        first_img = cv2.imread(frames[0])
+        height, width, layers = first_img.shape # determine frame dimensions
+        avi_writer = cv2.VideoWriter(args.prefix+".avi", cv2.VideoWriter.fourcc(*"MJPG"),
+                                     args.fps, (width, height))
+        for frame in avi_frames:
+            avi_writer.write(cv2.imread(frame))
+        cv2.destroyAllWindows()
+        avi_writer.release()
+    finally:
+        os.remove("_mkmovie1.list")
 
 if (args.mp4):
+    
     # for mp4, we want some extra frames at the start
-    f = open("_mkmovie2.list", "w")
-
-    n = 0
-    while (n < 28):
-        f.write("%s\n" % (frames[0]))
-        n += 1
+    mp4_frames = [frames[0]]*28
 
     for img in frames:
-        f.write("%s\n" % (img))
+        mp4_frames.append(img)
         if args.double:
-            f.write("%s\n" % (img))
+            mp4_frames.append(img)
         elif args.ncopies > 1:
             for i in range(args.ncopies):
-                f.write("%s\n" % (img))
+                mp4_frames.append(img)
 
-    if args.endFrames > 1:
-        n = 0
-        while (n < args.endFrames-1):
-            f.write("%s\n" % (frames[len(frames)-1]))        
-            n += 1
+    mp4_frames += [frames[-1]]*(args.endFrames-1)
+    
+    with open("_mkmovie2.list", "w+") as f:
+        # input list file for mencoder
+        f.writelines(mp4_frames)
 
-    f.close()
-
-
-
-# make the movies
-if (args.avi):
-    str1 = "mencoder mf://@_mkmovie1.list -ovc lavc -lavcopts "
-    str2 = "vcodec=msmpeg4v2:vbitrate=3000:vhq:mbd=2:trell "
-    str3 = "-mf type=png:fps="+str(args.fps)
-    str4 = f" -o {args.prefix}.avi"
-    os.system(str1+str2+str3+str4)
-
-if (args.mp4):
-    str1 = "mencoder mf://@_mkmovie2.list -of lavf -lavfopts format=mp4 "
-    str2 = "-ss 1 -ovc x264 -x264encopts crf=20.0:nocabac:level_idc=30:"
-    str3 = "global_header:threads=2 -fps "+str(args.fps)
-    str4 = f" -o {args.prefix}.mp4"
-    os.system(str1+str2+str3+str4)
-
-    str1 = "mencoder mf://@_mkmovie2.list -ovc x264 -x264encopts crf=10:"
-    str2 = "me=umh:subq=9:nr=100:global_header -of lavf -lavfopts format=mp4 "
-    str3 = "-fps "+str(args.fps)
-    str4 = f" -o {args.prefix}_hg.mp4"
-    os.system(str1+str2+str3+str4)
+    try:
+        subprocess.run("mencoder mf://@_mkmovie2.list -of lavf -lavfopts format=mp4 "
+                       "-ss 1 -ovc x264 -x264encopts crf=20.0:nocabac:level_idc=30:"
+                       f"global_header:threads=2 -fps {args.fps}"
+                       f" -o {args.prefix}.mp4".split(), check=True)
+    except:
+        import cv2
+        mp4_writer = cv2.VideoWriter(args.prefix+".mp4", cv2.VideoWriter.fourcc(*"mp4v"),
+                                     args.fps, (width, height))
+        for frame in mp4_frames:
+            mp4_writer.write(cv2.imread(frame))
+        cv2.destroyAllWindows()
+        mp4_writer.release()
+    try:
+        subprocess.run("mencoder mf://@_mkmovie2.list -ovc x264 -x264encopts crf=10:"
+                       "me=umh:subq=9:nr=100:global_header -of lavf -lavfopts format=mp4 "
+                       f"-fps {args.fps} -o {args.prefix}_hg.mp4".split(), check=True)
+    except:
+        pass
+    finally:
+        os.remove("_mkmovie2.list")
 
 
-# remove the files
-if (args.avi):
-    os.remove("_mkmovie1.list")
-if (args.mp4):
-    os.remove("_mkmovie2.list")
-
-if (args.avi):
+if os.path.exists(args.prefix+".avi"):
     print(f"\n Avi Movie: {args.prefix}.avi")
-if (args.mp4):
+if os.path.exists(args.prefix+".mp4"):
     print(f"\n Mp4 Movie: {args.prefix}.mp4")
+if os.path.exists(args.prefix+"_hg.mp4"):
     print(f"\n Mp4 Movie: {args.prefix}_hg.mp4")
-
