@@ -1,5 +1,4 @@
-import math
-import numpy
+import numpy as np
 import pylab
 
 # illustrate the wind-up problem of spiral arms
@@ -9,20 +8,11 @@ import pylab
 
 # define the rotation curve 
 def vel(r):
-
-    ar = math.fabs(r)
-    if (ar <= 5.0):
-        v = 1.4*ar*math.exp(-ar/20.0)
-    elif (ar > 5.0 and ar < 6.0):
-        max = 1.4*5*math.exp(-5.0/20.0)
-        min = 5.0
-        m = (max - min)/(-1.0)
-        v = m*(ar - 5.0) + max
-    else:
-        v = 5.0
-
-    return v
-
+    ar = np.abs(r)
+    return np.piecewise(ar, [ar<=5.0, ar>5.0 and ar<6.0],
+                        [lambda x: 1.4*x*np.exp(-x/20.0),
+                         lambda x: (5.0 - 7.0*np.exp(-0.25))*(x - 5.0) + 7.0*np.exp(-0.25),
+                         lambda x: 5])
 
 
 def spiral():
@@ -31,16 +21,16 @@ def spiral():
     rmax = 20
     npts = 1000
 
-    r = numpy.arange(npts, dtype=numpy.float64)*(rmax - rmin)/(npts - 1.0) + rmin
+    r = np.arange(npts, dtype=np.float64)*(rmax - rmin)/(npts - 1.0) + rmin
 
-    omega = numpy.zeros( npts )
+    omega = np.zeros( npts )
 
     n = 0
     while (n < npts):
-        omega[n] = math.fabs(vel(r[n])/r[n])
+        omega[n] = np.abs(vel(r[n])/r[n])
         n += 1
 
-        
+    t = np.arange(0.0, 20.0, 0.04)
     t = 0.0
     tmax = 20.0
     dt = 0.04
@@ -52,8 +42,8 @@ def spiral():
         
         pylab.clf()
 
-        x = r*numpy.cos(omega*t)
-        y = r*numpy.sin(omega*t)
+        x = r*np.cos(omega*t)
+        y = r*np.sin(omega*t)
 
         pylab.plot(x,y,color="b")
 
@@ -74,7 +64,3 @@ def spiral():
 
 if __name__== "__main__":
     spiral()
-
-
-    
-        
