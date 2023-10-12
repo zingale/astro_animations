@@ -59,7 +59,7 @@ if (args.avi):
 
     with open("_mkmovie1.list", "w+") as f:
         # input list file for mencoder
-        f.writelines(avi_frames)
+        f.write("\n".join(avi_frames))
 
     try:
         p = subprocess.run("mencoder mf://@_mkmovie1.list -ovc lavc -lavcopts "
@@ -97,7 +97,7 @@ if (args.mp4):
     
     with open("_mkmovie2.list", "w+") as f:
         # input list file for mencoder
-        f.writelines(mp4_frames)
+        f.write("\n".join(mp4_frames))
 
     try:
         subprocess.run("mencoder mf://@_mkmovie2.list -of lavf -lavfopts format=mp4 "
