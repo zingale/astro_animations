@@ -1,10 +1,9 @@
 #!/bin/env python
 
-import math
 import random
 
 import numpy as np
-import pylab
+import matplotlib.pyplot as plt
 
 
 class RandomWalk:
@@ -21,7 +20,6 @@ class RandomWalk:
         self.x = None
         self.y = None
 
-
     def walk(self):
 
         # set the initial position to be the origin
@@ -33,28 +31,28 @@ class RandomWalk:
 
         random.seed(self.seed)
 
-        for n in range(self.max_steps):
+        for _ in range(self.max_steps):
 
             # compute a random angle
-            angle = 2.0*math.pi*random.random()
+            angle = 2.0*np.pi*random.random()
 
             # compute the end coordinates of the segment
-            x_1 = self.l*math.cos(angle) + x_0
-            y_1 = self.l*math.sin(angle) + y_0
+            x_1 = self.l*np.cos(angle) + x_0
+            y_1 = self.l*np.sin(angle) + y_0
 
             x.append(x_1)
             y.append(y_1)
-            
+
             # have we hit the edge of our domain?
-            if math.sqrt(x_1**2 + y_1**2) >= self.R:
+            if np.sqrt(x_1**2 + y_1**2) >= self.R:
                 break
-            else:
-                x_0 = x_1
-                y_0 = y_1
+
+            x_0 = x_1
+            y_0 = y_1
 
         self.x = np.array(x)
         self.y = np.array(y)
-            
+
 
 def random_walk():
 
@@ -65,66 +63,57 @@ def random_walk():
     R = 25.0
 
     # take steps, draw a segment in a random direction, and save the frame
-    pylab.clf()
+    fig, ax = plt.subplots()
+    fig.set_size_inches(7.2, 7.2)
 
     # draw a circle to indicate the extent of the domain
     npts = 360
-    theta = np.arange(npts)*2*math.pi/(npts-1)
+    theta = np.arange(npts)*2*np.pi/(npts-1)
 
-    pylab.plot(R*np.cos(theta), R*np.sin(theta), color='k')
+    ax.plot(R*np.cos(theta), R*np.sin(theta), color='k')
 
-    pylab.subplots_adjust(left=0,right=1.0,bottom=0,top=1.0)
+    plt.subplots_adjust(left=0, right=1.0, bottom=0, top=1.0)
 
     # do a random walk
     r1 = RandomWalk(l, R, seed=1000)
     r1.walk()
 
     for n in range(len(r1.x)-1):
-                
-        pylab.plot([r1.x[n], r1.x[n+1]], 
-                   [r1.y[n], r1.y[n+1]], color='r')
 
-        pylab.axis([-1.1*R,1.1*R,-1.1*R,1.1*R])
-        pylab.axis("off")
+        ax.plot([r1.x[n], r1.x[n+1]],
+                [r1.y[n], r1.y[n+1]], color='C0')
 
-        f = pylab.gcf()
-        f.set_size_inches(7.2, 7.2)
+        ax.axis([-1.1*R, 1.1*R, -1.1*R, 1.1*R])
+        ax.axis("off")
 
-        pylab.savefig("random_walk_%04d.png" % n)
-
+        fig.savefig(f"random_walk_{n:04d}.png")
 
     # now do a second one
     r2 = RandomWalk(l, R, seed=1001)
     r2.walk()
 
-    pylab.clf()
+    fig, ax = plt.subplots()
+    fig.set_size_inches(7.2, 7.2)
 
-    pylab.plot(R*np.cos(theta), R*np.sin(theta), color='k')
+    ax.plot(R*np.cos(theta), R*np.sin(theta), color='k')
 
-    pylab.subplots_adjust(left=0,right=1.0,bottom=0,top=1.0)
+    plt.subplots_adjust(left=0, right=1.0, bottom=0, top=1.0)
 
     # draw the old one lighter
     for n in range(len(r1.x)-1):
-
-        pylab.plot([r1.x[n], r1.x[n+1]], 
-                   [r1.y[n], r1.y[n+1]], color='r', alpha=0.33)
-        
+        ax.plot([r1.x[n], r1.x[n+1]],
+                [r1.y[n], r1.y[n+1]], color='C0', alpha=0.33)
 
     # now draw the new one
     for n in range(len(r2.x)-1):
-                
-        pylab.plot([r2.x[n], r2.x[n+1]], 
-                   [r2.y[n], r2.y[n+1]], color='b')
+        ax.plot([r2.x[n], r2.x[n+1]],
+                [r2.y[n], r2.y[n+1]], color='C1')
 
-        pylab.axis([-1.1*R,1.1*R,-1.1*R,1.1*R])
-        pylab.axis("off")
+        ax.axis([-1.1*R, 1.1*R, -1.1*R, 1.1*R])
+        ax.axis("off")
 
-        f = pylab.gcf()
-        f.set_size_inches(7.2, 7.2)
-
-        pylab.savefig("random_walk_%04d.png" % (n + len(r1.x)) )
+        fig.savefig(f"random_walk_{n+len(r1.x):04d}.png")
 
 
 if __name__== "__main__":
     random_walk()
-
