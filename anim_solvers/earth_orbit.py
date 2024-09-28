@@ -4,7 +4,7 @@ import numpy as np
 import math
 
 class trajectory:
-    
+
     def __init__ (self, GM=4*np.pi**2, R_crash=1.0):
 
         self.npts = -1
@@ -51,7 +51,7 @@ class trajectory:
         angle_old = np.pi/2   # we are initially vertical
 
         n = 1
-        while (n < self.maxpoints and r > self.R_crash and r <= max_rad and 
+        while (n < self.maxpoints and r > self.R_crash and r <= max_rad and
                numorbits == 0):
 
             k1[:] = dt*self.rhs(t, y)
@@ -70,7 +70,7 @@ class trajectory:
             # compute the radius to decide if we collided with Earth
             r = np.sqrt(y[0]**2 + y[1]**2)
 
-            # compute the angle wrt to vertical and compare to the 
+            # compute the angle wrt to vertical and compare to the
             # previous one.  If we go from > pi/2 to <= pi/2 then we have
             # completed an orbit
             angle = math.atan2(y[1],(y[0] + SMALL))
@@ -82,7 +82,7 @@ class trajectory:
 
             n += 1
 
-    
+
         self.npts = n
 
 
@@ -98,5 +98,3 @@ class trajectory:
         f[3] = -self.GM*y[1]/r**3
 
         return f
-    
-

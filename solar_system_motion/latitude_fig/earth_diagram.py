@@ -5,7 +5,7 @@ import anim_solvers.myarrows as arrow
 import numpy as np
 import matplotlib.pylab as plt
 
-class Earth(object):
+class Earth:
     """ draw Earth and add embelishments to
         illustrate basic concepts """
 
@@ -190,7 +190,7 @@ class Earth(object):
 
 
 
-class Scene(object):
+class Scene:
     """ a container to hold the sequence of function calls we will do to
         compose the scene.  This way we can incrementally add to the
         figure """
@@ -244,30 +244,30 @@ def doit():
     sc.addto(e.draw_earth)
     sc.addto(e.draw_ecliptic)
     sc.addto(e.draw_sun)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="Earth and the ecliptic:\n" +
             "the ecliptic is the orbital plane, connecting the Earth and the Sun")
 
     n += 1
     sc.addto(e.draw_day_night)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="the day/night line:\n" +
             "night is the hemisphere pointed away from the Sun")
 
     n += 1
     sc.addto(e.draw_rot_axis)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="Earth's axial tilt:\n" +
             r"Earth's rotation axis is tilted and angle $\alpha = 23.5^\circ$ with respect to the ecliptic")
 
     n += 1
     sc.addto(e.draw_equator)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="Earth's equator:\n" +
             "the equator is perpendicular to the rotation axis")
 
     n += 1
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="the Sun:\n" +
             "the Sun is on the ecliptic (not shown to scale)\n" +
             "here Earth's North Pole is maximally pointed toward the Sun -- this is the day of the summer solstice")
@@ -275,26 +275,26 @@ def doit():
 
     n += 1
     sc.addto(e.draw_my_latitude)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="latitude on Earth:\n" + 
             r"latitude is just the angle above or below the equator.  Here is an observer at a latitude $l$")
 
     n += 1
     sc.addto(e.draw_zenith)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="your zenith:\n" + 
             "down is the direction connecting you to the center of the Earth (the direction gravity points)\n" +
             "up is opposite down -- here the zenith is shown as the point directly above us")
 
     n += 1
     sc.addto(e.draw_tropics)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="the tropics:\n" + 
             r"the tropic lines are +/- $\alpha$ in latitude -- note that the Sun is directly overhead for an observer on the Tropic of Cancer on the summer solstice")
 
     n += 1
     sc.addto(e.draw_arctic_circles)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="the arctic and antarctic circles:\n" +
             "on the summer solstice the Sun never sets between the arctic circle and North Pole -- note how everything is in daylight at these high latitudes\n" +
             "the opposite is true between the antarctic circle and the South Pole -- the Sun is never above the horizon (always night)\n" +
@@ -302,7 +302,7 @@ def doit():
 
     n += 1
     sc.addto(e.draw_horizon)
-    sc.draw(ofile="earth_{:02d}".format(n), 
+    sc.draw(ofile=f"earth_{n:02d}", 
             description="horizon:\n" +
             "your local horizon is tangent to the surface of the Earth where you are standing")
 

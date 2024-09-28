@@ -61,9 +61,9 @@ def doit():
         f.set_size_inches(9.6,7.2)
 
         pylab.text(0.05, 0.05, "time = %6.3f yr" % sol[0].t[n], transform=f.transFigure)
-        pylab.text(0.05, 0.9, "a = %6.3f, e = %5.2f" % (a_A, ecc_A), color="r", 
+        pylab.text(0.05, 0.9, "a = {:6.3f}, e = {:5.2f}".format(a_A, ecc_A), color="r", 
                    transform=f.transFigure)
-        pylab.text(0.05, 0.85, "a = %6.3f, e = %5.2f" % (a_B, ecc_B), color="b", 
+        pylab.text(0.05, 0.85, "a = {:6.3f}, e = {:5.2f}".format(a_B, ecc_B), color="b", 
                    transform=f.transFigure)
 
         pylab.savefig("orbit_%04d.png" % n)

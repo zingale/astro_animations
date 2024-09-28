@@ -102,10 +102,10 @@ def asteroids():
                       head_width = 0.2, width=0.05, overhang=-0.1)
 
             for k in range(150):
-                plt.savefig("asteroids_{:04d}.png".format(iframe))
+                plt.savefig(f"asteroids_{iframe:04d}.png")
                 iframe += 1
                  
-        plt.savefig("asteroids_{:04d}.png".format(iframe))
+        plt.savefig(f"asteroids_{iframe:04d}.png")
         iframe += 1
 
 if __name__ == "__main__":

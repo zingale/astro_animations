@@ -79,6 +79,3 @@ if __name__ == "__main__":
     f.set_size_inches(6.0, 6.0)
 
     plt.savefig("atest.png")
-
-
-        
