@@ -1,11 +1,11 @@
 # a simple class to integrate a satellite around the Earth
 
 import numpy as np
-import math
 
-class trajectory:
 
-    def __init__ (self, GM=4*np.pi**2, R_crash=1.0):
+class Trajectory:
+
+    def __init__(self, GM=4*np.pi**2, R_crash=1.0):
 
         self.npts = -1
 
@@ -17,7 +17,6 @@ class trajectory:
         self.GM = GM
         self.R_crash = R_crash
 
-
     def integrate(self, vinit, hinit, dt, max_rad):
 
         SMALL = 1.e-16
@@ -27,7 +26,6 @@ class trajectory:
         k2 = np.zeros(4, np.float64)
         k3 = np.zeros(4, np.float64)
         k4 = np.zeros(4, np.float64)
-
 
         y = np.zeros(4, np.float64)
         f = np.zeros(4, np.float64)
@@ -51,7 +49,9 @@ class trajectory:
         angle_old = np.pi/2   # we are initially vertical
 
         n = 1
-        while (n < self.maxpoints and r > self.R_crash and r <= max_rad and
+        while (n < self.maxpoints and
+               r > self.R_crash and
+               r <= max_rad and
                numorbits == 0):
 
             k1[:] = dt*self.rhs(t, y)
@@ -73,7 +73,7 @@ class trajectory:
             # compute the angle wrt to vertical and compare to the
             # previous one.  If we go from > pi/2 to <= pi/2 then we have
             # completed an orbit
-            angle = math.atan2(y[1],(y[0] + SMALL))
+            angle = np.arctan2(y[1],(y[0] + SMALL))
 
             if angle_old > np.pi/2 and angle <= np.pi/2:
                 numorbits = 1
@@ -82,9 +82,7 @@ class trajectory:
 
             n += 1
 
-
         self.npts = n
-
 
     def rhs(self, t, y):
 
