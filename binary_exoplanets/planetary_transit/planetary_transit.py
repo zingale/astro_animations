@@ -54,7 +54,7 @@ def radial_velocity():
     rad_scal = 0.01*AU
 
     # set the temperatures
-    T1 = 5000 # K
+    T1 = 5000  # K
     T2 = 1000  # K
 
     # set the timestep in terms of the orbital period
