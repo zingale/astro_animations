@@ -1,8 +1,9 @@
-import math
+"""
+a simple figure showing a planetary transit
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
-
-# a simple figure showing a planetary transit
 
 # we work in CGS units
 G = 6.67428e-8        # cm^3 g^{-1} s^{-2}
@@ -24,7 +25,7 @@ L_star = 0.4*L_sun
 # find the period
 P = np.sqrt(4.0*np.pi**2*a**3/(G*M_star))
 
-print "period = {} yr".format(P/year)
+print(f"period = {P/year} yr")
 
 # find the velocity of the planet in the orbit
 v = 2.0*np.pi*a/P
@@ -32,15 +33,13 @@ v = 2.0*np.pi*a/P
 # dimming during transit
 df = (R_p/R_star)**2
 
-
 f_normal = 1.0
 f_transit = f_normal - df
 
-print "fluxes = ", f_normal, f_transit
+print("fluxes = ", f_normal, f_transit)
 
 # length of transit
 t_transit = R_star/v
-
 
 # let's model 2 t_transit, with the transit centered in this interval
 t_min = 0.0
@@ -68,22 +67,26 @@ t = np.linspace(t_min, t_max, npts)
 f = f_normal*np.ones_like(t)
 
 ib = np.logical_and(t > t_begin_a, t < t_begin_b)
-f[ib] = f_normal + (f_transit - f_normal)/(t_begin_b - t_begin_a)*(t[ib]-t_begin_a)
-  
+f[ib] = f_normal + (f_transit - f_normal) / \
+    (t_begin_b - t_begin_a)*(t[ib]-t_begin_a)
+
 f[np.logical_and(t > t_begin_b, t < t_end_a)] = f_transit
 
 ie = np.logical_and(t > t_end_a, t < t_end_b)
 f[ie] = f_transit + (f_normal - f_transit)/(t_end_b - t_end_a)*(t[ie]-t_end_a)
 
-plt.plot((t-t_mid)/3600.0, f)
+fig, ax = plt.subplots()
 
-plt.ylim(0.9995,1.0001)
+ax.plot((t-t_mid)/3600.0, f)
+
+ax.set_ylim(0.9995, 1.0001)
 
 # turn off the offset text on the y-axis
-plt.gca().get_yaxis().get_major_formatter().set_useOffset(False)
+ax.get_yaxis().get_major_formatter().set_useOffset(False)
 
-plt.xlabel(r"$t$ (hours)", fontsize="large")
-plt.ylabel(r"$f/f_\star$", fontsize="large")
-plt.savefig("transit.png")
-plt.savefig("transit.eps")
+ax.set_xlabel(r"$t$ (hours)", fontsize="large")
+ax.set_ylabel(r"$f/f_\star$", fontsize="large")
+
+fig.savefig("transit.png")
+fig.savefig("transit.pdf")
 
