@@ -20,7 +20,6 @@ class _StarHistory:
         self.vy = np.zeros(num_steps, np.float64)
 
 
-
 # a simple class to integrate a binary system
 class Binary:
 
@@ -73,7 +72,6 @@ class Binary:
         self.vx1_init =  (self.M2/(self.M1 + self.M2))*v_mu*np.sin(self.theta)
         self.vy1_init = -(self.M2/(self.M1 + self.M2))*v_mu*np.cos(self.theta)
 
-
         self.annotate = annotate
 
         self.orbit1 = None
@@ -113,10 +111,11 @@ class Binary:
 
         # how many steps will we need?
         nsteps = int(tmax/dt)
+        self.npts = nsteps+1
 
         # solution storage
-        s1 = _StarHistory(nsteps+1)
-        s2 = _StarHistory(nsteps+1)
+        s1 = _StarHistory(self.npts)
+        s2 = _StarHistory(self.npts)
 
         s1.x[0] = self.x1_init
         s1.y[0] = self.y1_init
