@@ -4,7 +4,7 @@ import numpy as np
 
 def init_figure():
     fig = plt.figure()
-    ax = fig.gca(projection="3d")
+    ax = fig.add_subplot(projection="3d")
     ax.set_aspect("equal")
     ax.axis("off")
     return ax, fig
@@ -16,13 +16,14 @@ def init_figure():
 # example:
 # http://stackoverflow.com/questions/14824893/how-to-draw-diagrams-like-this
 
+
 class Sphere:
-    def __init__(self, R=1.0, center=(0.,0.,0.),
+    def __init__(self, R=1.0, center=(0., 0., 0.),
                  color="0.5", alpha=0.25, ax=None):
 
-        if ax == None:
+        if ax is None:
             ax, fig = init_figure()
-            
+
         self.R = R
         self.center = center
         self.color = color
@@ -38,7 +39,6 @@ class Sphere:
         ax.plot_surface(x, y, z, color=color, alpha=alpha,
                         linewidth=0,
                         rstride=1, cstride=1)
-
 
 
 class CPlane:
@@ -58,22 +58,20 @@ class CPlane:
 
             x = r*np.cos(phi)
             y = r*np.sin(phi)
-            
+
             z = c[2] - n[0]/n[2]*(x - c[0]) - n[1]/n[2]*(y - c[1])
 
         ax.plot_surface(x, y, z, color=color, alpha=alpha,
                         linewidth=0,
                         rstride=1, cstride=1, antialiased=False)
 
-        
+
 ax, fig = init_figure()
 
 s = Sphere(ax=ax, color="b", alpha=0.1)
 e = Sphere(ax=ax, color="b", alpha=1.0, R=0.1)
 
-p = CPlane(ax=ax, n=(1,0,1))
+p = CPlane(ax=ax, n=(1, 0, 1))
 
 
-plt.savefig("sphere")
-
-        
+plt.savefig("sphere.png")
