@@ -178,7 +178,7 @@ def doit():
 
             f.set_size_inches(7.2,7.2)
     
-            plt.savefig("tidal_locking_{:04}.png".format(n+d*N))
+            plt.savefig(f"tidal_locking_{n+d*N:04}.png")
         
 
 
