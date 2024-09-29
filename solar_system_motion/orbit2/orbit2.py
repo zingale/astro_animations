@@ -1,15 +1,14 @@
 #!/bin/env python
 
-import math
-import numpy
-import pylab
+"""compute the orbit of a 2 planets around the Sun using, showing the
+difference in properties with semi-major axis and eccentricity
+
+"""
+
+
+import matplotlib.pyplot as plt
 
 import anim_solvers.solar_system_integrator as solar_system_integrator
-
-# compute the orbit of a 2 planets around the Sun using, showing the difference in 
-# properties with semi-major axis and eccentricity
-
-# M. Zingale
 
 
 def doit():
@@ -17,7 +16,7 @@ def doit():
     # planet data
     ecc_A = 0.0   # eccentricity of planet A
     ecc_B = 0.4   # eccecntricity of planet B
-    
+
     a_A = 1.0     # semi-major axis of planet A
     a_B = 4.0**(1./3.)  # semi-major axis of planet B
 
@@ -32,46 +31,46 @@ def doit():
 
     sol = s.integrate(nsteps_year, nyears)
 
+    xmin = min(sol[0].x.min(), sol[1].x.min())
+    xmax = max(sol[0].x.max(), sol[1].x.max())
 
+    ymin = min(sol[0].y.min(), sol[1].y.min())
+    ymax = max(sol[0].y.max(), sol[1].y.max())
 
     # plotting
     for n in range(len(sol[0].x)):
 
-        pylab.clf()
+        fig, ax = plt.subplots()
 
         # plot the foci
-        pylab.scatter([0], [0], s=250, marker=(5,1), color="k")
-        pylab.scatter([0], [0], s=200, marker=(5,1), color="y")
+        ax.scatter([0], [0], s=250, marker=(5, 1), color="k")
+        ax.scatter([0], [0], s=200, marker=(5, 1), color="y")
 
         # plot planet A
-        pylab.plot(sol[0].x, sol[0].y, color="r")
-        pylab.scatter([sol[0].x[n]], [sol[0].y[n]], s=100, color="r")
+        ax.plot(sol[0].x, sol[0].y, color="C0")
+        ax.scatter([sol[0].x[n]], [sol[0].y[n]], s=100, color="C0")
 
         # plot planet B
-        pylab.plot(sol[1].x, sol[1].y, color="b")
-        pylab.scatter([sol[1].x[n]], [sol[1].y[n]], s=100, color="b")
+        ax.plot(sol[1].x, sol[1].y, color="C1")
+        ax.scatter([sol[1].x[n]], [sol[1].y[n]], s=100, color="C1")
 
-        pylab.axis([-2.5,1.5,-1.8,1.8])
-
-        pylab.axis("off")
-        ax = pylab.gca()
+        ax.axis([1.1 * xmin, 1.1 * xmax, 1.1 * ymin, 1.1 * ymax])
+        ax.axis("off")
         ax.set_aspect("equal", "datalim")
 
-        f = pylab.gcf()
-        f.set_size_inches(9.6,7.2)
+        fig.set_size_inches(9.6, 7.2)
 
-        pylab.text(0.05, 0.05, "time = %6.3f yr" % sol[0].t[n], transform=f.transFigure)
-        pylab.text(0.05, 0.9, "a = {:6.3f}, e = {:5.2f}".format(a_A, ecc_A), color="r", 
-                   transform=f.transFigure)
-        pylab.text(0.05, 0.85, "a = {:6.3f}, e = {:5.2f}".format(a_B, ecc_B), color="b", 
-                   transform=f.transFigure)
+        ax.text(0.05, 0.05, f"time = {sol[0].t[n]:6.3f} yr",
+                transform=fig.transFigure)
+        ax.text(0.05, 0.9, f"a = {a_A:6.3f}, e = {ecc_A:5.2f}", color="C0",
+                transform=fig.transFigure)
+        ax.text(0.05, 0.86, f"a = {a_B:6.3f}, e = {ecc_B:5.2f}", color="C1",
+                transform=fig.transFigure)
 
-        pylab.savefig("orbit_%04d.png" % n)
+        fig.savefig(f"orbit_{n:04d}.png")
+        plt.subplots_adjust(left=0.025, right=0.975, bottom=0.025, top=0.975)
+        plt.close(fig)
 
-    
-if __name__== "__main__":
+
+if __name__ == "__main__":
     doit()
-
-
-    
-        
