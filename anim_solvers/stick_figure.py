@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
 import numpy as np
-import matplotlib.pylab as plt
+import matplotlib.pyplot as plt
 
 def _rotate(point, center, theta):
-    """ apply a rotation matrix
+    r""" apply a rotation matrix
 
          / cos theta   -sin theta \
          |                        |
-         \\ sin theta    cos theta /
+         \ sin theta    cos theta /
 
         to a point about center, and return the
         transformed point """
@@ -20,7 +20,7 @@ def _rotate(point, center, theta):
             x*np.sin(theta) + y*np.cos(theta) + center[1])
 
 
-def draw_person(center, L, rot, color="k"):
+def draw_person(center, L, rot, color="k", ax=None):
     """ draw a stick figure at the position given by center
         of height L and rotated by an angle (radians) rot """
 
@@ -47,29 +47,29 @@ def draw_person(center, L, rot, color="k"):
     theta = np.radians(np.arange(0,361))
     hc = _rotate(head_center, center, rot)
 
-    plt.fill(hc[0] + head_radius*np.cos(theta),
-             hc[1] + head_radius*np.sin(theta), color=color)
+    ax.fill(hc[0] + head_radius*np.cos(theta),
+            hc[1] + head_radius*np.sin(theta), color=color)
 
     cc = _rotate(center, center, rot)
 
     lc = _rotate(left_arm_end, center, rot)
     rc = _rotate(right_arm_end, center, rot)
 
-    plt.plot([cc[0], lc[0]], [cc[1], lc[1]], color=color)
-    plt.plot([cc[0], rc[0]], [cc[1], rc[1]], color=color)
+    ax.plot([cc[0], lc[0]], [cc[1], lc[1]], color=color)
+    ax.plot([cc[0], rc[0]], [cc[1], rc[1]], color=color)
 
 
     ts = _rotate(torso_start, center, rot)
     te = _rotate(torso_end, center, rot)
 
-    plt.plot([ts[0], te[0]], [ts[1], te[1]], color=color)
+    ax.plot([ts[0], te[0]], [ts[1], te[1]], color=color)
 
 
     lf = _rotate(left_foot_end, center, rot)
     rf = _rotate(right_foot_end, center, rot)
 
-    plt.plot([ts[0], lf[0]], [ts[1], lf[1]], color=color)
-    plt.plot([ts[0], rf[0]], [ts[1], rf[1]], color=color)
+    ax.plot([ts[0], lf[0]], [ts[1], lf[1]], color=color)
+    ax.plot([ts[0], rf[0]], [ts[1], rf[1]], color=color)
 
 
 def doit():
@@ -81,9 +81,10 @@ def doit():
 
     theta = np.radians(np.arange(0,361))
 
-    # draw a circle
-    plt.plot(R*np.cos(theta), R*np.sin(theta), c="b")
+    fig, ax = plt.subplots()
 
+    # draw a circle
+    ax.plot(R*np.cos(theta), R*np.sin(theta), c="b")
 
     # draw some people
     angles = [30, 60, 90, 120, 180, 270, 300]
@@ -91,22 +92,18 @@ def doit():
     for l in angles:
         center = ( (R + 0.5*L)*np.cos(np.radians(l)),
                    (R + 0.5*L)*np.sin(np.radians(l)) )
-        draw_person(center, L, np.radians(l - 90), color="r")
+        draw_person(center, L, np.radians(l - 90), color="r", ax=ax)
         L = 1.1*L
 
-    plt.axis("off")
-
-    ax = plt.gca()
+    ax.axis("off")
     ax.set_aspect("equal", "datalim")
 
-
     plt.subplots_adjust(left=0.05, right=0.98, bottom=0.05, top=0.98)
-    plt.axis([-1.2*R, 1.2*R, -1.2*R, 1.2*R])
+    ax.axis([-1.2*R, 1.2*R, -1.2*R, 1.2*R])
 
-    f = plt.gcf()
-    f.set_size_inches(6.0, 6.0)
+    fig.set_size_inches(6.0, 6.0)
 
-    plt.savefig("test.png")
+    fig.savefig("test.png")
 
 
 if __name__ == "__main__":

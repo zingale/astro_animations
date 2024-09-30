@@ -15,7 +15,7 @@ class Cap:
         self.cap_x = [-0.5*self.L, 0, 0.5*self.L]
         self.cap_y = [-self.L, 0, -self.L]
 
-    def draw(self, color="k", ls="-"):
+    def draw(self, color="k", ls="-", ax=None):
 
         # arrow at start
         xa = []
@@ -25,7 +25,10 @@ class Cap:
             xa += [self.c[0] + p[0]]
             ya += [self.c[1] + p[1]]
 
-        plt.plot(xa, ya, color=color, ls=ls)
+        if ax is not None:
+            ax.plot(xa, ya, color=color, ls=ls)
+        else:
+            plt.plot(xa, ya, color=color, ls=ls)
 
 
 class ArcArrow:
@@ -40,20 +43,22 @@ class ArcArrow:
         self.theta0 = np.radians(theta_start)
         self.theta1 = np.radians(theta_end)
 
-    def draw(self, color="k", ls="-"):
+    def draw(self, color="k", ls="-", ax=None):
 
         theta = np.linspace(self.theta0, self.theta1, 100)
 
-        plt.plot(self.x0 + self.R*np.cos(theta),
-                 self.y0 + self.R*np.sin(theta), color=color, ls=ls)
-
+        if ax is not None:
+            ax.plot(self.x0 + self.R*np.cos(theta),
+                    self.y0 + self.R*np.sin(theta), color=color, ls=ls)
+        else:
+            plt.plot(self.x0 + self.R*np.cos(theta),
+                     self.y0 + self.R*np.sin(theta), color=color, ls=ls)
 
         start_point = (self.x0 + self.R*np.cos(theta[0]),
                        self.y0 + self.R*np.sin(theta[0]))
 
         end_point = (self.x0 + self.R*np.cos(theta[-1]),
                      self.y0 + self.R*np.sin(theta[-1]))
-
 
         # arrow at start
         c = Cap(start_point, self.theta0+np.pi, L=0.05*self.R)
@@ -65,17 +70,15 @@ class ArcArrow:
 
 
 if __name__ == "__main__":
-    a = ArcArrow((0,0), 1.0, theta_start=135, theta_end=270)
-    a.draw()
 
-    plt.axis("off")
+    fig, ax = plt.subplots()
 
-    ax = plt.gca()
+    a = ArcArrow((0, 0), 1.0, theta_start=135, theta_end=270)
+    a.draw(ax=ax)
+
+    ax.axis("off")
     ax.set_aspect("equal", "datalim")
+    ax.axis([-1.2*a.R, 1.2*a.R, -1.2*a.R, 1.2*a.R])
 
-    plt.axis([-1.2*a.R, 1.2*a.R, -1.2*a.R, 1.2*a.R])
-
-    f = plt.gcf()
-    f.set_size_inches(6.0, 6.0)
-
-    plt.savefig("atest.png")
+    fig.set_size_inches(6.0, 6.0)
+    fig.savefig("atest.png")
