@@ -35,7 +35,6 @@ def radial_velocity():
     # create the solar system container
     b = bi.Binary(M_star, M_p, a_star + a_p, ecc, theta)
 
-
     # set the timestep in terms of the orbital period
     dt = b.P/360.0
     tmax = 2.0*b.P  # maximum integration time
@@ -44,10 +43,7 @@ def radial_velocity():
     s = b.orbit1
     p = b.orbit2
 
-
-    # ================================================================
     # plotting
-    # ================================================================
 
     title_frames = 70
 
@@ -59,15 +55,14 @@ def radial_velocity():
         fig = plt.figure(1)
         fig.clear()
 
-        plt.subplots_adjust(left=0.1,right=0.95,bottom=0.15,top=0.85,
-                            wspace=0.45,hspace=0.0)
+        fig.subplots_adjust(left=0.05, right=0.95, bottom=0.1, top=0.9,
+                            wspace=0.45, hspace=0.0)
 
         ax = fig.add_subplot(121)
         ax.set_aspect("equal", "datalim")
         ax.set_axis_off()
 
         ax.scatter([0], [0], s=150, marker="x", color="k")
-
 
         # plot the planet's orbit and position
         ax.plot(p.x, p.y, color="C0")
@@ -84,38 +79,38 @@ def radial_velocity():
         ax.arrow(0.0, 1.5*a_p, 0.0, 0.2*a_p, width=0.025*a_p,
                  facecolor="0.5", edgecolor="k", alpha=1.0, clip_on=0,
                  length_includes_head=True, head_width=0.075*a_p, head_length=0.075*a_p)
-        ax.text(0.0, 1.4*a_p, "to the observer", horizontalalignment='center')
+        ax.text(0.0, 1.3*a_p, "to the observer", horizontalalignment='center')
 
-        ax.text(-1.8*a_p, -1.6*a_p, "time = %6.3f yr" % (p.t[0]/year))
+        ax.text(-1.3*a_p, -1.4*a_p, f"time = {p.t[0]/year} yr", fontsize="large")
 
-        ax.set_xlim(-1.5*a_p, 1.5*a_p)
-        ax.set_ylim(-1.5*a_p, 1.5*a_p)
-
+        ax.set_xlim(-1.25*a_p, 1.25*a_p)
+        ax.set_ylim(-1.25*a_p, 1.25*a_p)
 
         ax = fig.add_subplot(122)
 
         ax.scatter([0.1], [0.8], s=200, color="C1")
-        ax.text(0.2, 0.8, "star", color="C1")
+        ax.text(0.2, 0.8, "star", color="C1", fontsize="large",
+                verticalalignment="center")
 
-        ax.scatter([0.1], [0.6], s=100, color="C0")
-        ax.text(0.2, 0.6, "planet", color="C0")
+        ax.scatter([0.1], [0.7], s=100, color="C0")
+        ax.text(0.2, 0.7, "planet", color="C0", fontsize="large",
+                verticalalignment="center")
 
-        ax.text(0.2, 0.5, "(note: planet's mass exaggerated", size="small", color="k")
-        ax.text(0.2, 0.45, " to enhance effect)", size="small", color="k")
+        ax.text(0.2, 0.64, "(note: planet's mass exaggerated\nto enhance effect)",
+                size="small", color="k")
 
-
-        ax.scatter([0.1], [0.3], s=150, marker="x", color="k")
-        ax.text(0.2, 0.3, "center of mass", color="k")
+        ax.scatter([0.1], [0.6], s=150, marker="x", color="k")
+        ax.text(0.2, 0.6, "center of mass", color="k", fontsize="large",
+                verticalalignment="center")
 
         ax.set_xlim(0, 1)
         ax.set_ylim(0, 1)
 
         ax.set_axis_off()
 
-        fig.set_size_inches(12.8,7.2)
+        fig.set_size_inches(12.8, 7.2)
 
-        plt.savefig(f"radial_velocity_{iframe:04d}.png")
-
+        fig.savefig(f"radial_velocity_{iframe:04d}.png")
 
     # now plot the actual data
     for n in range(len(s.t)):
@@ -123,15 +118,14 @@ def radial_velocity():
         fig = plt.figure(1)
         fig.clear()
 
-        plt.subplots_adjust(left=0.1,right=0.95,bottom=0.15,top=0.85,
-                            wspace=0.45,hspace=0.0)
+        fig.subplots_adjust(left=0.05, right=0.95, bottom=0.1, top=0.9,
+                            wspace=0.45, hspace=0.0)
 
         ax = fig.add_subplot(121)
         ax.set_aspect("equal", "datalim")
         ax.set_axis_off()
 
         ax.scatter([0], [0], s=150, marker="x", color="k")
-
 
         # plot the planet's orbit and position
         ax.plot(p.x, p.y, color="C0")
@@ -142,18 +136,18 @@ def radial_velocity():
         ax.scatter([s.x[n]], [s.y[n]], s=200, color="C1")
 
         # plot a reference line
-        ax.plot([0,1*AU], [-1.2*a_p,-1.2*a_p], color="k")
-        ax.text(0.5*AU, -1.4*a_p, "1 AU", horizontalalignment='center')
+        ax.plot([0, 1*AU], [-1.2*a_p, -1.2*a_p], color="k")
+        ax.text(0.5*AU, -1.3*a_p, "1 AU", horizontalalignment='center')
 
         ax.arrow(0.0, 1.5*a_p, 0.0, 0.2*a_p, width=0.025*a_p,
                  facecolor="0.5", edgecolor="k", alpha=1.0, clip_on=0,
                  length_includes_head=True, head_width=0.075*a_p, head_length=0.075*a_p)
         ax.text(0.0, 1.4*a_p, "to the observer", horizontalalignment='center')
 
-        ax.text(-1.8*a_p, -1.6*a_p, "time = %6.3f yr" % (s.t[n]/year))
+        ax.text(-1.3*a_p, -1.4*a_p, f"time = {p.t[0]/year} yr", fontsize="large")
 
-        ax.set_xlim(-1.5*a_p, 1.5*a_p)
-        ax.set_ylim(-1.5*a_p, 1.5*a_p)
+        ax.set_xlim(-1.25*a_p, 1.25*a_p)
+        ax.set_ylim(-1.25*a_p, 1.25*a_p)
 
         ax = fig.add_subplot(122)
 
@@ -165,12 +159,11 @@ def radial_velocity():
         ax.scatter([s.t[n]/b.P], [-s.vy[n]/1.e5], color="C1", s=50)
 
         # plot a reference line at vy = 0
-        ax.plot([0.0,tmax/b.P], [0.0,0.0], "k--")
-
+        ax.plot([0.0, tmax/b.P], [0.0, 0.0], "k--")
 
         ax.axis([0.0, tmax/b.P,
-                    -int(np.max(s.vy))/1.e5 - 1,
-                    -int(np.min(s.vy))/1.e5 + 1])
+                 -int(np.max(s.vy))/1.e5 - 1,
+                 -int(np.min(s.vy))/1.e5 + 1])
 
 
         ax.set_xlabel("t/period")
@@ -178,10 +171,10 @@ def radial_velocity():
 
         fig.set_size_inches(12.8,7.2)
 
-        plt.savefig(f"radial_velocity_{iframe:04d}.png")
+        fig.savefig(f"radial_velocity_{iframe:04d}.png")
 
         iframe += 1
 
 
-if __name__== "__main__":
+if __name__ == "__main__":
     radial_velocity()
