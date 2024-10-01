@@ -83,12 +83,12 @@ def doppler():
         ax.plot([-1.2*xmax, 1.2*xmax], [y_init, y_init], color='k')
 
         # draw the source
-        ax.scatter([x_source], [y_source], color='b')
+        ax.scatter([x_source], [y_source], color='k')
 
         # loop over the wavefronts, and draw any that have been
         # emitted so far
         for wf in wavefronts:
-            wf.plot(t, ax=ax, color="r")
+            wf.plot(t, ax=ax, color="C1")
 
         fig.subplots_adjust(left=0, right=1.0, bottom=0, top=1.0)
 
@@ -97,7 +97,7 @@ def doppler():
         ax.set_aspect("equal")
         ax.set_axis_off()
 
-        fig.set_size_inches(12.8, 7.2)
+        fig.set_size_inches(7.2, 7.2)
 
         outfile = f"doppler_{iframe:04d}.png"
         fig.savefig(outfile)
@@ -106,6 +106,7 @@ def doppler():
         iframe += 1
 
         plt.close(fig)
+
 
 if __name__ == "__main__":
     doppler()
