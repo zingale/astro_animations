@@ -173,14 +173,13 @@ class Equipotentials:
 
 def make_plot(mu):
 
-    # do imshow
-    plt.clf()
+    fig, ax = plt.subplots()
 
     eq = Equipotentials(mu, 1024)
 
-    print(mu,  eq.V.min(), eq.V.max())
-    plt.imshow(np.log10(eq.V), origin="lower", cmap="Accent",
-               extent=[eq.xmin, eq.xmax, eq.ymin, eq.ymax])
+    print(mu, eq.V.min(), eq.V.max())
+    ax.imshow(np.log10(eq.V), origin="lower", cmap="Accent",
+              extent=[eq.xmin, eq.xmax, eq.ymin, eq.ymax])
 
     # draw contours -- these values seem reasonable for a range of mu's
     Vmin = 1.5
@@ -196,43 +195,43 @@ def make_plot(mu):
     x_L3, y_L3, V_L3 = eq.get_L3()
 
     # special contours right through the lagrange points
-    plt.contour(eq.x, eq.y, eq.V, [V_L1], colors="b")
-    plt.contour(eq.x, eq.y, eq.V, [V_L2], colors="b")
-    plt.contour(eq.x, eq.y, eq.V, [V_L3], colors="b")
+    ax.contour(eq.x, eq.y, eq.V, [V_L1], colors="b")
+    ax.contour(eq.x, eq.y, eq.V, [V_L2], colors="b")
+    ax.contour(eq.x, eq.y, eq.V, [V_L3], colors="b")
 
     # mark the Lagrange points and write the names
     xeps = 0.025
 
-    plt.scatter([x_L1], [y_L1], marker="x", color="r", s=50)
-    plt.text(x_L1+xeps, y_L1+xeps, "L1", color="r")
+    ax.scatter([x_L1], [y_L1], marker="x", color="r", s=50)
+    ax.text(x_L1+xeps, y_L1+xeps, "L1", color="r")
 
-    plt.scatter([x_L2], [y_L2], marker="x", color="r", s=50)
-    plt.text(x_L2+xeps, y_L2+xeps, "L2", color="r")
+    ax.scatter([x_L2], [y_L2], marker="x", color="r", s=50)
+    ax.text(x_L2+xeps, y_L2+xeps, "L2", color="r")
 
-    plt.scatter([x_L3], [y_L3], marker="x", color="r", s=50)
-    plt.text(x_L3+xeps, y_L3+xeps, "L3", color="r")
+    ax.scatter([x_L3], [y_L3], marker="x", color="r", s=50)
+    ax.text(x_L3+xeps, y_L3+xeps, "L3", color="r")
 
     x_L4, y_L4 = eq.get_L4()
-    plt.scatter([x_L4], [y_L4], marker="x", color="r", s=50)
-    plt.text(x_L4+xeps, y_L4+xeps, "L4", color="r")
+    ax.scatter([x_L4], [y_L4], marker="x", color="r", s=50)
+    ax.text(x_L4+xeps, y_L4+xeps, "L4", color="r")
 
     x_L5, y_L5 = eq.get_L5()
-    plt.scatter([x_L5], [y_L5], marker="x", color="r", s=50)
-    plt.text(x_L5+xeps, y_L5+xeps, "L5", color="r")
+    ax.scatter([x_L5], [y_L5], marker="x", color="r", s=50)
+    ax.text(x_L5+xeps, y_L5+xeps, "L5", color="r")
 
-    plt.axis([eq.xmin, eq.xmax, eq.ymin, eq.ymax])
+    ax.axis([eq.xmin, eq.xmax, eq.ymin, eq.ymax])
 
-    plt.title(fr"Equipotentials, $\mu = M_2/(M_1 + M_2) = {mu:5.3f}$",
-              fontsize=12)
-    plt.xlabel("$x/(a + b)$")
-    plt.ylabel("$y/(a + b)$")
+    ax.set_title(fr"Equipotentials, $\mu = M_2/(M_1 + M_2) = {mu:5.3f}$",
+                 fontsize=12)
+    ax.set_xlabel("$x/(a + b)$")
+    ax.set_ylabel("$y/(a + b)$")
 
-    f = plt.gcf()
-    f.set_size_inches(10.8, 10.8)
+    fig.set_size_inches(10.8, 10.8)
 
-    plt.tight_layout()
+    fig.tight_layout()
 
-    plt.savefig(f"equipotentials_mu_{mu:5.3f}.png")
+    fig.savefig(f"equipotentials_mu_{mu:5.3f}.png")
+    plt.close(fig)
 
 
 if __name__ == "__main__":
