@@ -1,6 +1,5 @@
-import math
-import numpy
-import pylab
+import numpy as np
+import matplotlib.pyplot as plt
 import random
 
 # physical constants
@@ -9,34 +8,32 @@ m_p = 1.67e-24       # proton mass
 
 
 # a container class for an atom
-class atom:
+class Atom:
 
-    def __init__ (self, x_init, y_init, vel, angle):
+    def __init__(self, x_init, y_init, vel, angle):
         # angle is assumed to be in radians
 
         self.x = x_init
         self.y = y_init
-        self.u = vel*math.cos(angle)    # x-velocity
-        self.v = vel*math.sin(angle)    # y-velocity
+        self.u = vel*np.cos(angle)    # x-velocity
+        self.v = vel*np.sin(angle)    # y-velocity
 
     def advance(self, dt, L):
-        
+
         self.x = self.x + self.u*dt
         self.y = self.y + self.v*dt
 
-        if (self.x < 0):
+        if self.x < 0:
             self.x = 0
             self.u = -self.u
-
-        if (self.x > L):
+        elif self.x > L:
             self.x = L
             self.u = -self.u
 
-        if (self.y < 0):
+        if self.y < 0:
             self.y = 0
             self.v = -self.v
-
-        if (self.y > L):
+        elif self.y > L:
             self.y = L
             self.v = -self.v
 
@@ -57,7 +54,7 @@ def thermal_motion():
 
     # temperature
     T = 100.0
-    vel = math.sqrt(3.0*k*T/m_p)
+    vel = np.sqrt(3.0*k*T/m_p)
 
     # list to hold the atoms
     atoms = []
@@ -67,93 +64,60 @@ def thermal_motion():
     random.seed(seed)
 
     # initialize the atoms
-    n = 0
-    while (n < N):
-        x = L*random.random()
-        y = L*random.random()
-        angle = 2.0*math.pi*random.random()
+    for n in range(N):
+        x = L * random.random()
+        y = L * random.random()
+        angle = 2.0*np.pi*random.random()
 
-        atoms.append(atom(x, y, vel, angle))
-        
-        n += 1
-
+        atoms.append(Atom(x, y, vel, angle))
 
     plot_deltat = 5.e-6
     tmax = 1.e-2
 
-    # compute the timestep 
+    # compute the timestep
     dt = 0.1*L/(nstep*vel)
-
-
-    print "v = ", vel
-    print "dt = ", dt
-    print "L = ", L
 
     # take steps, draw the atoms and then move them and write a frame
     iframe = 0
-    i = 0
     t = 0
-    while (t < tmax):
+    while t < tmax:
 
-        pylab.clf()
+        do_plot = (t - dt) % plot_deltat > t % plot_deltat
 
-    
-        # draw the box
-        pylab.plot([0.0,0.0,L,L,0.0],
-                   [0.0,L,L,0.0,0.0],
-                   color = "k")
+        if do_plot:
+            fig, ax = plt.subplots()
 
+            # draw the box
+            ax.plot([0.0, 0.0, L, L, 0.0],
+                    [0.0, L, L, 0.0, 0.0],
+                    color="k")
 
-        # draw the atoms
-        n = 0
-        while (n < len(atoms)):
+            # draw the atoms
+            for n in range(len(atoms)):
+                ax.scatter([atoms[n].x], [atoms[n].y], color="C0")
 
-            pylab.scatter([atoms[n].x], [atoms[n].y])
-            n += 1
+            ax.set_aspect("equal", "datalim")
+            ax.axis([0.0-L/20.0, L+L/20.0,
+                     0.0-L/20.0, L+L/20.0])
+            ax.axis("off")
 
+            fig.subplots_adjust(left=0.05, right=0.95,
+                                bottom=0.05, top=0.95)
 
+            fig.set_size_inches(7.2, 7.2)
+
+            outfile = f"thermal_motion_{iframe:04d}.png"
+            fig.savefig(outfile)
+            plt.close(fig)
+
+            iframe += 1
 
         # move the atoms
-        n = 0
-        while (n < len(atoms)):
-            
+        for n in range(len(atoms)):
             atoms[n].advance(dt, L)
-            n += 1
 
-
-        # # look for collisions
-        # n = 0
-        # while (n < len(atoms)):
-            
-        #     atoms[n].collisionDetect(dt, L, radius)
-        #     n += 1
-
-
-        # axis stuff
-        ax = pylab.gca()
-        ax.set_aspect("equal", "datalim")
-
-        pylab.axis([0.0-L/20.0,L+L/20.0,
-                    0.0-L/20.0,L+L/20.0])
-        pylab.subplots_adjust(left=0.05, right=0.95,
-                              bottom=0.05, top=0.95)
-
-
-        pylab.axis("off")
-
-        f = pylab.gcf()
-        f.set_size_inches(5.0,5.0)
-
-        if ((t - dt) % plot_deltat > t % plot_deltat):
-            print "outputting: ", t, i
-            outfile = "thermal_motion_%04d.png" % iframe
-            pylab.savefig(outfile)
-            iframe += 1
-            
         t += dt
-        i += 1
-        
 
-if __name__== "__main__":
+
+if __name__ == "__main__":
     thermal_motion()
-
