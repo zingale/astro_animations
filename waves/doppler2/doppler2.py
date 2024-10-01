@@ -99,17 +99,18 @@ def doppler():
         ax[0].plot([-1.2*xmax, 1.2*xmax], [y_init, y_init], 'k:')
 
         # draw the source
-        ax[0].scatter([x_source], [y_source], color='b')
+        ax[0].scatter([x_source], [y_source], color='k')
 
         # loop over the wavefronts, and draw any that have been
         # emitted so far
         for wf in wavefronts1:
-            wf.plot(t, ax=ax[0], color="r")
+            wf.plot(t, ax=ax[0], color="C0")
 
         ax[0].plot([-1.2*xmax, 1.2*xmax], [-0.8*xmax, -0.8*xmax], color='k', lw=2)
         ax[0].set_xlim(-1.2*xmax, 1.2*xmax)
         ax[0].set_ylim(-0.8*xmax, 0.8*xmax)
         ax[0].set_axis_off()
+        ax[0].set_aspect("equal")
 
         # second source
 
@@ -120,22 +121,23 @@ def doppler():
         ax[1].plot([-1.2*xmax, 1.2*xmax], [y_init, y_init], 'k:')
 
         # draw the source
-        ax[1].scatter([x_source], [y_source], color='b')
+        ax[1].scatter([x_source], [y_source], color='k')
 
         # loop over the wavefronts, and draw any that have been
         # emitted so far
         for wf in wavefronts2:
-            wf.plot(t, ax=ax[1], color="g")
+            wf.plot(t, ax=ax[1], color="C1")
 
         ax[1].plot([-1.2*xmax, 1.2*xmax], [0.8*xmax, 0.8*xmax], color='k', lw=2)
         ax[1].set_xlim(-1.2*xmax, 1.2*xmax)
         ax[1].set_ylim(-0.8*xmax, 0.8*xmax)
         ax[1].set_axis_off()
+        ax[1].set_aspect("equal")
 
         fig.subplots_adjust(left=0, right=1.0, bottom=0, top=1.0,
                             wspace=0, hspace=0)
 
-        fig.set_size_inches(4.5, 6.0)
+        fig.set_size_inches(6.0, 7.2)
 
         outfile = f"doppler_{iframe:04d}.png"
         fig.savefig(outfile)
