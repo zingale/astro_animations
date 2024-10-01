@@ -3,7 +3,7 @@
 import anim_solvers.stick_figure as sf
 import anim_solvers.myarrows as arrow
 import numpy as np
-import matplotlib.pylab as plt
+import matplotlib.pyplot as plt
 
 
 class Earth:
