@@ -76,7 +76,7 @@ def asteroids():
             if sol[0].y[n]*sol[0].y[n+1] < 0.0 and sol[0].x[n] > 0.0:
                 perihelion = True
 
-        fig.subplots_adjust(left=0.025, right=0.975, bottom=0.025, top=0.975)
+        fig.subplots_adjust(left=0.0125, right=0.985, bottom=0.0125, top=0.985)
 
         if perihelion:
             ax.text(0.5, 0.97,
