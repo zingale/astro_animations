@@ -1,5 +1,5 @@
-Solar System Animations
-=======================
+Solar System Motion
+===================
 
 Planetary Orbits and Kepler's Laws
 ----------------------------------
