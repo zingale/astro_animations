@@ -27,6 +27,8 @@ i = 0
 while i < len(lon_center):
 
     fig = plt.figure(figsize=(12.8, 7.2), facecolor="black")
+    fig.subplots_adjust(bottom=0.05, top=0.95, left=0.05, right=0.95)
+
 
     # draw the sphere showing the phase
     ax = fig.add_axes([0.05, 0.333, 0.3, 0.333])  #], axisbg="k")
@@ -44,7 +46,7 @@ while i < len(lon_center):
 
     # draw the orbit seen top-down -- we adjust the phase angle here to sync
     # up with the phase view
-    ax = fig.add_axes([0.4, 0.1, 0.5, 0.8])
+    ax = fig.add_axes([0.4, 0.05, 0.55, 0.9])
 
     theta = numpy.linspace(0, 2.0*numpy.pi, 361, endpoint=True)
     theta_half = numpy.linspace(0, numpy.pi, 361, endpoint=True) - numpy.pi/2.0
@@ -56,8 +58,11 @@ while i < len(lon_center):
     y_half = numpy.sin(theta_half)
 
     # draw the Earth
-    ax.scatter([0], [0], s=1600, marker="o", color="k")
-    ax.scatter([0], [0], s=1500, marker="o", color="b")
+    # draw the Earth -- full circle (dark)
+    ax.fill(0.125*x, 0.125*y, "0.25", zorder=100)
+
+    # semi-circle -- illuminated
+    ax.fill(0.125*x_half, 0.125*y_half, "C0", zorder=101)
 
     # draw the orbit
     ax.plot(x, y, "w--")
@@ -81,6 +86,8 @@ while i < len(lon_center):
     ax.text(1.7, 0.0, "sunlight", rotation=90, fontsize=16,
             horizontalalignment="center", verticalalignment="center",
             color="y")
+
+    ax.axis([-1.1, 1.8, -1.1, 1.1])
 
     ax.set_aspect("equal", "datalim")
 
