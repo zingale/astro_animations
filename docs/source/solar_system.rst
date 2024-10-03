@@ -19,3 +19,31 @@ complete its orbit around the Sun, since $P^2 \sim a^3$.
 
 *download MP4:* :download:`orbit2.mp4 <../../solar_system_motion/orbit2/orbit2.mp4>`
 
+
+Kepler's Second Law
+-------------------
+
+.. video:: ../../solar_system_motion/second_law/second_law.mp4
+
+A demonstration of "equal areas in equal times", by shading the area
+swept out by a planet in equal time intervals.
+
+*download MP4:* :download:`second_law.mp4 <../../solar_system_motion/second_law/second_law.mp4>`
+
+
+Retrograde Motion
+-----------------
+
+.. video:: ../../solar_system_motion/retrograde/retrograde.mp4
+
+Integrate Earth and Mars in their orbits around the Sun, starting a
+bit before opposition, and draw a line indicating the line-of-sight to
+Mars from Earth against some background stars to show the change in
+apparent motion.
+
+Note: the orbits are simplified here -- the semi-major axis and
+eccentricity are correct, but it is assumed that both ellipses are
+oriented the same way. For demonstration purposes, this is not all
+that critical.
+
+*download MP4:* :download:`retrograde.mp4 <../../solar_system_motion/retrograde/retrograde.mp4>`
