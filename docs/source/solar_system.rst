@@ -5,7 +5,6 @@ Planetary Orbits and Kepler's Laws
 ----------------------------------
 
 .. video:: ../../solar_system_motion/orbit2/orbit2.mp4
-   :width: 400
 
 Integrate the orbits of two planets around a star, neglecting the
 gravitational force between the planets themselves. This is useful for
