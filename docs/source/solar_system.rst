@@ -47,3 +47,15 @@ oriented the same way. For demonstration purposes, this is not all
 that critical.
 
 *download MP4:* :download:`retrograde.mp4 <../../solar_system_motion/retrograde/retrograde.mp4>`
+
+
+Parallax
+--------
+
+.. video:: ../../solar_system_motion/parallax/parallax.mp4
+
+A simple animation showing how parallax works, illustrating the motion
+of the Earth around the Sun and the apparent shift seen in the
+position of a nearby star against the background, more distant stars.
+
+*download MP4:* :download:`parallax.mp4 <../../solar_system_motion/parallax/parallax.mp4>`
