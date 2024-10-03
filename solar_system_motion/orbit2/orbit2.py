@@ -43,8 +43,8 @@ def doit():
         fig, ax = plt.subplots()
 
         # plot the foci
-        ax.scatter([0], [0], s=250, marker=(5, 1), color="k")
-        ax.scatter([0], [0], s=200, marker=(5, 1), color="y")
+        plt.scatter([0], [0], s=1600, marker=(20, 1), color="k")
+        plt.scatter([0], [0], s=1500, marker=(20, 1), color="#FFFF00")
 
         # plot planet A
         ax.plot(sol[0].x, sol[0].y, color="C0")
