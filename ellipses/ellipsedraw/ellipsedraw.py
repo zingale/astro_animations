@@ -17,7 +17,7 @@ def ellipse():
     e = 0.5
     a = 1.0
 
-    r = a*(1.0 - e**3)/(1.0 + e*np.cos(theta))
+    r = a*(1.0 - e**2)/(1.0 + e*np.cos(theta))
 
     x = r*np.cos(theta)
     y = r*np.sin(theta)
@@ -53,17 +53,17 @@ def ellipse():
         ax.plot([0, x[n]], [0, y[n]], color="C1", zorder=100, linewidth=2)
         ax.plot([-2.0*a*e, x[n]], [0, y[n]], color="C0", zorder=100, linewidth=2)
 
-        ax.set_xlim(-2.5, 1.5)
-        ax.set_ylim(-2., 2.)
+        ax.set_xlim(-2.25, 1.25)
+        ax.set_ylim(-1.75, 1.75)
 
         len1 = np.sqrt((x[n] - 0)**2 + (y[n] - 0)**2)
         len2 = np.sqrt((x[n] - (-2.0*a*e))**2 + (y[n] - 0)**2)
 
         ax.set_title(f"Ellipse, eccenticity = {e:5.3f}")
 
-        ax.text(-1.5, -1.25, f"r length: {len1:5.3f}", color="C1")
-        ax.text(-1.5, -1.5, f"r' length: {len2:5.3f}", color="C0")
-        ax.text(-1.5, -1.75, f"r + r' = {len1 + len2:5.3f}")
+        ax.text(-1.5, -1.25, f"r length: {len1:5.3f}", color="C1", fontsize="12")
+        ax.text(-1.5, -1.45, f"r' length: {len2:5.3f}", color="C0", fontsize="12")
+        ax.text(-1.5, -1.65, f"r + r' = {(len1 + len2):5.3f}", fontsize="12")
 
         for direction in ["xzero", "yzero"]:
             # adds arrows at the ends of each axis
@@ -77,8 +77,6 @@ def ellipse():
             ax.axis[direction].set_visible(False)
 
         fig.set_size_inches(7.2, 7.2)
-
-        fig.set_size_inches(7.2,7.2)
 
         plt.savefig(f"ellipsedraw_{n:03d}.png")
 
