@@ -28,6 +28,18 @@ center of mass, and must have the same period.
   :download:`binary_mratio=2_e=0.4.mp4 <../../binary_exoplanets/binary_stars/binary_mratio=2_e=0.4.mp4>`
 
 
+Binary System Reference Frame
+-----------------------------
+
+.. video:: ../../binary_exoplanets/binary_reference/binary_reference_mratio=4_e=0.4.mp4
+
+A comparison of different reference frames for a binary system: the center of mass frame and
+the frame centered on the more massive star.  This demonstrates that the eccentricity of the
+ellipses and their orientation are the same in the two frames.
+
+*download MP4:* :download:`binary_reference_mratio=4_e=0.4.mp4 <../../binary_exoplanets/binary_reference/binary_reference_mratio=4_e=0.4.mp4>`
+
+
 Planetary Orbit + Stellar Motion
 --------------------------------
 
