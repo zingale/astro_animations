@@ -1,0 +1,1230 @@
+commit 5ed2c0d708bf41cc2cda6a8ec1fa2ff422a0cff0
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Nov 8 11:03:14 2022 -0500
+
+    some pyupgrade
+
+commit 7b27b3e4b2ab57e6654a79f92bfe2f66dffb83a0
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Nov 8 10:57:41 2022 -0500
+
+    add new video
+
+commit 41e4bf51e538af5e4e37472ad3a658c079565629
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Jul 28 08:35:16 2022 -0400
+
+    update to be more modern
+
+commit ffc05515d0821912d35f1e56cf8d9b77f7c76137
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Jul 28 08:22:44 2022 -0400
+
+    flake8
+
+commit 6ffdf3312a1e8d2121e0c1814d0ab76c638e8da3
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Jul 28 08:21:48 2022 -0400
+
+    more cleaning
+
+commit eca349aef4ed4d420a95134a5fa6295aa0fce07f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Jul 28 08:15:46 2022 -0400
+
+    update style
+
+commit 7a0a6821b3849dd881d3a80d8bd78db25d58edb4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Dec 4 14:15:11 2020 -0500
+
+    first cut at something interactive
+
+commit 3ea3585f5227674f091e9f671e7ef2843270d67f
+Merge: 5062a82 ce629f8
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Oct 13 10:36:37 2020 -0400
+
+    Merge branch 'master' of github.com:zingale/astro_animations
+
+commit 5062a827ed1b469c69a63dd3971b15895909e204
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Oct 13 10:36:28 2020 -0400
+
+    new diagram
+
+commit 4e4e3b54d731e0f4ea450737618e8e40fc9e6a8e
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Oct 13 10:18:13 2020 -0400
+
+    a little cleaning
+
+commit 3585bae6afb66c9b98a3dd3cfe186bb81e47461d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Oct 13 10:13:42 2020 -0400
+
+    clean up
+
+commit ce629f8753fd0b6522f15eba6dbcc77c30c61668
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Feb 19 09:01:09 2019 -0500
+
+    updated fig
+
+commit 2d80f65897e7a2933eb01a4063bc712f2981462e
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Feb 18 16:23:49 2019 -0500
+
+    updated style
+
+commit c668721f43b2520db9dc6597861b9ed60adbf914
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Feb 18 13:18:58 2019 -0500
+
+    update style
+
+commit fbf5bef89a3e589c2c501cde7de6d87556c03eb8
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Feb 18 12:39:40 2019 -0500
+
+    finish up the movies
+
+commit d4b1d332917a891986be5b1cd5020406f6aaff02
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Feb 18 11:12:47 2019 -0500
+
+    a much nicer view
+
+commit 3461d62e079a5b778571607e4aa7044a023fe910
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Feb 18 10:40:58 2019 -0500
+
+    add note
+
+commit 2262c2919184699dc35100c171d363ac95bc4a13
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 17 12:41:06 2019 -0500
+
+    update style
+
+commit 109e822f0fd2b030b2c8b97f83cee82610ead502
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 17 12:00:08 2019 -0500
+
+    updates to the style and colors
+
+commit fd491922980de1048efc183efa466473dc6000c9
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 17 11:43:03 2019 -0500
+
+    clean this up
+
+commit 56385799a1cebf21d1fa6c822ce6347b4a1f47d6
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 17 11:27:29 2019 -0500
+
+    the binary_integrator now stores the orbit information internally
+    add methods for KE and PE
+
+commit 481fa5bc2fcc5def8d9dacd577da835b1d688a99
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 17 11:27:01 2019 -0500
+
+    here are updated binary star plots with better size and colors
+
+commit 43d229c0acd7330446750d53adf5c0805efc79b3
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 17 11:21:33 2019 -0500
+
+    updated movie style
+
+commit 7e23f1d79771f96e5f1c2605a3d297589a3d0a23
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 17 09:41:18 2019 -0500
+
+    some clean-ups
+
+commit bfdfb0b4a0fc27df3570ac8db7e39fc742c62e57
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Feb 16 22:30:46 2019 -0500
+
+    some clean-ups
+
+commit 7229ea71f3bfed8741929bee69f88bf61a3b3799
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Feb 16 21:36:38 2019 -0500
+
+    some updates
+
+commit dd2c5457ad92d469174256ea2e4d752c26203f60
+Merge: 43a13d4 feea8c7
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 15 11:01:44 2019 -0500
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 43a13d46ba3a4ddd8dd2682a74696ccd19367dd5
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 15 11:01:13 2019 -0500
+
+    some updates to style
+
+commit feea8c76fcc6e2834898dbd97d0653829edad573
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Sep 16 12:21:49 2018 -0400
+
+    some updates to show structure
+
+commit 191e22e7fa9be402f020ffb34a2d710fdf8c8b61
+Merge: 4038ac5 7c43271
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 15 19:07:03 2018 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 4038ac529aa1576b9109f661acd5a27ec1f6f7a1
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 15 19:06:53 2018 -0400
+
+    update style
+
+commit 7c43271bd789983580f7149f0a19d52fecef651f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Oct 19 13:03:38 2017 -0400
+
+    updated movies
+
+commit aa174ac15ea3aa40ffaa26cc6e5347b540b98335
+Merge: efede06 99ca79b
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Sep 14 12:37:30 2017 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit efede06646c8146e6dcb046eef221020e3505212
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Sep 14 12:37:23 2017 -0400
+
+    update style
+
+commit 99ca79b6cd143a4eada091beb699a0d678b764e4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Jun 12 16:14:27 2017 -0400
+
+    clean-up for python 3
+
+commit 4f76a06a04094e30f500bf1e9d3b5481c9b0326c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Apr 27 13:51:01 2017 -0400
+
+    new figure
+
+commit 210bd36579a8fbfc36e609f8740bc35e47a296a3
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Apr 27 10:06:23 2017 -0400
+
+    new simple drawing
+
+commit 74858074169cd522888eb339b2fc833729ea0ff6
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Feb 16 09:32:46 2017 -0500
+
+    a little cleaning
+
+commit d446ffa9d90a8fcb5bd035797ec9b3630358c908
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Feb 7 20:51:58 2017 -0500
+
+    mpl 2.0 fixes
+
+commit bb257c1a509678eb0995495a55484d2ca820f531
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Jan 6 19:29:15 2017 -0500
+
+    update style
+
+commit 779c1102696ae312dd99e5c45143aec36e9203b1
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Dec 31 13:18:58 2016 -0500
+
+    update style
+
+commit 95d68eeb8345158292611d5217adc45aff40b775
+Merge: 6bc333d 6c30510
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Dec 19 19:54:50 2016 -0500
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 6bc333d454fd9e6e14ddf3ac10d023751b5458f8
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Dec 19 19:54:44 2016 -0500
+
+    update style
+
+commit 6c30510fdf07286eb961940c95d08a90f4257557
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Dec 19 12:05:58 2016 -0500
+
+    a lot of cleaning
+
+commit 96dc5c03ac51c770ac4b4b8c5d8e496eb56fc7c8
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Dec 12 11:22:42 2016 -0500
+
+    change label
+
+commit 9d8de9ae51144c7d80a4c2c32b5f631924a8c3a6
+Merge: 4b8c09e f23b2ef
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Dec 12 11:03:40 2016 -0500
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 4b8c09e842eeba5d3caffbc2c2771dc6eaea2346
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Dec 12 11:03:32 2016 -0500
+
+    some cleaning
+
+commit f23b2efafe06d4e3bd1af5d418cf858120cd18f4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Oct 2 10:58:17 2016 -0400
+
+    image
+
+commit 6eb526454655c85ced2bb6c203fa9ee6e479179f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Oct 2 10:49:17 2016 -0400
+
+    movies
+
+commit 2a31ffdfcc7efb7f60974810c2da7d469980925b
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Oct 2 09:55:34 2016 -0400
+
+    final version
+
+commit 75a374f0b5c23cb67dadecea2330e18eafff5fc2
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 23:10:09 2016 -0400
+
+    finish first pass at fig
+
+commit d9eabfa6a3a626c8206f5940cb7c4be4660cccbd
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 22:01:29 2016 -0400
+
+    more work on implementing multiple frames via a scene
+
+commit f0e427cb759751fa837551f987ce51240a5b553c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 17:34:25 2016 -0400
+
+    add a png
+
+commit e1db4c371e3f37f8b69e6941637e946391fef30d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 17:12:54 2016 -0400
+
+    abstract out the cap
+
+commit b476c46d1805755d008548e96c15a32bf22a6c83
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 17:12:40 2016 -0400
+
+    more progress
+
+commit 77bd0b5bc414092bdaba43f770306eadc9e1dcee
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 14:08:07 2016 -0400
+
+    more progress
+
+commit 4acb57877bf9387ffb11f083048941f2c3c36ab5
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 13:53:36 2016 -0400
+
+    spacing
+
+commit 5af7394a5d9caf7423d52eacd70b2ef1d83b2bfd
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 1 13:52:09 2016 -0400
+
+    add arrow class -- this is simpler than what matplotlib provides
+
+commit f46ed8b0ae69d0534d07da473f3295a1b0183cb0
+Merge: 2f6ccbf b5fb43d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 30 23:14:21 2016 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 2f6ccbf46be63e5167e0687049677d9ffe9a43f4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 30 23:14:08 2016 -0400
+
+    more comprehensive diagram
+
+commit b5fb43d8729fbefac054458a81ccece94d9bffd3
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Jan 18 14:03:08 2016 -0500
+
+    tweaks
+
+commit 5fcafdeb96f06700e4fadf27fdbdd7acb8d6c6df
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Jan 5 12:34:01 2016 -0500
+
+    updates
+
+commit fcbc10e1082edeb57da7c82ca92aa4fa5e162699
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Nov 5 21:33:21 2015 -0500
+
+    some more comments
+
+commit f7c513558ed2cc040f036913ed0fc2a4d16af7c0
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Nov 5 21:21:20 2015 -0500
+
+    consolodate some code
+
+commit d785bbe556583c9cdf10a8b79064f2faf5f338d8
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Nov 5 15:31:41 2015 -0500
+
+    classy this up and add a notebook with the 3-d plot
+
+commit e858345602f7417a5f56296aecd53dc3e336d97c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Nov 5 10:27:21 2015 -0500
+
+    new titles
+
+commit a7f6a47aa41d66f860aa2ce56884600e966c512f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Nov 5 10:13:33 2015 -0500
+
+    more comments
+
+commit eee4109331451297d083ddb383f509e15b22bc1d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Nov 5 10:07:21 2015 -0500
+
+    more commenting
+
+commit 9109816c39d5b8a5300228875cc72fe4a2a88f73
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Nov 4 19:48:22 2015 -0500
+
+    add an animation of the equipotential
+
+commit 17f3aee4ed5d24ced62237c083a73a32fa26c70f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Nov 4 18:32:46 2015 -0500
+
+    some tweaks
+
+commit c1a1a1fbc886c49dee47f7d990a3eba8fd5f5f35
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 27 15:28:49 2015 -0500
+
+    more segmentation to make it clearer that things are being distorted
+
+commit f66ae31de4830cf25ee50ca3f819d1bfb1372047
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Feb 26 09:32:44 2015 -0500
+
+    annotation
+
+commit 9df857f3d70b18d6544e92135525a9957c2751d5
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Feb 25 23:11:21 2015 -0500
+
+    a a lot nicer now  -- the rotation is clear by coloring the quadrants
+    differently
+
+commit 2e5ee83cf676b628c053a340c0386a9a09730f5d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Feb 25 22:10:08 2015 -0500
+
+    more realistic
+
+commit a9c1a57d36734ccdff8f915f196ad0f3eeb81dc4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Feb 25 20:38:38 2015 -0500
+
+    more work on the tidal exampe
+
+commit 640bdbbe3c76e459533aa05cc4a901a7145cb9ee
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Feb 25 17:23:42 2015 -0500
+
+    start of a simple animation showing tidal locking
+
+commit 46fc28c784f11027951ba3d722484ecd2c2a97f5
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Feb 24 13:11:23 2015 -0500
+
+    experiements in 3-d
+
+commit 49449487fbb3ad5652669a634b2e302e812e9a23
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Feb 24 12:27:54 2015 -0500
+
+    more todo
+
+commit 93f0ad794189ddfe5e60b2c215971c36f15dea4c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 20 15:16:22 2015 -0500
+
+    add a transparency option
+
+commit c803eefbba8d4158e6ecc2829e85af6cc12d018c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 20 15:11:41 2015 -0500
+
+    a latitude plot
+
+commit 6624774c49f946b7e9761c5c8239d6c672367f46
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 20 14:42:05 2015 -0500
+
+    draw a stick figure at a given location and rotation
+
+commit 523018a7f06e98bdbfb2a3cf1a53ad50461c3203
+Merge: fd297d9 e6232ee
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 20 14:21:46 2015 -0500
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit fd297d9afa425863758f68fc5415d5eaf0a3e413
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 20 14:21:29 2015 -0500
+
+    draw a person on a Earth
+
+commit e6232eed415c07e71f7216feee25d34324b97a73
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 8 09:36:42 2015 -0500
+
+    add gh-pages url
+
+commit 8b44fdf128e96b17e4ef58cba4dd831e4f7cd108
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Feb 7 18:17:22 2015 -0500
+
+    update the script to allow us to see how Earth appears to move as
+    seen from Mars.  The *_extended.* movies are run in this mode
+
+commit fb91ab9bd0584ec7d1ad81a161ffa309b3b5a94a
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Feb 6 11:04:40 2015 -0500
+
+    show the day of summer solstice centered on SB.  We go from midnight to
+    midnight
+
+commit d52c2c5376d168ccb8ba3e7582f640df00aa0ab9
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Feb 2 20:35:02 2015 -0500
+
+    update
+
+commit 23939bcc575a2e4a8ac021e71653f80231eb8dab
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 1 15:11:26 2015 -0500
+
+    add orientation andd an add method that takes period
+
+commit 1f8d192b474468508cfddfdd613459aa3e6f716c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 1 11:43:44 2015 -0500
+
+    add a new movie
+
+commit b029c5b72bbcd5051c32b84e90d10e6fe3d1aab3
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 1 11:25:42 2015 -0500
+
+    movies
+
+commit 88f198e93199c222131f9ff35d61ea83580f0b5f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 1 11:23:46 2015 -0500
+
+    add some annotation
+
+commit 69a9aeb653c252c4dea76fa28ed21c0c71acddf4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 1 10:04:53 2015 -0500
+
+    more tweaking -- still need to add text
+
+commit 5896b9b94439f595ddaed209dcfe1f34c273451c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 1 09:52:48 2015 -0500
+
+    add a simple model of asteroid resonances
+
+commit d88cd29909015e7b28f6f26de315f3d7dabc0ebb
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Feb 1 08:58:09 2015 -0500
+
+    updates
+
+commit 732bf1b419b2b68d0b843ecef23b00273022484a
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Jan 31 14:57:43 2015 -0500
+
+    more clean-up
+
+commit 07fad25322949d698b6dbfa29a7ecd3b9e27cec7
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Jan 31 14:41:43 2015 -0500
+
+    remove an extraneous n += 1, some import modernization
+
+commit 69d760062301568d7d5f31831018e892aa0194f6
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Jan 31 14:36:38 2015 -0500
+
+    modernize to the solar_system_integrator + make HD with nicer / bigger
+    images
+
+commit e9e477d7d0162de790bcfcb61453603979763513
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Jan 31 14:34:41 2015 -0500
+
+    update imports
+
+commit 0c9ef1a15ef72f51b8800adcfdaf7a0784036c7f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Jan 30 22:46:29 2015 -0500
+
+    update to the solar_system_integrator
+
+commit 2bfeffe04f26f8ae1a85f2bc80c215c4692d4883
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Jan 30 22:13:22 2015 -0500
+
+    update to use the solar_system_integrator and conform to better style
+
+commit cef718f3244ac276a1ce48e41669452842ce0f02
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Jan 29 13:50:16 2015 -0500
+
+    add constants
+
+commit bcb9436475f37816148dc1384fc3befd3bb33155
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Jan 29 12:45:59 2015 -0500
+
+    seasons
+
+commit 51e167f984147150aca75f88a1466e4955c4ce5c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Jan 29 12:45:01 2015 -0500
+
+    add a simple animation showing how Earth's axial tilt doesn't change
+    over an orbit
+
+commit 9f31aa565e984eb6b7d73af910b5b1e0d1c2354d
+Merge: 0499ac4 e221b28
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Jan 28 12:48:25 2015 -0500
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 0499ac4b3f1730328c00aa85fdee03bfa02980c9
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Jan 28 12:48:15 2015 -0500
+
+    ignore some common output files
+
+commit e221b289725c408746373e3b58be5c88f5fe2ddb
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Dec 11 12:50:33 2014 -0500
+
+    updates
+
+commit d5b2f7c15faf59ddc025c67de88f7deb480d6e14
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Oct 30 18:08:52 2014 -0400
+
+    another TODO
+
+commit 4baf70a15518d5b3eb677e48a0f72c743c070878
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Oct 22 18:42:06 2014 -0400
+
+    more todo
+
+commit 34a4ee73cb39b5dd033de007255f03e2be6a3791
+Merge: 2428911 03ccdeb
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Oct 13 18:39:43 2014 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 2428911df37543223c556b6bc223193c334c1ebb
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Oct 13 18:39:31 2014 -0400
+
+    more todo
+
+commit 03ccdebaa036c6041b09f6878fa478ab51ebcc1d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 4 11:14:32 2014 -0400
+
+    rename
+
+commit e18e9dd56758782a227aa2dce68155ab7255ead1
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 4 11:12:14 2014 -0400
+
+    new figs
+
+commit b8a5502e76e72f5b9120ac036c71f43a93614301
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 4 11:01:49 2014 -0400
+
+    add local sky
+
+commit 8e8ee2a1f0f8e91fa837ab1f936cc1fa89f8bb64
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Oct 4 10:59:05 2014 -0400
+
+    add Eratosthenes fig
+
+commit 2b9040eaf47f71312c2235c3a6fb209d31f6b6cf
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 13 19:30:24 2014 -0400
+
+    clean up and mark the Lagrange points -- needs more documentation
+
+commit 13158bc3456498d9fe0068d6b198b29612b7ae35
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Sep 10 10:46:51 2014 -0400
+
+    update code to be more compact.  Sync with the frequency version, and make HD
+
+commit f48025f096bd277ba9ec7b9eca9a0e4bb370365a
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Sep 10 10:25:12 2014 -0400
+
+    clean up this script a lot -- make it HD sized too
+
+commit d4a34457914284dc9b1f8053f0386763cd05f87f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 6 19:11:06 2014 -0400
+
+    switch over to the binary_integrator
+
+commit dc34828bcb328d76eaf59910fac955cbafd8c71e
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 6 18:27:06 2014 -0400
+
+    switch to the binary_integrator
+
+commit af703b6cb4ec29f206001aaaf00d1af60b77e51f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 6 14:09:10 2014 -0400
+
+    update to sync with the circluar version
+
+commit 6772552bfd0f7f418a23b2382fa0ccc1b2ca63cc
+Merge: 479a6b3 91221f4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 6 13:49:01 2014 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 479a6b397ea876a436385d8718bbbecd71352637
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 6 13:48:43 2014 -0400
+
+    switch to the binary_integrator -- fix the arrow, and make HD
+
+commit 91221f4b2157e383ae469ffc16b703e25face2ee
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Sep 6 10:52:16 2014 -0400
+
+    update this figure to use the binary integrator
+
+commit 04992a4f1571578e613bd4e6f619c224f008955d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 22:45:34 2014 -0400
+
+    update to use the binary integrator
+
+commit 64b047cdac91260c2d422bedd5d314d54672f013
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 14:57:31 2014 -0400
+
+    add *~
+
+commit d0cb1f1ef11584c61e72cf8db97e5a7b1897795f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 14:56:10 2014 -0400
+
+    update this movie
+
+commit 0e3077d4c9c0a25e4983c9a72996e047f55a47c7
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 14:52:08 2014 -0400
+
+    updated movies
+
+commit a4e03915a4f554d130600fe3363a553ae42b1caa
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 14:48:40 2014 -0400
+
+    update the movies to HD
+
+commit 9239617b87ef596da35b9b035961cfbe1a18ef8c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 14:43:59 2014 -0400
+
+    update the movie in HD
+
+commit 3db7f40f1f23f85247322bc4cff6ffa2821140d8
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 14:25:01 2014 -0400
+
+    updated movies HD
+
+commit 99c5d6724c348da6fc50669c0f16dee316dd5598
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 14:18:03 2014 -0400
+
+    split the integrator out into its own class
+
+commit 63f41a0255aa73a5b69c9e118e481a5458a4cccf
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 10:35:00 2014 -0400
+
+    allow for the user to override the unit system by specifying
+    GM and year in the units they wish (default is 4pi**2 and 1).
+
+commit 8b4709f11c2e078a5a04c76f16dc3f9421e87864
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Fri Sep 5 10:34:37 2014 -0400
+
+    new version -- correct aspect, nicer labels, HD, and uses the
+    solar_system_integrator
+
+commit d0af0d9f62098b37fd977238da2862e9440bd458
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Sep 4 22:04:18 2014 -0400
+
+    switch to the earth_orbit integrator.
+    
+    Something funny about the axes -- cannot use "datalim" for some reason (?)
+
+commit 8e3e2a4ef437474fa829db5923d1a7c2e5b7c7cc
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Sep 4 20:14:04 2014 -0400
+
+    new HD movies
+
+commit 80744f1a3984dd22ac05b0132d9c1b19167a96ce
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Sep 4 20:09:06 2014 -0400
+
+    use the earth_orbit solver and general clean-ups
+
+commit ae95fcfd60d49bf3f165b372c1876ad44f4f522a
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Sep 4 19:58:20 2014 -0400
+
+    split the integrator into its own class
+
+commit 3c68600e98779532fcd12734f202630e7d9f99f5
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Sep 4 19:51:40 2014 -0400
+
+    clean-up the script and make it HD
+
+commit 37d50853160eebb37ea93ca3970471efa4e19210
+Merge: b1898eb 9319fb4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Sep 2 18:30:34 2014 -0400
+
+    Merge pull request #1 from orvedahl/master
+    
+    add human sorting of files and a few more command line options
+
+commit 9319fb4098c769fb4146f9f4863e2cc2359caa43
+Author: Ryan Orvedahl <ryan.orvedahl@colorado.com>
+Date:   Tue Sep 2 13:36:16 2014 -0600
+
+    add human sorting of files and a few more command line options
+
+commit b1898eb279e8a4ed87e7a6f00ad01fba3850a9ae
+Merge: 192e193 85fe8b9
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Aug 28 14:15:26 2014 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 192e1933d9d3eceee8129b6be666cdab0ba42419
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Thu Aug 28 14:15:16 2014 -0400
+
+    add a TODO
+
+commit 85fe8b9255ad158b9cf6dc16f0f6d1da1e835308
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 21:30:53 2014 -0400
+
+    clean-up
+
+commit 3b793b6235b46e45a75d48024a4df1a69442c7de
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 21:09:58 2014 -0400
+
+    updated animations
+
+commit 2c6b1ed15dfdd10376218542d3ce6b152f2c069d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 21:04:21 2014 -0400
+
+    lots of clean-ups -- use arrow and annotate now
+
+commit e1c08afd20f91cbda00ffd57d5cc5bb823b1bfb6
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 20:37:02 2014 -0400
+
+    readme
+
+commit cf84ac32e15112dfd74504a0c98d1a1be57565ae
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 20:21:13 2014 -0400
+
+    add an alternate projection (moll)
+
+commit 832a6bbf44fa7c202cd1c019607864ec5f25da53
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 10:21:00 2014 -0400
+
+    nicer movies with labels
+
+commit 599ed79c49a29da1deebb0a0b127480aab3aaff4
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 10:20:26 2014 -0400
+
+    show noon centered on stony brook over the course of a year
+
+commit 5dfd3f61c700ac2c9f34e95a0b5456c70d37ffd3
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Wed Aug 27 09:27:03 2014 -0400
+
+    simplify the script
+
+commit 75c282ca755242b57bc8d378380cb92f8ea5a0b6
+Merge: fd2dca4 e5f3e5b
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 21:52:50 2014 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit fd2dca4f3a0be23ad445738d28f3fa3c9d683480
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 21:50:34 2014 -0400
+
+    add some animations iwth the basemap showing the day/night line
+    at the solstices and equinox
+
+commit e5f3e5bd103aac22c8360f3825c339defaeae34d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 16:04:11 2014 -0400
+
+    update the style -- the code still needs to be switched over to the new
+    integrator
+
+commit d9d06239f21f704ebada4e0574e3c7950dcd99cd
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 09:19:43 2014 -0400
+
+    one more markdown fix
+
+commit b1a339ae5a1f24f5bf5c77c2414a6d680e3ceff7
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 09:18:57 2014 -0400
+
+    fix markdown
+
+commit e9eec1817a327f59b0a159394379678783ef1275
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 09:18:29 2014 -0400
+
+    some setup notes
+
+commit de253e890c7e0b851db1a91edceac972e332ce7a
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 09:16:26 2014 -0400
+
+    remove
+
+commit 47e75d4a7e529e0e320c8dc15da6b2c21f3fec10
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Tue Aug 26 09:15:04 2014 -0400
+
+    fix pluto plotting bug + saner names for output
+
+commit a08505ceb5595d4601655141b73a51d14bb87a76
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 21:02:36 2014 -0400
+
+    update to HD + add a second random walk
+
+commit 1c78e2d131550b9b7010a6f5937aeaf7e4fe3a53
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 20:16:56 2014 -0400
+
+    update with tweaks
+
+commit a2429318da0a72bf7a91fb7b68141cd6110aff4d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 14:39:29 2014 -0400
+
+    move
+
+commit b9a7555435b2467905342b4371f73ac896744386
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 13:57:41 2014 -0400
+
+    update the eccentricity movie to HD
+
+commit 892a7882a763549ead23b16b070212de6fa73030
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 13:45:38 2014 -0400
+
+    update to HD
+
+commit 9e7533fa171bbcb60b634a34bfeb859050da95e3
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 11:36:38 2014 -0400
+
+    update the movies to the new version
+
+commit cee6513f0e29e99cd2a62d5b7be2ac714bd95c62
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 11:26:33 2014 -0400
+
+    switch to using the solar_system_integrator, and make this HD
+
+commit ec966a347e5b209911b3b2b8074311a46ea4e8d7
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 11:18:50 2014 -0400
+
+    fix aphelion location
+
+commit dc3d5266b64b824727e15c3c3d2f0e99f74dc40d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 09:57:38 2014 -0400
+
+    this file is old
+
+commit c7619aa967a5eda3362ae497d5d9d665ea48b32f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 09:28:44 2014 -0400
+
+    update comments
+
+commit a262b9e1dc74acb1f6f94e797b34628c6b0c2b4e
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 25 09:17:58 2014 -0400
+
+    update the directories
+
+commit 6f2dc4e4a2a0e61e6d5cc4c2aa3f29eb8dfe2a4b
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 21:52:03 2014 -0400
+
+    restructure to use the solar_system_integrator
+
+commit b08f9905b74e5c2a9050e1dfe5f449efb26e4c41
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 21:18:44 2014 -0400
+
+    make it counterclockwise
+
+commit e9a20e283df0754e1162d5ce428de220450d93c0
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 20:53:07 2014 -0400
+
+    comments
+
+commit f8845bc1ce976420407dccf47cbe51f32085ba11
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 20:21:11 2014 -0400
+
+    fix the time position
+
+commit 53b0d0611cd7e455f71f2fec0682c0c8e6ccc85a
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 20:11:47 2014 -0400
+
+    some sizing tweaks
+
+commit a8704d5d2acf92bd2862e8c188e0d527a3dc785c
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 19:58:44 2014 -0400
+
+    simplified version of the retrograde solver that uses the new solar_system_integrator.py
+    classes
+
+commit 8233e8cbc093d3cc0b170e93026ddba01d9ba1a2
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 19:54:24 2014 -0400
+
+    add solvers
+
+commit 0f52996fb4e8a76f94732d62f1101d764ba82ea2
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 19:50:50 2014 -0400
+
+    a general integrator that can be used for many of the scripts
+
+commit 0a520c40616c6863b203179d40cc15c828416536
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 24 10:40:05 2014 -0400
+
+    movie making script
+
+commit e5b43fd6f169fafe7a2e8a1c5195721d2c9c4268
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Aug 23 23:03:59 2014 -0400
+
+    update to HD
+
+commit 223d68ea80b483b141a46f13f62e23a7a68e105e
+Merge: 102a326 1df25aa
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Aug 23 22:11:42 2014 -0400
+
+    Merge branch 'master' of ssh://github.com/zingale/astro_animations
+
+commit 102a326257171f9d20318fdec9e31c3b30afca1e
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Aug 23 22:11:19 2014 -0400
+
+    major restructuring
+
+commit 1df25aab7fe5f1d98e01480f788128674200e48d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sat Aug 23 16:25:08 2014 -0400
+
+    rename to eliminate "-"
+
+commit d19eae2f579f8230671a8dbed695858c588fc1cd
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 11 13:57:29 2014 -0400
+
+    add youtube link
+
+commit c6c2a7d7e7fd7203d8b67b5d4928c31474996474
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 11 12:59:50 2014 -0400
+
+    more movemnet
+
+commit d16e04109884fa25362bfa42f1823044472bd01d
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Mon Aug 11 12:59:26 2014 -0400
+
+    more into the proper categories
+
+commit 43d8c1dbd92666bb3845fffa50c02c06fd4619f1
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 10 22:33:01 2014 -0400
+
+    updated README
+
+commit 1d3d75aa52890d79a679a96878770c1760c775e2
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 10 22:19:08 2014 -0400
+
+    add CC license
+
+commit 6cac300c303b8dddbadcc54bb91fa6093bd0ed01
+Merge: d4f3883 10504dc
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 10 22:10:25 2014 -0400
+
+    Merge ssh://github.com/zingale/astro-animations
+
+commit 10504dc6f37000d773286f411f3dda18c1bcac60
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 10 22:06:53 2014 -0400
+
+    Initial commit
+
+commit d4f3883ed6600ba104a531dfc266b2a68ac6683f
+Author: Michael Zingale <michael.zingale@stonybrook.edu>
+Date:   Sun Aug 10 21:36:30 2014 -0400
+
+    sort into subdirectories
+
+commit beb1a059f7be198f643124e795fbb2e39ae90dbf
+Author: Michael Zingale <zingale@inf.astro.sunysb.edu>
+Date:   Fri Jun 13 12:30:26 2014 -0400
+
+    figure styling
+
+commit 8f370a42cf5bbd80fc65e9195bd1cb448cc3fb68
+Author: Michael Zingale <zingale@inf.astro.sunysb.edu>
+Date:   Mon Mar 24 14:50:33 2014 -0400
+
+    rea movie
+
+commit 32560d25631372d4c536ec7b348d3f59350ae7b3
+Author: Michael Zingale <zingale@localhost.localdomain>
+Date:   Wed Mar 12 20:50:38 2014 -0400
+
+    final version
+
+commit 709fa7e855cf0f62104fe7c28e76d0a2357d92a7
+Author: Michael Zingale <zingale@localhost.localdomain>
+Date:   Wed Mar 12 20:18:57 2014 -0400
+
+    looks good
+
+commit f5f9f95e9fd51c476d2047ad80510adb757c0494
+Author: Michael Zingale <zingale@localhost.localdomain>
+Date:   Wed Mar 12 20:14:54 2014 -0400
+
+    more progress
+
+commit 0abc1f4d91bf002b0c958a2654ee8890f25ba924
+Author: Michael Zingale <zingale@localhost.localdomain>
+Date:   Wed Mar 12 19:32:45 2014 -0400
+
+    shows more of the orbit + phases
+
+commit e561a6945764a3292e7675b4c52aeb6755e99974
+Author: Michael Zingale <zingale@localhost.localdomain>
+Date:   Wed Mar 12 17:56:43 2014 -0400
+
+    make things have a dark background
+
+commit 3b55098f00cfe2dba2d61bfad19a759a76122edd
+Author: Michael Zingale <zingale@localhost.localdomain>
+Date:   Wed Mar 12 14:49:28 2014 -0400
+
+    sync with laptop
+
+commit 3b374f40bb524842dd3294d3ee5553a01daa1a80
+Author: Michael Zingale <zingale@localhost.localdomain>
+Date:   Wed Mar 12 14:48:51 2014 -0400
+
+    updates from the laptop
+
+commit a1c458e8e20cdd2ba172d2388eae2a309f66af8b
+Author: Michael Zingale <zingale@inf.astro.sunysb.edu>
+Date:   Wed Mar 12 14:33:06 2014 -0400
+
+    now in git -- this was done on inf
