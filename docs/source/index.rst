@@ -7,7 +7,12 @@
 Simple Astronomy Animations
 ***************************
 
-A collection of astronomy animations produced for my intro astronomy classes.
+A collection of astronomy animations produced for my intro astronomy classes.  These are
+all written in python (using matplotlib) and the videos are rendered using FFmpeg.
+
+.. note::
+
+   All the source code for these animations is available on github: https://github.com/zingale/astro_animations
 
 .. toctree::
    :maxdepth: 1
