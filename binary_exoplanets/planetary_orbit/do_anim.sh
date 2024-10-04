@@ -2,9 +2,7 @@
 
 # make the movie
 ./planetary_orbits.py
-mkmovie.py -o planetary_orbits planetary_orbit_????.png
+ffmpeg -framerate 15 -f image2 -pattern_type glob -i "*.png" -vcodec mpeg4 -c:v libx264 -crf 20 planetary_orbits.mp4
 
-# store one of the frames as the preview frame for the webpage and clean-up
-cp planetary_orbit_0150.png planetary_orbit_preview.png
 rm -f planetary_orbit_????.png
 

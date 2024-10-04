@@ -61,12 +61,9 @@ def doit():
 
     for n in range(len(s1.t)):
 
-        fig = plt.figure(1)
-        fig.clear()
+        fig, ax = plt.subplots()
 
-        ax = fig.add_subplot(111)
-
-        plt.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=0.95)
+        fig.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=0.95)
 
         ax.set_aspect("equal", "datalim")
         ax.set_axis_off()
@@ -86,20 +83,21 @@ def doit():
         # plot star 2's orbit and position
         symsize = 1000*(b.M2/b.M1)
         if not (b.M1 == b.M2 and b.e == 0.0):
-            plt.plot(s2.x, s2.y, color="C0")
+            ax.plot(s2.x, s2.y, color="C0")
 
-        plt.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="C0", zorder=100)
+        ax.scatter([s2.x[n]], [s2.y[n]], s=symsize, color="C0", zorder=100)
 
-        plt.scatter([0], [0], s=150, marker="x", color="k", zorder=1000)
+        ax.scatter([0], [0], s=150, marker="x", color="k", zorder=1000)
 
-        plt.axis([-1.1*a_star2, 1.1*a_star2, -1.1*a_star2, 1.1*a_star2])
+        ax.axis([-1.1*a_star2, 1.1*a_star2, -1.1*a_star2, 1.1*a_star2])
 
         fig.set_size_inches(12.8, 7.2)
 
-        plt.savefig(f"planetary_orbit_{iframe:04d}.png")
+        fig.savefig(f"planetary_orbit_{iframe:04d}.png")
+        plt.close(fig)
 
         iframe += 1
 
 
-if __name__== "__main__":
+if __name__ == "__main__":
     doit()
