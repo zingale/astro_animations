@@ -50,24 +50,6 @@ to the Sun.
 *download MP4:* :download:`lunar-phases.mp4 <../../solar_system_motion/lunar_phases/lunar-phases.mp4>`
 
 
-Solstices and Equinox
----------------------
-
-.. video:: ../../solar_system_motion/solstice-equinox/summer_solstice.mp4
-
-.. video:: ../../solar_system_motion/solstice-equinox/equinox.mp4
-
-.. video:: ../../solar_system_motion/solstice-equinox/winter_solstice.mp4
-
-A set of animations showing the Earth at either solstice or and
-equinox (with the time set as noon UTC).
-
-*download MP4:*
-:download:`summer_solstice.mp4 <../../solar_system_motion/solstice-equinox/summer_solstice.mp4>`
-:download:`equinox.mp4 <../../solar_system_motion/solstice-equinox/equinox.mp4>`
-:download:`winter_solstice.mp4 <../../solar_system_motion/solstice-equinox/winter_solstice.mp4>`
-
-
 Earth Diagram
 -------------
 
@@ -90,3 +72,35 @@ direction over the course of an orbit, giving rise to the seasons.
 
 *download MP4:* :download:`seasons.mp4 <../../solar_system_motion/seasons/seasons.mp4>`
 
+
+Solstices and Equinox
+---------------------
+
+.. video:: ../../solar_system_motion/solstice-equinox/summer_solstice.mp4
+
+.. video:: ../../solar_system_motion/solstice-equinox/equinox.mp4
+
+.. video:: ../../solar_system_motion/solstice-equinox/winter_solstice.mp4
+
+A set of animations showing the Earth at either solstice or and
+equinox (with the time set as noon UTC).
+
+*download MP4:*
+  :download:`summer_solstice.mp4 <../../solar_system_motion/solstice-equinox/summer_solstice.mp4>`
+  :download:`equinox.mp4 <../../solar_system_motion/solstice-equinox/equinox.mp4>`
+  :download:`winter_solstice.mp4 <../../solar_system_motion/solstice-equinox/winter_solstice.mp4>`
+
+
+Stony Brook Over a Year
+-----------------------
+
+.. video:: ../../solar_system_motion/sb_over_year/stonybrook_noon_year.mp4
+
+.. video:: ../../solar_system_motion/sb_over_year/stonybrook_noon_year_moll.mp4
+
+A view of the changing seasons over the year, centered on Stony Brook,
+NY at noon local time.  Two different projections are shown.
+
+*download MP4:*
+  :download:`stonybrook_noon_year.mp4 <../../solar_system_motion/sb_over_year/stonybrook_noon_year.mp4>`
+  :download:`stonybrook_noon_year_moll.mp4 <../../solar_system_motion/sb_over_year/stonybrook_noon_year_moll.mp4>`
