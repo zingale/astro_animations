@@ -75,18 +75,6 @@ perihelion.
 *download MP4:* :download:`mercury_rotation.mp4 <../../solar_system_motion/mercury_rotation/mercury_rotation.mp4>`
 
 
-Moon's Synchronous Rotation
----------------------------
-
-.. video:: ../../solar_system_motion/moon_rotation/moon_rotation.mp4
-
-Illustrate the synchronous rotation of the Moon. The black dot
-represents a person standing on the surface. The orbit is taken to be
-circular, for simplicity.
-
-*download MP4:* :download:`moon_rotation.mp4 <../../solar_system_motion/moon_rotation/moon_rotation.mp4>`
-
-
 Orbital Energy
 --------------
 
@@ -99,57 +87,26 @@ total energy / unit mass along the way.
 *download MP4:* :download:`orbitalenergy.mp4 <../../solar_system_motion/orbitalenergy/orbitalenergy.mp4>`
 
 
-Lunar Period
-------------
+Resonances in the Asteroid Belt
+-------------------------------
 
-.. video:: ../../solar_system_motion/lunar_period/lunar_period.mp4
+.. video:: ../../solar_system_motion/asteroid_resonance/asteroids.mp4
 
-A simple animation showing how the time between successive full Moons
-(the synodic lunar period) is greater than the true (sidereal) orbital
-period of the Moon.
+A 2:1 resonance between an asteroid (shown in red) and Jupiter (black)
+as they orbit around the Sun. Some randomly placed asteroids are also
+shown.
 
-*download MP4:* :download:`lunar_period.mp4 <../../solar_system_motion/lunar_period/lunar_period.mp4>`
-
-
-Sidereal vs. Solar Day (for Earth)
-----------------------------------
-
-.. video:: ../../solar_system_motion/sidereal_solar_day/earth.mp4
-
-A simple animation showing how the true rotation period of Earth (the
-sidereal day) is shorter than the time between noons (the solar day).
-
-*download MP4:* :download:`earth.mp4 <../../solar_system_motion/sidereal_solar_day/earth.mp4>`
+*download MP4:* :download:`asteroids.mp4 <../../solar_system_motion/asteroid_resonance/asteroids.mp4>`
 
 
-Phases of the Moon
-------------------
+Tidal Locking
+-------------
 
-.. video:: ../../solar_system_motion/lunar_phases/lunar-phases.mp4
+.. video:: ../../solar_system_motion/tidal_locking/tidal_locking.mp4
 
-A simple animation showing the phases of the Moon and the
-corresponding point in the Moons orbit around the Earth, with respect
-to the Sun.
+An illustration of tidal locking of a moon in orbit around a
+planet. The rotation of the moon is visualized by coloring alternate
+quadrants differently, and watching a stationary person rotate with
+the moon.. The tidal distortion is always along the planet-moon line.
 
-*download MP4:* :download:`lunar-phases.mp4 <../../solar_system_motion/lunar_phases/lunar-phases.mp4>`
-
-
-Solstices and Equinox
----------------------
-
-.. video:: ../../solar_system_motion/solstice-equinox/summer_solstice.mp4
-
-.. video:: ../../solar_system_motion/solstice-equinox/equinox.mp4
-
-.. video:: ../../solar_system_motion/solstice-equinox/winter_solstice.mp4
-
-A set of animations showing the Earth at either solstice or and
-equinox (with the time set as noon UTC).
-
-*download MP4:*
-:download:`summer_solstice.mp4 <../../solar_system_motion/solstice-equinox/summer_solstice.mp4>`
-:download:`equinox.mp4 <../../solar_system_motion/solstice-equinox/equinox.mp4>`
-:download:`winter_solstice.mp4 <../../solar_system_motion/solstice-equinox/winter_solstice.mp4>`
-
-
-
+*download MP4:* :download:`tidal_locking.mp4 <../../solar_system_motion/tidal_locking/tidal_locking.mp4>`

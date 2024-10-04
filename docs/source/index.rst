@@ -14,4 +14,5 @@ A collection of astronomy animations produced for my intro astronomy classes.
    :caption: Animation Library
    :hidden:
 
+   earth_moon
    solar_system
