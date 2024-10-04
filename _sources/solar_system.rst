@@ -1,3 +1,5 @@
+.. _solarsystem:
+
 Solar System Motion
 ===================
 

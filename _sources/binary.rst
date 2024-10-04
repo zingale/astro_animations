@@ -1,3 +1,5 @@
+.. _binary:
+
 Binary Systems / Exoplanets
 ===========================
 
