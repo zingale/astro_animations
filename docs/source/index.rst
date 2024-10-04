@@ -18,5 +18,7 @@ A collection of astronomy animations produced for my intro astronomy classes.
    ellipse
    mechanics
    solar_system
+   binary
    thermo
    waves
+   nuclear
