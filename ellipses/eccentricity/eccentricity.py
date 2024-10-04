@@ -43,15 +43,15 @@ def ellipse():
         ax.plot(x, y, color="k", linewidth=2)
 
         # second foci
-        ax.scatter([-2.0*a*e], [0], color="C0", marker="x", s=100)
+        ax.scatter([-2.0*a*e], [0], color="C0", marker="x", s=100, zorder=100)
 
         # primary foci
-        ax.scatter([0], [0],color="C1", marker="x", s=100)
+        ax.scatter([0], [0],color="C1", marker="x", s=100, zorder=100)
 
         ax.set_xlim(-2.5, 1.5)
         ax.set_ylim(-2., 2.)
 
-        ax.text(-2.0, -1.5, f"a = {a:5.3f}, e = {e:6.4f}")
+        ax.text(-2.0, -1.5, f"a = {a:5.3f}, e = {e:6.4f}", fontsize="14")
 
         for direction in ["xzero", "yzero"]:
             # adds arrows at the ends of each axis
