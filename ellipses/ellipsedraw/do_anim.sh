@@ -2,10 +2,8 @@
 
 # make the movie
 ./ellipsedraw.py
-mkmovie.py -o ellipsedraw ellipsedraw_???.png
+ffmpeg -framerate 15 -f image2 -pattern_type glob -i "ellipsedraw_*.png" -vcodec mpeg4 -c:v libx264 -crf 20 ellipsedraw.mp4
 
-# store one of the frames as the preview frame for the webpage
-cp ellipsedraw_120.png ellipsedraw_preview.png
 
 # clean-up
 rm -f ellipsedraw_???.png
