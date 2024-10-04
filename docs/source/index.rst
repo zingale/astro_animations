@@ -16,4 +16,5 @@ A collection of astronomy animations produced for my intro astronomy classes.
 
    earth_moon
    ellipse
+   mechanics
    solar_system
