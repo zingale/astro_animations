@@ -137,13 +137,13 @@ def radial_velocity():
             if i == 0 and annotate:
                 # display time
                 ax.text(0.05, 0.05, f"time = {s1.t[n]/year:6.3f} yr",
-                        transform=ax.transAxes)
+                        transform=ax.transAxes, fontsize="14")
 
                 # display information about stars
                 ax.text(0.025, 0.9, fr"mass ratio: {b.M1/b.M2:3.2f}",
-                        transform=ax.transAxes, color="k", fontsize="medium")
+                        transform=ax.transAxes, color="k", fontsize="14")
                 ax.text(0.025, 0.86, fr"eccentricity: {b.e:3.2f}",
-                        transform=ax.transAxes, color="k", fontsize="medium")
+                        transform=ax.transAxes, color="k", fontsize="14")
 
 
 
@@ -157,9 +157,9 @@ def radial_velocity():
             ax.set_ylim(ymin, ymax)
 
             if i == 0:
-                ax.set_title("massive star frame of reference")
+                ax.set_title("massive star frame of reference", fontsize="18")
             else:
-                ax.set_title("center of mass frame of reference")
+                ax.set_title("center of mass frame of reference", fontsize="18")
 
         fig.set_size_inches(12.8, 7.2)
 
