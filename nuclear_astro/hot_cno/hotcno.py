@@ -34,7 +34,7 @@ def main():
 
     rho = 100
 
-    Ts = np.logspace(7, np.log10(5.e8), 400)
+    Ts = np.logspace(7, np.log10(8.e8), 500)
 
     dpi = 150
 
