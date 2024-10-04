@@ -20,8 +20,6 @@ sys.path.insert(0, os.path.abspath('../../'))
 extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
-    'nbsphinx',
-    'numpydoc',
     'sphinx_copybutton',
     'sphinx_math_dollar',
     'sphinxcontrib.video',
