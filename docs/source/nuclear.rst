@@ -1,3 +1,5 @@
+.. _nuclear:
+
 Nuclear Physics
 ===============
 

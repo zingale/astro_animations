@@ -1,3 +1,5 @@
+.. _earthmoon:
+
 Earth/Moon Motion
 =================
 

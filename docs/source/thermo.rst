@@ -1,3 +1,5 @@
+.. _thermo:
+
 Thermodynamics and Radiation
 ============================
 

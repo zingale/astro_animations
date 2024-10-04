@@ -1,3 +1,5 @@
+.. _ellipses:
+
 Ellipses
 ========
 
