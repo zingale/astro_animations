@@ -20,10 +20,10 @@ for e, p, d in zip(events, pretty_title, dates):
 
     for lon in range(0, 360, 1):
 
-        plt.clf()
+        fig, ax = plt.subplots()
 
-        bm = Basemap(projection='ortho', lat_0 = 0, lon_0 = lon,
-                     resolution = 'l', area_thresh = 1000.)
+        bm = Basemap(projection='ortho', lat_0=0, lon_0=lon,
+                     resolution='l', area_thresh=1000., ax=ax)
 
         bm.drawmapboundary()
 
@@ -32,17 +32,17 @@ for e, p, d in zip(events, pretty_title, dates):
 
         bm.drawcoastlines()
         bm.drawmapboundary(fill_color='aqua')
-        bm.fillcontinents(color='coral',lake_color='aqua')
+        bm.fillcontinents(color='coral', lake_color='aqua')
 
         CS = bm.nightshade(d)
 
-        f = plt.gcf()
-        f.set_size_inches(7.2, 7.2)
+        fig.set_size_inches(7.2, 7.2)
 
-        plt.text(0.5, 0.95, p, transform=f.transFigure,
-                 horizontalalignment="center", fontsize="large")
+        ax.text(0.5, 0.95, p, transform=fig.transFigure,
+                horizontalalignment="center", fontsize="14")
 
-        plt.text(0.5, 0.05, "noon UTC", transform=f.transFigure,
-                 horizontalalignment="center")
+        ax.text(0.5, 0.05, "noon UTC", transform=fig.transFigure,
+                horizontalalignment="center", fontsize="12")
 
-        plt.savefig(f"{e}_{lon:03}.png")
+        fig.savefig(f"{e}_{lon:03}.png")
+        plt.close(fig)
