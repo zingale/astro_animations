@@ -15,4 +15,5 @@ A collection of astronomy animations produced for my intro astronomy classes.
    :hidden:
 
    earth_moon
+   ellipse
    solar_system
