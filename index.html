@@ -414,6 +414,13 @@ all written in python (using matplotlib) and the videos are rendered using FFmpe
 <p class="admonition-title">Note</p>
 <p>All the source code for these animations is available on github: <a class="github reference external" href="https://github.com/zingale/astro_animations">zingale/astro_animations</a></p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Videos are rendered with <a class="reference external" href="https://www.ffmpeg.org/">ffmpeg</a> using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ffmpeg<span class="w"> </span>-framerate<span class="w"> </span><span class="m">15</span><span class="w"> </span>-f<span class="w"> </span>image2<span class="w"> </span>-pattern_type<span class="w"> </span>glob<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;*.png&quot;</span><span class="w"> </span>-vcodec<span class="w"> </span>mpeg4<span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-crf<span class="w"> </span><span class="m">20</span><span class="w"> </span>-pix_fmt<span class="w"> </span>yuv420p<span class="w"> </span>-movflags<span class="w"> </span>+faststart<span class="w"> </span>movie.mp4
+</pre></div>
+</div>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
