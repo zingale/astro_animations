@@ -30,6 +30,15 @@ all written in python (using matplotlib) and the videos are rendered using FFmpe
 
    All the source code for these animations is available on github: https://github.com/zingale/astro_animations
 
+.. note::
+
+   Videos are rendered with `ffmpeg <https://www.ffmpeg.org/>`_ using:
+
+   .. code:: bash
+
+      ffmpeg -framerate 15 -f image2 -pattern_type glob -i "*.png" -vcodec mpeg4 -c:v libx264 -crf 20 -pix_fmt yuv420p -movflags +faststart movie.mp4
+
+
 .. toctree::
    :maxdepth: 1
    :caption: Animation Library
