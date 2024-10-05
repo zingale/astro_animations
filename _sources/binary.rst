@@ -28,6 +28,18 @@ center of mass, and must have the same period.
   :download:`binary_mratio=2_e=0.4.mp4 <../../binary_exoplanets/binary_stars/binary_mratio=2_e=0.4.mp4>`
 
 
+Energy in Binary Orbits
+-----------------------
+
+.. video:: ../../binary_exoplanets/binary_stars/binary_mratio=4_e=0.4_energy.mp4
+
+A version of the above binary star orbits with a mass ratio of 4 and eccentricity of 0.4
+that shows the energies in the system: kinetic energy of both stars, potential energy,
+and total energy.  This shows that the total energy is conserved in the system.
+
+*download MP4:* :download:`binary_mratio=4_e=0.4_energy.mp4 <../../binary_exoplanets/binary_stars/binary_mratio=4_e=0.4_energy.mp4>`
+
+
 Binary System Reference Frame
 -----------------------------
 
