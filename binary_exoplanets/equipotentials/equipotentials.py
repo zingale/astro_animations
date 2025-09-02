@@ -176,19 +176,23 @@ def make_plot(mu):
     fig, ax = plt.subplots()
 
     eq = Equipotentials(mu, 1024)
+    V = np.abs(eq.V)
 
-    print(mu, eq.V.min(), eq.V.max())
-    ax.imshow(np.log10(eq.V), origin="lower", cmap="Accent",
-              extent=[eq.xmin, eq.xmax, eq.ymin, eq.ymax])
+    print(mu, eq.V.min(), np.median(V),  eq.V.max())
+    im = ax.imshow(np.log10(V), origin="lower", cmap="YlGnBu",
+                   extent=[eq.xmin, eq.xmax, eq.ymin, eq.ymax],
+                   vmax=np.log(4*V.min()))
+
+    #fig.colorbar(im, ax=ax)
 
     # draw contours -- these values seem reasonable for a range of mu's
     Vmin = 1.5
     Vmax = 1000.0  # np.max(V)
-    nC = 25
+    n_contours = 25
 
-    C = np.logspace(math.log10(Vmin), math.log10(Vmax), nC)
+    C = np.logspace(math.log10(Vmin), math.log10(Vmax), n_contours)
 
-    plt.contour(eq.x, eq.y, eq.V, C, colors="b")
+    ax.contour(eq.x, eq.y, eq.V, C, colors="b")
 
     x_L1, y_L1, V_L1 = eq.get_L1()
     x_L2, y_L2, V_L2 = eq.get_L2()
