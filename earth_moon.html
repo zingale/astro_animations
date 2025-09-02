@@ -16,30 +16,27 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/myfile.css?v=f6307105" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -54,7 +51,6 @@
     <link rel="prev" title="Simple Astronomy Animations" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -70,8 +66,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -79,6 +86,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -86,8 +94,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -103,8 +111,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -134,11 +141,15 @@
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Animation Library</span></p>
@@ -159,14 +170,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -344,16 +350,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -400,47 +414,47 @@
 <span id="earthmoon"></span><h1>Earth/Moon Motion<a class="headerlink" href="#earth-moon-motion" title="Link to this heading">#</a></h1>
 <section id="moon-s-synchronous-rotation">
 <h2>Moon’s Synchronous Rotation<a class="headerlink" href="#moon-s-synchronous-rotation" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/moon_rotation.mp4" type="video/mp4"></video><p>Illustrate the synchronous rotation of the Moon. The black dot
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/moon_rotation.mp4" type="video/mp4"></video></div><p>Illustrate the synchronous rotation of the Moon. The black dot
 represents a person standing on the surface. The orbit is taken to be
 circular, for simplicity.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/a3d798c44931650e3c5f205c7ef0fc68/moon_rotation.mp4"><code class="xref download docutils literal notranslate"><span class="pre">moon_rotation.mp4</span></code></a></p>
 </section>
 <section id="lunar-period">
 <h2>Lunar Period<a class="headerlink" href="#lunar-period" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/lunar_period.mp4" type="video/mp4"></video><p>A simple animation showing how the time between successive full Moons
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/lunar_period.mp4" type="video/mp4"></video></div><p>A simple animation showing how the time between successive full Moons
 (the synodic lunar period) is greater than the true (sidereal) orbital
 period of the Moon.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/cff52b656f0fd7b026a425c3bb422ae8/lunar_period.mp4"><code class="xref download docutils literal notranslate"><span class="pre">lunar_period.mp4</span></code></a></p>
 </section>
 <section id="sidereal-vs-solar-day-for-earth">
 <h2>Sidereal vs. Solar Day (for Earth)<a class="headerlink" href="#sidereal-vs-solar-day-for-earth" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/earth.mp4" type="video/mp4"></video><p>A simple animation showing how the true rotation period of Earth (the
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/earth.mp4" type="video/mp4"></video></div><p>A simple animation showing how the true rotation period of Earth (the
 sidereal day) is shorter than the time between noons (the solar day).</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/9817d251b32111130d64c289208e1f7e/earth.mp4"><code class="xref download docutils literal notranslate"><span class="pre">earth.mp4</span></code></a></p>
 </section>
 <section id="phases-of-the-moon">
 <h2>Phases of the Moon<a class="headerlink" href="#phases-of-the-moon" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/lunar-phases.mp4" type="video/mp4"></video><p>A simple animation showing the phases of the Moon and the
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/lunar-phases.mp4" type="video/mp4"></video></div><p>A simple animation showing the phases of the Moon and the
 corresponding point in the Moons orbit around the Earth, with respect
 to the Sun.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/54e4da53816455f73117a4459c3d4928/lunar-phases.mp4"><code class="xref download docutils literal notranslate"><span class="pre">lunar-phases.mp4</span></code></a></p>
 </section>
 <section id="earth-diagram">
 <h2>Earth Diagram<a class="headerlink" href="#earth-diagram" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/earth_summer_solstice.mp4" type="video/mp4"></video><p>An animated diagram pointing out how latitude, zenith, and horizon are
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/earth_summer_solstice.mp4" type="video/mp4"></video></div><p>An animated diagram pointing out how latitude, zenith, and horizon are
 defined, as well as showing the orientation of Earth on the Summer
 Solstice and showing the tropics and (ant)arctic circles.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/40c2f4cd5c1969ecf98f3b1142938c01/earth_summer_solstice.mp4"><code class="xref download docutils literal notranslate"><span class="pre">earth_summer_solstice.mp4</span></code></a></p>
 </section>
 <section id="seasons">
 <h2>Seasons<a class="headerlink" href="#seasons" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/seasons.mp4" type="video/mp4"></video><p>A simple animation showing how the Earth’s axial tilt does not change
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/seasons.mp4" type="video/mp4"></video></div><p>A simple animation showing how the Earth’s axial tilt does not change
 direction over the course of an orbit, giving rise to the seasons.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/5960e34b299ca5b06930cf16f199f8ef/seasons.mp4"><code class="xref download docutils literal notranslate"><span class="pre">seasons.mp4</span></code></a></p>
 </section>
 <section id="solstices-and-equinox">
 <h2>Solstices and Equinox<a class="headerlink" href="#solstices-and-equinox" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/summer_solstice.mp4" type="video/mp4"></video><video controls="True" preload="auto"><source src="_images/equinox.mp4" type="video/mp4"></video><video controls="True" preload="auto"><source src="_images/winter_solstice.mp4" type="video/mp4"></video><p>A set of animations showing the Earth at either solstice or and
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/summer_solstice.mp4" type="video/mp4"></video></div><div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/equinox.mp4" type="video/mp4"></video></div><div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/winter_solstice.mp4" type="video/mp4"></video></div><p>A set of animations showing the Earth at either solstice or and
 equinox (with the time set as noon UTC).</p>
 <dl class="simple">
 <dt><em>download MP4:</em></dt><dd><p><a class="reference download internal" download="" href="_downloads/0e0f4eb0b83f92a54d11246f260ea90d/summer_solstice.mp4"><code class="xref download docutils literal notranslate"><span class="pre">summer_solstice.mp4</span></code></a>
@@ -451,7 +465,7 @@ equinox (with the time set as noon UTC).</p>
 </section>
 <section id="stony-brook-over-a-year">
 <h2>Stony Brook Over a Year<a class="headerlink" href="#stony-brook-over-a-year" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/stonybrook_noon_year.mp4" type="video/mp4"></video><video controls="True" preload="auto"><source src="_images/stonybrook_noon_year_moll.mp4" type="video/mp4"></video><p>A view of the changing seasons over the year, centered on Stony Brook,
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/stonybrook_noon_year.mp4" type="video/mp4"></video></div><div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/stonybrook_noon_year_moll.mp4" type="video/mp4"></video></div><p>A view of the changing seasons over the year, centered on Stony Brook,
 NY at noon local time.  Two different projections are shown.</p>
 <dl class="simple">
 <dt><em>download MP4:</em></dt><dd><p><a class="reference download internal" download="" href="_downloads/120a808a9b6732b8053f1c8d668a59df/stonybrook_noon_year.mp4"><code class="xref download docutils literal notranslate"><span class="pre">stonybrook_noon_year.mp4</span></code></a>
@@ -497,8 +511,7 @@ NY at noon local time.  Two different projections are shown.</p>
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -563,8 +576,8 @@ By Michael Zingale
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

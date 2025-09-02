@@ -16,30 +16,27 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/myfile.css?v=f6307105" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -56,7 +53,6 @@
     <link rel="prev" title="Orbits" href="mechanics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -72,8 +68,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -81,6 +88,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -88,8 +96,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -105,8 +113,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -136,11 +143,15 @@
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Animation Library</span></p>
@@ -161,14 +172,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -346,16 +352,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -402,7 +416,7 @@
 <span id="solarsystem"></span><h1>Solar System Motion<a class="headerlink" href="#solar-system-motion" title="Link to this heading">#</a></h1>
 <section id="planetary-orbits-and-kepler-s-laws">
 <h2>Planetary Orbits and Kepler’s Laws<a class="headerlink" href="#planetary-orbits-and-kepler-s-laws" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/orbit2.mp4" type="video/mp4"></video><p>Integrate the orbits of two planets around a star, neglecting the
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/orbit2.mp4" type="video/mp4"></video></div><p>Integrate the orbits of two planets around a star, neglecting the
 gravitational force between the planets themselves. This is useful for
 demonstrating Kepler’s third law. We work in units of AU, years, and
 solar masses. The semi-major axes are picked such that one planet has
@@ -415,13 +429,13 @@ complete its orbit around the Sun, since <span class="math notranslate nohighlig
 </section>
 <section id="kepler-s-second-law">
 <h2>Kepler’s Second Law<a class="headerlink" href="#kepler-s-second-law" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/second_law.mp4" type="video/mp4"></video><p>A demonstration of “equal areas in equal times”, by shading the area
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/second_law.mp4" type="video/mp4"></video></div><p>A demonstration of “equal areas in equal times”, by shading the area
 swept out by a planet in equal time intervals.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/18f9a83d3c49587070480c93c25512b5/second_law.mp4"><code class="xref download docutils literal notranslate"><span class="pre">second_law.mp4</span></code></a></p>
 </section>
 <section id="retrograde-motion">
 <h2>Retrograde Motion<a class="headerlink" href="#retrograde-motion" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/retrograde.mp4" type="video/mp4"></video><p>Integrate Earth and Mars in their orbits around the Sun, starting a
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/retrograde.mp4" type="video/mp4"></video></div><p>Integrate Earth and Mars in their orbits around the Sun, starting a
 bit before opposition, and draw a line indicating the line-of-sight to
 Mars from Earth against some background stars to show the change in
 apparent motion.</p>
@@ -433,14 +447,14 @@ that critical.</p>
 </section>
 <section id="parallax">
 <h2>Parallax<a class="headerlink" href="#parallax" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/parallax.mp4" type="video/mp4"></video><p>A simple animation showing how parallax works, illustrating the motion
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/parallax.mp4" type="video/mp4"></video></div><p>A simple animation showing how parallax works, illustrating the motion
 of the Earth around the Sun and the apparent shift seen in the
 position of a nearby star against the background, more distant stars.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/c20f865e063ad9a772470935d12f7a98/parallax.mp4"><code class="xref download docutils literal notranslate"><span class="pre">parallax.mp4</span></code></a></p>
 </section>
 <section id="mercury-s-rotation">
 <h2>Mercury’s Rotation<a class="headerlink" href="#mercury-s-rotation" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/mercury_rotation.mp4" type="video/mp4"></video><p>Illustrate a 3:2 resonance between the rotation period and orbital
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/mercury_rotation.mp4" type="video/mp4"></video></div><p>Illustrate a 3:2 resonance between the rotation period and orbital
 period of Mercury. The semi-major axis and eccentricity for the planet
 drawn match Mercury. The black dot on the surface of the planet
 represents a person standing initially directly under the Sun at
@@ -449,21 +463,21 @@ perihelion.</p>
 </section>
 <section id="orbital-energy">
 <h2>Orbital Energy<a class="headerlink" href="#orbital-energy" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/orbitalenergy.mp4" type="video/mp4"></video><p>A simple showing the orbit of a planet around the Sun, outputting the
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/orbitalenergy.mp4" type="video/mp4"></video></div><p>A simple showing the orbit of a planet around the Sun, outputting the
 kinetic energy / unit mass, the potential energy / unit mass, and the
 total energy / unit mass along the way.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/b7323dd6af9fbaa18488890e50bcbc0c/orbitalenergy.mp4"><code class="xref download docutils literal notranslate"><span class="pre">orbitalenergy.mp4</span></code></a></p>
 </section>
 <section id="resonances-in-the-asteroid-belt">
 <h2>Resonances in the Asteroid Belt<a class="headerlink" href="#resonances-in-the-asteroid-belt" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/asteroids.mp4" type="video/mp4"></video><p>A 2:1 resonance between an asteroid (shown in red) and Jupiter (black)
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/asteroids.mp4" type="video/mp4"></video></div><p>A 2:1 resonance between an asteroid (shown in red) and Jupiter (black)
 as they orbit around the Sun. Some randomly placed asteroids are also
 shown.</p>
 <p><em>download MP4:</em> <a class="reference download internal" download="" href="_downloads/ee93cb327e163cbf2e2998cac2626582/asteroids.mp4"><code class="xref download docutils literal notranslate"><span class="pre">asteroids.mp4</span></code></a></p>
 </section>
 <section id="tidal-locking">
 <h2>Tidal Locking<a class="headerlink" href="#tidal-locking" title="Link to this heading">#</a></h2>
-<video controls="True" preload="auto"><source src="_images/tidal_locking.mp4" type="video/mp4"></video><p>An illustration of tidal locking of a moon in orbit around a
+<div  class="sphinx-contrib-video-container align-left"><video controls="True" preload="auto"><source src="_images/tidal_locking.mp4" type="video/mp4"></video></div><p>An illustration of tidal locking of a moon in orbit around a
 planet. The rotation of the moon is visualized by coloring alternate
 quadrants differently, and watching a stationary person rotate with
 the moon.. The tidal distortion is always along the planet-moon line.</p>
@@ -507,8 +521,7 @@ the moon.. The tidal distortion is always along the planet-moon line.</p>
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -573,8 +586,8 @@ By Michael Zingale
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
