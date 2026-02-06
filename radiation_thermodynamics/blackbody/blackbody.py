@@ -23,7 +23,7 @@ def I_nu(f, T):
 
 def blackbody():
 
-    # define frequncy
+    # define frequency
     npts = 250
     f = np.logspace(4.0, 24.0, npts, endpoint=True)
 

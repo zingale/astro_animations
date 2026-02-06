@@ -6,7 +6,7 @@ import matplotlib as mpl
 
 # to show the phase we will paint a hemisphere white and the other
 # black.  We will then change the longitude that we are centered above
-# through the full 360 degress, showing the range of phases.
+# through the full 360 degrees, showing the range of phases.
 
 # the range of longitudes to view
 lon_center = numpy.linspace(0, 360, 361, endpoint=True)
