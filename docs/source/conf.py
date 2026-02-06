@@ -104,9 +104,10 @@ html_theme_options = {
     "use_repository_button": True,
     "use_issues_button": True,
     "use_edit_page_button": True,
-    "use_source_button": True,
+    "use_source_button": False,
     "repository_branch": "main",
     "path_to_docs": "docs/source",
+    "use_download_button": False
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -132,30 +133,4 @@ linkcheck_ignore = [r"https://ascelibrary.org",
                     r"https://doi.org/10.1061/(ASCE)0733-9429(1999)125:11(1210)",
                     r"https://pubs.aip.org/physicstoday/article/11/8/28/927415/Water-Waves"]
 
-
-# -- Options for HTMLHelp output ------------------------------------------
-
-# Output file base name for HTML help builder.
-htmlhelp_basename = 'astroanimdoc'
-
-
-# -- Options for LaTeX output ---------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
 
