@@ -45,7 +45,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'astro_animations'
-copyright = '2024 Michael Zingale'
+copyright = '2024-2026 Michael Zingale'
 author = 'Michael Zingale'
 
 #html_logo = "logo.gif"
@@ -107,7 +107,8 @@ html_theme_options = {
     "use_source_button": False,
     "repository_branch": "main",
     "path_to_docs": "docs/source",
-    "use_download_button": False
+    "use_download_button": False,
+    "navbar_persistent": []
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
